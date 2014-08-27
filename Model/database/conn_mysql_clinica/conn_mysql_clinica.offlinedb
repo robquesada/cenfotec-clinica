@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<ProviderSettings xmlns="http://xmlns.oracle.com/ide/hash">
+   <hash n="dataTypeSettings">
+      <value n="sourceKey" v="oracle.javatools.db.mysql.MySQL5"/>
+   </hash>
+   <value n="id" v="5030c375-a0e3-4f40-81aa-ded93a7e7785"/>
+   <value n="name" v="conn_mysql_clinica"/>
+</ProviderSettings>

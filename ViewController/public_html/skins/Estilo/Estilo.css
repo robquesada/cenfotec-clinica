@@ -1,0 +1,174 @@
+@charset "UTF-8";
+/**ADFFaces_Skin_File / DO NOT REMOVE**/
+@namespace af "http://xmlns.oracle.com/adf/faces/rich";
+@namespace dvt "http://xmlns.oracle.com/dss/adf/faces";
+
+.AFChangedIcon:alias {
+    content: url(statusIconChanged/updatedvalue_status_red.png); 
+}
+
+.AFButton:alias {
+    height:25px; 
+}
+
+.AFButtonGradientEndColor:alias {
+    color: #8E44AD; 
+}
+
+.AFButtonGradientEndActiveColor:alias {
+    color: #9B59B6; 
+}
+
+.AFButtonGradientEndDisabledColor:alias {
+    color: #9B59B6; 
+}
+
+.AFButtonGradientEndHoverColor:alias {
+    color: #9B59B6; 
+}
+
+.AFButtonBorderBottomColor:alias {
+    color: #AC99B3; 
+}
+
+.AFButtonBorderActiveColor:alias {
+    color: #906AA0; 
+}
+
+.AFButtonBorderDisabledColor:alias {
+    color: #7A4092; 
+}
+
+/*INFO: Color value exceeded range after adjustment: HSL(282, -14%, 38%)*/
+.AFButtonBorderBottomHoverColor:alias {
+    color: #616161; 
+}
+
+.AFDefaultFont:alias {
+    font-size: 13px; 
+}
+
+.AFDefaultFontFamily:alias {
+    font-family: Arial; 
+}
+
+.AFButtonForeground:alias {
+    color: White; 
+    font-weight: bold; 
+}
+
+.AFButtonGradientStartColor:alias {
+    color: #8E44AD; 
+}
+
+.AFButtonBorderColor:alias {
+    color: #AA96B2; 
+}
+
+.AFButtonGradientStartHoverColor:alias {
+    color: #9B59B6; 
+}
+
+/*INFO: Color value exceeded range after adjustment: HSL(282, -6%, 45%)*/
+.AFButtonBorderHoverColor:alias {
+    color: #737373; 
+}
+
+.AFButtonForegroundHover:alias {
+    color: White; 
+    font-weight: bold; 
+}
+
+.AFButtonBorder:alias {
+    border-style: solid; 
+}
+
+.AFButtonBorderHover:alias {
+    border-style: solid; 
+}
+
+.AFButtonBorderActive:alias {
+    border-style: solid; 
+}
+
+.AFButtonGradientStartActiveColor:alias {
+    color: #9B59B6; 
+}
+
+.AFButtonBorderTopActiveColor:alias {
+    color: #786081; 
+}
+
+.AFButtonForegroundDepressed:alias {
+    color: White; 
+    font-weight: bold; 
+}
+
+.brandtop af|decorativeBox::top-content[theme="dark"] {
+    color: Black; 
+    background-color: Black; 
+    border-color: Black; 
+    border: Black; 
+    border-width: 0px; 
+    border-left-color: Black; 
+    border-left-width: 0px; 
+    border-right-width: 0px; 
+    border-right-color: Black; 
+    border-top-color: Black; 
+    border-top-width: 0px; 
+    border-bottom-width: 0px; 
+    border-bottom-color: Black; 
+    outline-color: Black; 
+    outline-width: 0px; 
+}
+
+af|inputListOfValues::search-icon-style:active {
+    background-image: url(iconLOVSearchActive/lov_dwn_flat.png); 
+}
+
+af|inputListOfValues::search-icon-style:hover {
+    background-image: url(iconLOVSearchHover/lov_ovr_flat.png); 
+}
+
+af|inputListOfValues::search-icon-style:disabled, af|inputListOfValues::search-icon-style:disabled:hover, af|inputListOfValues::search-icon-style:disabled:active {
+    background-image: url(iconLOVSearchDisabled/lov_dwn_flat.png); 
+}
+
+af|inputListOfValues::search-icon-style {
+    background-image: url(iconLOVSearchActive/lov_dwn_flat.png); 
+}
+
+af|inputDate::launch-icon-style, af|panelList af|inputDate::launch-icon-style {
+    background-image: url(iconInputDateLaunch/timedate_ena_flat.png); 
+}
+
+af|inputDate::launch-icon-style:active {
+    background-image: url(iconInputDateLaunchActive/timedate_ena_flat.png); 
+}
+
+@agent (touchScreen:none) {
+
+    af|inputDate::launch-icon-style:disabled:hover {
+        background-image: url(iconInputDateLaunchDisabledHover/timedate_ovr_flat.png); 
+    }
+
+    af|inputDate::launch-icon-style:hover {
+        background-image: url(iconInputDateLaunchHover/timedate_ovr_flat.png); 
+    }
+}
+
+.AFButtonGradientStartDisabledColor:alias {
+    color: #9B59B6; 
+}
+
+.AFButtonBorderDisabled:alias {
+    border-width: 1px; 
+}
+
+.AFButtonForegroundDisabled:alias {
+    color: #a2eaf3; 
+}
+
+.sinborde af|panelBox {
+    border: 0px; 
+}

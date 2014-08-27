@@ -1,0 +1,1121 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <af:panelSplitter orientation="vertical" splitterPosition="50" id="ps3">
+        <f:facet name="first"/>
+        <f:facet name="second">
+            <af:panelSplitter orientation="horizontal" splitterPosition="100" id="ps2">
+                <f:facet name="first"/>
+                <f:facet name="second">
+                    <af:panelSplitter orientation="horizontal" splitterPosition="100" positionedFromEnd="true" id="ps1">
+                        <f:facet name="first">
+                            <af:panelGroupLayout id="pgl1">
+                                <af:panelGridLayout id="pgl2">
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr1">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc1" halign="center">
+                                            <af:toolbox id="t1">
+                                                <af:toolbar id="t2">
+                                                    <af:group id="g1">
+                                                        <af:button text="Buscar pacientes" id="pt_bListarPacientes"
+                                                                   action="listar"/>
+                                                    </af:group>
+                                                    <af:group id="g2">
+                                                        <af:button text="Agregar nuevo paciente"
+                                                                   id="pt_bAgregarPaciente" action="agregar"/>
+                                                    </af:group>
+                                                </af:toolbar>
+                                            </af:toolbox>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl3">
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr3">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc3" halign="center">
+                                            <af:panelGroupLayout id="pgl7" layout="horizontal">
+                                                <af:link text="#{PacienteController.pacienteEditar.nombrePaciente} #{PacienteController.pacienteEditar.primerApellido} #{PacienteController.pacienteEditar.segundoApellido}"
+                                                         id="l1" inlineStyle="font-size:large;" action="ver"/>
+                                                <af:spacer width="10" height="10" id="s2"/>
+                                                <af:outputLabel value="> Odontogramas y presupuestos" id="pt_ol1"
+                                                                inlineStyle="font-size:large; font-family:sans-serif;"/>
+                                                <af:spacer width="10" height="10" id="s7"/>
+                                                <af:selectOneChoice id="socListaPrespuestos"
+                                                                    contentStyle="Height: 23px; font-size: 15px;"
+                                                                    partialTriggers="bAplicarPresupuesto bNuevoPresupuesto bGuardarCambios"
+                                                                    value="#{PacienteController.presupuestoFiltro}"
+                                                                    unselectedLabel="-- Seleccionar --"
+                                                                    clientComponent="true">
+                                                    <af:forEach items="#{PacienteController.listaPresupuestos}"
+                                                                var="var">
+                                                        <af:selectItem id="si4"
+                                                                       value="#{var}"
+                                                                       label="#{var.fechaCreacion}"/>
+                                                    </af:forEach>
+                                                </af:selectOneChoice>
+                                                <af:button id="bBuscarPresupuesto" icon="images/Buscar.png"
+                                                           action="#{PacienteController.buscarPresupuesto}">
+                                                    <af:clientListener method="validarBuscar" type="action"/>
+                                                </af:button>
+                                            </af:panelGroupLayout>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                    <af:gridRow id="gr13">
+                                        <af:gridCell id="gc25">
+                                            <af:spacer width="10" height="20" id="s1"/>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl5">
+                                    <af:gridRow id="gr1">
+                                        <af:gridCell id="gc2" halign="end" valign="top" width="40%">
+                                            <af:panelBox id="pb6" type="stretch"
+                                                         showDisclosure="false"
+                                                         inlineStyle="Width: 350px; Height: 47px;" showHeader="never">
+                                                <f:facet name="toolbar"/>
+                                                <af:panelGroupLayout id="pgl4" halign="end" valign="top">
+                                                    <af:panelGridLayout id="pgl14">
+                                                        <af:gridRow marginTop="5px" height="auto" marginBottom="5px"
+                                                                    id="gr2">
+                                                            <af:gridCell marginStart="5px" width="50%" id="gc100"
+                                                                         halign="start" valign="middle">
+                                                                <af:outputLabel value="Procedimientos" id="ol34"
+                                                                                inlineStyle="font-weight:bold;"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="50%" marginEnd="5px"
+                                                                         id="gc101" halign="end" valign="middle">
+                                                                <af:button id="bAgregar" icon="images/Agregar.png" partialTriggers="::bEliminar ::bNuevoPresupuesto ::bAplicarPresupuesto ::bBuscarPresupuesto">
+                                                                    <af:clientListener method="limpiarPopupAgregar"
+                                                                                       type="action"/>
+                                                                    <af:showPopupBehavior popupId="popupRegistrarProcedimientoPresupuesto"
+                                                                                          triggerType="action"/>
+                                                                </af:button>
+                                                            </af:gridCell>
+                                                        </af:gridRow>
+                                                    </af:panelGridLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                            <af:panelBox id="pb5" type="stretch"
+                                                         inlineStyle="Width: 350px; Height: 212px;"
+                                                         showDisclosure="false" showHeader="never">
+                                                <f:facet name="toolbar"/>
+                                                <af:listView id="lvProcedimientosOdontograma" selection="single"
+                                                             emptyText="Agregue procedimientos para generar el odontograma y el presupuesto."
+                                                             value="#{PacienteController.listaLineasDetallePresupuesto}"
+                                                             var="var"
+                                                             partialTriggers="::bBuscarPresupuesto bBorrar ::bAplicarPresupuesto ::bAgregarLineaDetallePresupuesto ::bEditarLineaDetallePresupuesto ::bNuevoPresupuesto ::bGuardarCambios"
+                                                             selectionListener="#{PacienteController.seleccionarLineaDetallePresupuesto}">
+                                                    <f:facet name="groupHeaderStamp"/>
+                                                    <af:listItem id="li1">
+                                                        <af:panelGridLayout id="pgl17">
+                                                            <af:gridRow marginTop="5px" height="auto" marginBottom="5px"
+                                                                        id="gr18">
+                                                                <af:gridCell marginStart="5px" width="65%" id="gc104"
+                                                                             halign="start" valign="middle">
+                                                                    <af:panelGroupLayout id="pgl20" layout="vertical">
+                                                                        <af:outputLabel value="#{var.bitacoraprocedimiento1.nombreProcedimiento}"
+                                                                                        id="ol36"
+                                                                                        inlineStyle="font-weight:bold;"/>
+                                                                        <af:outputLabel value="(#{var.estadoProcedimiento}) Diente #{var.numeroDiente}, cara #{var.caraDiente}"
+                                                                                        id="ol38"/>
+                                                                        <af:outputLabel value="Precio: #{var.bitacoraprocedimiento1.precio}"
+                                                                                        id="ol37"/>
+                                                                    </af:panelGroupLayout>
+                                                                </af:gridCell>
+                                                                <af:gridCell marginStart="5px" width="35%"
+                                                                             marginEnd="5px" id="gc105" halign="center"
+                                                                             valign="middle">
+                                                                    <af:panelGroupLayout id="pgl18"
+                                                                                         layout="horizontal"
+                                                                                         halign="center">
+                                                                        <af:button id="bEditar"
+                                                                                   icon="images/Editar.png" partialTriggers="::bEliminar ::bNuevoPresupuesto ::bAplicarPresupuesto ::bBuscarPresupuesto">
+                                                                            <af:showPopupBehavior popupId="::popupEditarProcedimientoPresupuesto"
+                                                                                                  triggerType="action"/>
+                                                                        </af:button>
+                                                                        <af:spacer width="10" height="10" id="s5"/>
+                                                                        <af:button id="bBorrar" icon="images/Borrar.png"
+                                                                                   action="#{PacienteController.eliminarLineaDetallePresupuesto}" partialTriggers="::bEliminar ::bNuevoPresupuesto ::bAplicarPresupuesto ::bBuscarPresupuesto"/>
+                                                                    </af:panelGroupLayout>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                        </af:panelGridLayout>
+                                                    </af:listItem>
+                                                </af:listView>
+                                            </af:panelBox>
+                                            <af:panelBox id="pb7" showDisclosure="false" type="stretch"
+                                                         inlineStyle="Width: 350px; Height: 67px;" showHeader="never">
+                                                <f:facet name="toolbar"/>
+                                                <af:panelGroupLayout id="pgl13" layout="vertical" halign="center">
+                                                    <af:selectOneChoice id="socUsuarioPresupuesto"
+                                                                        contentStyle="Height: 23px; font-size: 15px;"
+                                                                        value="#{PacienteController.presupuestoRegistrar.usuario}"
+                                                                        partialTriggers="bBuscarPresupuesto bAplicarPresupuesto bNuevoPresupuesto"
+                                                                        label="Usuario"
+                                                                        unselectedLabel="-- Seleccionar --"
+                                                                        clientComponent="true">
+                                                        <af:forEach items="#{PacienteController.listaUsuarios}"
+                                                                    var="var">
+                                                            <af:selectItem label="#{var.nombre} #{var.primerApellido} #{var.segundoApellido}"
+                                                                           id="si1" value="#{var}"/>
+                                                        </af:forEach>
+                                                    </af:selectOneChoice>
+                                                    <af:separator id="s9"/>
+                                                    <af:panelGroupLayout id="pgl16" layout="horizontal" halign="center"
+                                                                         valign="middle">
+                                                        <af:outputLabel value="Fecha actual: #{PacienteController.fechaActual}"
+                                                                        id="olFechaActualPresuesto"/>
+                                                        <af:spacer width="10" height="10" id="s3"/>
+                                                        <af:outputLabel value="Total:" id="ol33"
+                                                                        inlineStyle="font-size:large; font-weight:bold;"/>
+                                                        <af:spacer width="3" height="10" id="s19"
+                                                                   inlineStyle="font-size:large; font-weight:bold;"/>
+                                                        <af:outputText value="#{PacienteController.presupuestoRegistrar.monto}" id="ot1"
+                                                                       partialTriggers="bBuscarPresupuesto lvProcedimientosOdontograma:bEditar lvProcedimientosOdontograma:bBorrar bAplicarPresupuesto bAgregarLineaDetallePresupuesto bEditarLineaDetallePresupuesto bNuevoPresupuesto"
+                                                                       inlineStyle="font-size:large; font-weight:bold;"/>
+                                                        <af:activeOutputText value="0" id="aot1"
+                                                                             inlineStyle="font-size:large; font-weight:bold;"/>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                        </af:gridCell>
+                                        <af:gridCell id="gc1" halign="start" valign="top" width="60%"
+                                                     marginStart="40px">
+                                            <af:panelGroupLayout id="pgl8" layout="horizontal" halign="center"
+                                                                 styleClass="AFStretchWidth">
+                                                <af:panelBox text="Superior izquierdo" id="pb1" showDisclosure="false"
+                                                             titleHalign="center" type="stretch"
+                                                             inlineStyle="Width: 300px; Height: 161px;"
+                                                             partialTriggers="bBuscarPresupuesto lvProcedimientosOdontograma:bBorrar bAplicarPresupuesto bAgregarLineaDetallePresupuesto bEditarLineaDetallePresupuesto bNuevoPresupuesto">
+                                                    <f:facet name="toolbar"/>
+                                                    <af:panelGridLayout id="pgl6">
+                                                        <af:gridRow marginTop="5px" height="auto" id="gr11">
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc68"
+                                                                         halign="center" valign="bottom">
+                                                                <af:outputLabel value="18" id="ol2"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc69"
+                                                                         halign="center" valign="bottom">
+                                                                <af:outputLabel value="17" id="ol3"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc70"
+                                                                         halign="center" valign="bottom">
+                                                                <af:outputLabel value="16" id="ol4"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc71"
+                                                                         halign="center" valign="bottom">
+                                                                <af:outputLabel value="15" id="ol5"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc72"
+                                                                         halign="center" valign="bottom">
+                                                                <af:outputLabel value="14" id="ol6"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc73"
+                                                                         halign="center" valign="bottom">
+                                                                <af:outputLabel value="13" id="ol7"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc74"
+                                                                         halign="center" valign="bottom">
+                                                                <af:outputLabel value="12" id="ol8"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc75"
+                                                                         halign="center" valign="bottom">
+                                                                <af:outputLabel value="11" id="ol9"/>
+                                                            </af:gridCell>
+                                                        </af:gridRow>
+                                                        <af:gridRow marginTop="5px" height="auto" id="gr3">
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc4"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente18.png" id="gi17"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc5"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente17.png" id="gi18"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc6"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente16.png" id="gi19"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc7"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente15.png" id="gi20"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc8"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente14.png" id="gi21"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc9"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente13.png" id="gi22"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc10"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente12.png" id="gi23"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc11"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente11.png" id="gi24"/>
+                                                            </af:gridCell>
+                                                        </af:gridRow>
+                                                        <af:gridRow id="gr19">
+                                                            <af:forEach var="var"
+                                                                        items="#{PacienteController.listaSuperiorIzquierda}">
+                                                                <af:gridCell id="gc106" width="10px" marginStart="5px"
+                                                                             halign="center">
+                                                                    <af:image id="i2"
+                                                                              source="images/Odonto#{var}.png"
+                                                                              inlineStyle="Width: 30px; Height: 30px;"/>
+                                                                </af:gridCell>
+                                                            </af:forEach>
+                                                        </af:gridRow>
+                                                    </af:panelGridLayout>
+                                                </af:panelBox>
+                                                <af:panelBox text="Superior derecho" id="pb2" showDisclosure="false"
+                                                             titleHalign="center"
+                                                             inlineStyle="Width: 300px; Height: 161px;" type="stretch"
+                                                             partialTriggers="bBuscarPresupuesto lvProcedimientosOdontograma:bBorrar bAplicarPresupuesto bAgregarLineaDetallePresupuesto bEditarLineaDetallePresupuesto bNuevoPresupuesto">
+                                                    <f:facet name="toolbar"/>
+                                                    <af:panelGridLayout id="pgl9">
+                                                        <af:gridRow marginTop="5px" height="auto" id="gr12">
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc76"
+                                                                         halign="center" valign="bottom">
+                                                                <af:outputLabel value="21" id="ol1"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc77"
+                                                                         halign="center" valign="bottom">
+                                                                <af:outputLabel value="22" id="ol10"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc78"
+                                                                         halign="center" valign="bottom">
+                                                                <af:outputLabel value="23" id="ol11"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc79"
+                                                                         halign="center" valign="bottom">
+                                                                <af:outputLabel value="24" id="ol15"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc80"
+                                                                         halign="center" valign="bottom">
+                                                                <af:outputLabel value="25" id="ol14"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc81"
+                                                                         halign="center" valign="bottom">
+                                                                <af:outputLabel value="26" id="ol12"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc82"
+                                                                         halign="center" valign="bottom">
+                                                                <af:outputLabel value="27" id="ol13"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%"
+                                                                         id="gc83" halign="center" valign="bottom">
+                                                                <af:outputLabel value="28" id="ol16"/>
+                                                            </af:gridCell>
+                                                        </af:gridRow>
+                                                        <af:gridRow marginTop="5px" height="auto" id="gr8">
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc3"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente21.png" id="gi16"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc12"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente22.png" id="gi26"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc13"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente23.png" id="gi27"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc22"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente24.png" id="gi28"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc23"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente25.png" id="gi29"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc33"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente26.png" id="gi30"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc34"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente27.png" id="gi31"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" marginEnd="5px"
+                                                                         id="gc43" halign="center">
+                                                                <h:graphicImage url="images/Diente28.png" id="gi32"/>
+                                                            </af:gridCell>
+                                                        </af:gridRow>
+                                                        <af:gridRow id="gr4">
+                                                            <af:forEach var="var"
+                                                                        items="#{PacienteController.listaSuperiorDerecha}">
+                                                                <af:gridCell id="gc14" width="10px" marginStart="5px"
+                                                                             halign="center">
+                                                                    <af:image id="i1" source="images/Odonto#{var}.png"
+                                                                              inlineStyle="Width: 30px; Height: 30px;"/>
+                                                                </af:gridCell>
+                                                            </af:forEach>
+                                                        </af:gridRow>
+                                                    </af:panelGridLayout>
+                                                </af:panelBox>
+                                            </af:panelGroupLayout>
+                                            <af:panelGroupLayout id="pgl10" layout="horizontal" halign="center"
+                                                                 styleClass="AFStretchWidth">
+                                                <af:panelBox text="Inferior izquierdo" id="pb3" showDisclosure="false"
+                                                             titleHalign="center"
+                                                             inlineStyle="Width: 300px; Height: 166px;" type="stretch"
+                                                             partialTriggers="bBuscarPresupuesto lvProcedimientosOdontograma:bBorrar bAplicarPresupuesto bAgregarLineaDetallePresupuesto bEditarLineaDetallePresupuesto bNuevoPresupuesto">
+                                                    <f:facet name="toolbar"/>
+                                                    <af:panelGridLayout id="pgl11">
+                                                        <af:gridRow marginTop="5px" height="auto" id="gr87">
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc845"
+                                                                         halign="center"/>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc846"
+                                                                         halign="center"/>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc847"
+                                                                         halign="center"/>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc848"
+                                                                         halign="center"/>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc849"
+                                                                         halign="center"/>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc850"
+                                                                         halign="center"/>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc851"
+                                                                         halign="center"/>
+                                                            <af:gridCell marginStart="5px" width="10%" marginEnd="5px"
+                                                                         id="gc852" halign="center"/>
+                                                        </af:gridRow>
+                                                        <af:gridRow id="gr9">
+                                                            <af:forEach var="var"
+                                                                        items="#{PacienteController.listaInferiorIzquierda}">
+                                                                <af:gridCell id="gc15" width="10px" marginStart="5px"
+                                                                             halign="center">
+                                                                    <af:image id="i3" source="images/Odonto#{var}.png"
+                                                                              inlineStyle="Width: 30px; Height: 30px;"/>
+                                                                </af:gridCell>
+                                                            </af:forEach>
+                                                        </af:gridRow>
+                                                        <af:gridRow marginTop="5px" height="auto" id="gr6">
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc35"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente48.png" id="gi41"
+                                                                                height="72" width="43"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc36"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente47.png" id="gi42"
+                                                                                height="72" width="43"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc37"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente46.png" id="gi43"
+                                                                                height="72" width="43"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc38"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente45.png" id="gi44"
+                                                                                height="72" width="43"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc39"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente44.png" id="gi45"
+                                                                                height="72" width="43"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc40"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente43.png" id="gi46"
+                                                                                height="72" width="43"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc41"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente42.png" id="gi47"
+                                                                                height="72" width="43"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc42"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente41.png" id="gi48"
+                                                                                height="72" width="43"/>
+                                                            </af:gridCell>
+                                                        </af:gridRow>
+                                                        <af:gridRow marginTop="5px" height="auto" id="gr14">
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc84"
+                                                                         halign="center" valign="top">
+                                                                <af:outputLabel value="48" id="ol24"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc85"
+                                                                         halign="center" valign="top">
+                                                                <af:outputLabel value="47" id="ol23"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc86"
+                                                                         halign="center" valign="top">
+                                                                <af:outputLabel value="46" id="ol22"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc87"
+                                                                         halign="center" valign="top">
+                                                                <af:outputLabel value="45" id="ol21"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc88"
+                                                                         halign="center" valign="top">
+                                                                <af:outputLabel value="44" id="ol20"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc89"
+                                                                         halign="center" valign="top">
+                                                                <af:outputLabel value="43" id="ol19"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc90"
+                                                                         halign="center" valign="top">
+                                                                <af:outputLabel value="42" id="ol18"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc91"
+                                                                         halign="center" valign="top">
+                                                                <af:outputLabel value="41" id="ol17"/>
+                                                            </af:gridCell>
+                                                        </af:gridRow>
+                                                    </af:panelGridLayout>
+                                                </af:panelBox>
+                                                <af:panelBox text="Inferior derecho" id="pb4" showDisclosure="false"
+                                                             titleHalign="center"
+                                                             inlineStyle="Width: 300px; Height: 166px;" type="stretch"
+                                                             partialTriggers="bBuscarPresupuesto lvProcedimientosOdontograma:bBorrar bAplicarPresupuesto bAgregarLineaDetallePresupuesto bEditarLineaDetallePresupuesto bNuevoPresupuesto">
+                                                    <f:facet name="toolbar"/>
+                                                    <af:panelGridLayout id="pgl12">
+                                                        <af:gridRow marginTop="5px" height="auto" id="gr7">
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc45"
+                                                                         halign="center"/>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc46"
+                                                                         halign="center"/>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc47"
+                                                                         halign="center"/>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc48"
+                                                                         halign="center"/>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc49"
+                                                                         halign="center"/>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc50"
+                                                                         halign="center"/>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc51"
+                                                                         halign="center"/>
+                                                            <af:gridCell marginStart="5px" width="10%" marginEnd="5px"
+                                                                         id="gc52" halign="center"/>
+                                                        </af:gridRow>
+                                                        <af:gridRow id="gr5">
+                                                            <af:forEach var="var"
+                                                                        items="#{PacienteController.listaInferiorDerecha}">
+                                                                <af:gridCell id="gc16" width="10px" marginStart="5px"
+                                                                             halign="center">
+                                                                    <af:image id="i4" source="images/Odonto#{var}.png"
+                                                                              inlineStyle="Width: 30px; Height: 30px;"
+                                                                              partialTriggers="lvProcedimientosOdontograma:bBorrar bAplicarPresupuesto bAgregarLineaDetallePresupuesto bEditarLineaDetallePresupuesto"/>
+                                                                </af:gridCell>
+                                                            </af:forEach>
+                                                        </af:gridRow>
+                                                        <af:gridRow marginTop="5px" height="auto" id="gr10">
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc60"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente31.png" id="gi57"
+                                                                                height="72" width="43"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc61"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente32.png" id="gi58"
+                                                                                height="72" width="43"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc62"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente33.png" id="gi59"
+                                                                                height="72" width="43"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc63"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente34.png" id="gi60"
+                                                                                height="72" width="43"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc64"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente35.png" id="gi61"
+                                                                                height="72" width="43"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc65"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente36.png" id="gi62"
+                                                                                height="72" width="43"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc66"
+                                                                         halign="center">
+                                                                <h:graphicImage url="images/Diente37.png" id="gi63"
+                                                                                height="72" width="43"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" marginEnd="5px"
+                                                                         id="gc67" halign="center">
+                                                                <h:graphicImage url="images/Diente38.png" id="gi64"
+                                                                                height="72" width="43"/>
+                                                            </af:gridCell>
+                                                        </af:gridRow>
+                                                        <af:gridRow marginTop="5px" height="auto" id="gr15">
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc92"
+                                                                         halign="center" valign="top">
+                                                                <af:outputLabel value="31" id="ol25"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc93"
+                                                                         halign="center" valign="top">
+                                                                <af:outputLabel value="32" id="ol27"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc94"
+                                                                         halign="center" valign="top">
+                                                                <af:outputLabel value="33" id="ol26"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc95"
+                                                                         halign="center" valign="top">
+                                                                <af:outputLabel value="34" id="ol28"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc96"
+                                                                         halign="center" valign="top">
+                                                                <af:outputLabel value="35" id="ol29"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc97"
+                                                                         halign="center" valign="top">
+                                                                <af:outputLabel value="36" id="ol30"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" id="gc98"
+                                                                         halign="center" valign="top">
+                                                                <af:outputLabel value="37" id="ol31"/>
+                                                            </af:gridCell>
+                                                            <af:gridCell marginStart="5px" width="10%" marginEnd="5px"
+                                                                         id="gc99" halign="center" valign="top">
+                                                                <af:outputLabel value="38" id="ol32"/>
+                                                            </af:gridCell>
+                                                        </af:gridRow>
+                                                    </af:panelGridLayout>
+                                                </af:panelBox>
+                                            </af:panelGroupLayout>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl15">
+                                    <af:gridRow id="gr17" marginTop="15px">
+                                        <af:gridCell id="gc103" halign="center">
+                                            <af:panelGroupLayout id="pgl21" halign="center" layout="vertical">
+                                                <af:panelGroupLayout id="pgl22" layout="horizontal" halign="center">
+                                                    <af:button id="bEliminarPresupuesto" icon="images/Borrar.png" partialTriggers="bNuevoPresupuesto bAplicarPresupuesto bBuscarPresupuesto"
+                                                               visible="#{PacienteController.aplicado}">
+                                                        <af:clientListener method="limpiarPopupEliminar" type="action"/>
+                                                        <af:showPopupBehavior popupId="popupEliminarPresupuesto"
+                                                                              triggerType="action"/>
+                                                    </af:button>
+                                                    <af:spacer width="10" height="10" id="s15"/>
+                                                    <af:button text="Nuevo" id="bNuevo" partialTriggers="bAplicarPresupuesto bEliminarPresupuesto bBuscarPresupuesto bEliminar">
+                                                        <af:showPopupBehavior popupId="popupNuevoPresupuesto"
+                                                                              triggerType="action"/>
+                                                        <af:clientListener method="limpiarPopupNuevo" type="action"/>
+                                                    </af:button>
+                                                    <af:spacer width="10" height="10" id="s14"/>
+                                                    <af:button text="Aplicar presupuesto" id="bAplicarPresupuesto"
+                                                               action="#{PacienteController.aplicarPresupuesto}" partialTriggers="bNuevoPresupuesto bEliminarPresupuesto bBuscarPresupuesto bEliminar"
+                                                               visible="#{!PacienteController.aplicado}">
+                                                        <af:clientListener method="validarAplicar" type="action"/>
+                                                    </af:button>
+                                                    <af:spacer width="10" height="10" id="s26"/>
+                                                    <af:button text="Guardar cambios" id="bGuardarCambios"
+                                                               partialTriggers="bNuevoPresupuesto bAplicarPresupuesto bBuscarPresupuesto"
+                                                               visible="#{PacienteController.aplicado}"
+                                                               action="#{PacienteController.editarPresupuesto}">
+                                                        <af:clientListener method="validarEditarPresupuesto"
+                                                                           type="action"/>
+                                                    </af:button>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout id="pgl29" layout="horizontal" halign="center">
+                                                    <af:outputLabel value="#{PacienteController.mensajePresupuesto}"
+                                                                    id="ol39"
+                                                                    partialTriggers="bAplicarPresupuesto bBuscarPresupuesto bGuardarCambios"/>
+                                                    <af:outputLabel id="olMensaje" clientComponent="true"
+                                                                    inlineStyle="color:Red;"/>
+                                                </af:panelGroupLayout>
+                                            </af:panelGroupLayout>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr16">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc102"
+                                                     halign="center"/>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:popup childCreation="deferred" autoCancel="disabled"
+                                          id="popupRegistrarProcedimientoPresupuesto" contentDelivery="lazyUncached">
+                                    <af:dialog id="d1" type="none" title="Agregar procedimiento"
+                                               inlineStyle="background-color:White;">
+                                        <af:panelGroupLayout id="pgl27" layout="horizontal" halign="center">
+                                            <af:panelFormLayout id="pfl1">
+                                                <af:spacer width="10" height="10" id="s23"/>
+                                                <af:selectOneChoice label="Procedimiento" id="socProcedimientoRegistrar"
+                                                                    value="#{PacienteController.lineaDetalleRegistrar.bitacoraprocedimiento1}"
+                                                                    contentStyle="Height: 23px; font-size: 15px;"
+                                                                    partialTriggers="bAgregarLineaDetallePresupuesto"
+                                                                    clientComponent="true"
+                                                                    unselectedLabel="-- Seleccionar --">
+                                                    <af:forEach var="var"
+                                                                items="#{PacienteController.listaProcedimientos}">
+                                                        <af:selectItem label="#{var.nombreProcedimiento}" value="#{var}"
+                                                                       id="si21"/>
+                                                    </af:forEach>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice label="Estado del procedimiento"
+                                                                    id="socEstadoProcedimientoRegistrar"
+                                                                    contentStyle="Height: 23px; font-size: 15px;"
+                                                                    partialTriggers="bAgregarLineaDetallePresupuesto"
+                                                                    value="#{PacienteController.lineaDetalleRegistrar.estadoProcedimiento}"
+                                                                    clientComponent="true"
+                                                                    unselectedLabel="-- Seleccionar --">
+                                                    <af:selectItem label="Pendiente" value="Pendiente" id="si3"/>
+                                                    <af:selectItem label="En proceso" value="En proceso" id="si17"/>
+                                                    <af:selectItem label="Aplicado" value="Aplicado" id="si18"/>
+                                                </af:selectOneChoice>
+                                                <af:separator id="s6"/>
+                                                <af:selectBooleanRadio label="Diente" id="sbrNumeroDienteRegistrar"
+                                                                       text="Número de diente" group="diente"
+                                                                       selected="true"
+                                                                       partialTriggers="bAgregarLineaDetallePresupuesto"
+                                                                       value="#{PacienteController.dienteSeleccionadoPresupuestoRegistrar}"
+                                                                       clientComponent="true"/>
+                                                <af:panelGroupLayout id="pgl26" layout="horizontal">
+                                                    <af:selectOneChoice id="socDiente1Registrar"
+                                                                        contentStyle="Height: 23px; font-size: 15px;"
+                                                                        value="#{PacienteController.odontogramaNumeroDiente1}"
+                                                                        partialTriggers="bAgregarLineaDetallePresupuesto"
+                                                                        clientComponent="true" unselectedLabel="#">
+                                                        <af:selectItem label="1" id="si5" value="1"/>
+                                                        <af:selectItem label="2" id="si2" value="2"/>
+                                                        <af:selectItem label="3" id="si6" value="3"/>
+                                                        <af:selectItem label="4" id="si7" value="4"/>
+                                                    </af:selectOneChoice>
+                                                    <af:selectOneChoice id="socDiente2Registrar"
+                                                                        contentStyle="Height: 23px; font-size: 15px;"
+                                                                        value="#{PacienteController.odontogramaNumeroDiente2}"
+                                                                        partialTriggers="bAgregarLineaDetallePresupuesto"
+                                                                        clientComponent="true" unselectedLabel="#">
+                                                        <af:selectItem label="1" value="1" id="si8"/>
+                                                        <af:selectItem label="2" value="2" id="si9"/>
+                                                        <af:selectItem label="3" value="3" id="si10"/>
+                                                        <af:selectItem label="4" value="4" id="si12"/>
+                                                        <af:selectItem label="5" value="5" id="si13"/>
+                                                        <af:selectItem label="6" value="6" id="si14"/>
+                                                        <af:selectItem label="7" value="7" id="si15"/>
+                                                        <af:selectItem label="8" value="8" id="si16"/>
+                                                    </af:selectOneChoice>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout id="pgl28" layout="horizontal">
+                                                    <af:selectOneChoice id="socCaraDienteRegistrar"
+                                                                        contentStyle="Height: 23px; font-size: 15px;"
+                                                                        label="Cara del diente"
+                                                                        partialTriggers="bAgregarLineaDetallePresupuesto"
+                                                                        value="#{PacienteController.lineaDetalleRegistrar.caraDiente}"
+                                                                        clientComponent="true"
+                                                                        unselectedLabel="-- Seleccionar --">
+                                                        <af:selectItem label="Todo el diente" value="Todas" id="si19"/>
+                                                        <af:selectItem label="1" value="1" id="si20"/>
+                                                        <af:selectItem label="2" value="2" id="si26"/>
+                                                        <af:selectItem label="3" value="3" id="si23"/>
+                                                        <af:selectItem label="4" value="4" id="si24"/>
+                                                        <af:selectItem label="5" value="5" id="si25"/>
+                                                    </af:selectOneChoice>
+                                                    <af:spacer width="10" height="10" id="s12"/>
+                                                    <h:graphicImage id="gi132" url="images/OdontoMuestra.png"
+                                                                    height="80" width="81"/>
+                                                </af:panelGroupLayout>
+                                                <af:selectBooleanRadio text="Toda la boca y/o dentadura"
+                                                                       id="sbrTodaDentaduraRegistrar" group="diente"
+                                                                       partialTriggers="bAgregarLineaDetallePresupuesto"
+                                                                       clientComponent="true"/>
+                                                <af:separator id="s8"/>
+                                            </af:panelFormLayout>
+                                            <af:spacer width="10" height="10" id="s20"/>
+                                        </af:panelGroupLayout>
+                                        <af:spacer width="10" height="10" id="s47"/>
+                                        <af:panelGroupLayout id="pgl315" layout="horizontal" halign="center">
+                                            <af:button text="Agregar" id="bAgregarLineaDetallePresupuesto"
+                                                       action="#{PacienteController.agregarLineaDetallePresupuesto}">
+                                                <af:clientListener method="validarAgregarProcedimiento" type="action"/>
+                                            </af:button>
+                                            <af:spacer width="10" height="10" id="s24"/>
+                                            <af:button text="Cancelar" id="bCancelar">
+                                                <af:clientListener method="cerrarPopup" type="action"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                        <af:spacer width="10" height="10" id="s16"/>
+                                        <af:panelGroupLayout id="pgl19" layout="horizontal" halign="center">
+                                            <af:outputLabel id="olMensajeProcedimientoRegistrar"
+                                                            clientComponent="true"/>
+                                        </af:panelGroupLayout>
+                                    </af:dialog>
+                                </af:popup>
+                                <af:popup childCreation="deferred" autoCancel="disabled"
+                                          id="popupEditarProcedimientoPresupuesto" contentDelivery="lazyUncached">
+                                    <af:dialog id="d2" type="none" title="Editar procedimiento"
+                                               inlineStyle="background-color:White;">
+                                        <af:panelFormLayout id="pfl2">
+                                            <af:spacer width="10" height="10" id="s124"/>
+                                            <af:selectOneChoice label="Procedimiento" id="socProcedimientoEditar"
+                                                                value="#{PacienteController.lineaDetalleEditar.bitacoraprocedimiento1}"
+                                                                contentStyle="Height: 23px; font-size: 15px;"
+                                                                partialTriggers="bEditarLineaDetallePresupuesto"
+                                                                clientComponent="true"
+                                                                unselectedLabel="-- Seleccionar --">
+                                                <af:forEach var="var" items="#{PacienteController.listaProcedimientos}">
+                                                    <af:selectItem label="#{var.nombreProcedimiento}" value="#{var}" id="si22"/>
+                                                </af:forEach>
+                                            </af:selectOneChoice>
+                                            <af:selectOneChoice label="Estado del procedimiento"
+                                                                id="socEstadoProcedimientoEditar"
+                                                                contentStyle="Height: 23px; font-size: 15px;"
+                                                                partialTriggers="bEditarLineaDetallePresupuesto"
+                                                                value="#{PacienteController.lineaDetalleEditar.estadoProcedimiento}"
+                                                                clientComponent="true"
+                                                                unselectedLabel="-- Seleccionar --">
+                                                <af:selectItem label="Pendiente" value="Pendiente" id="si29"/>
+                                                <af:selectItem label="En proceso" value="En proceso" id="si27"/>
+                                                <af:selectItem label="Aplicado" value="Aplicado" id="si28"/>
+                                            </af:selectOneChoice>
+                                            <af:separator id="s10"/>
+                                            <af:selectBooleanRadio label="Diente"
+                                                                   id="sbrNumeroDienteEditar" text="Número de diente" group="dienteEditar"
+                                                                   selected="true"
+                                                                   partialTriggers="bEditarLineaDetallePresupuesto"
+                                                                   value="#{PacienteController.dienteSeleccionadoPresupuestoEditar}"
+                                                                   clientComponent="true"/>
+                                            <af:panelGroupLayout id="pgl46" layout="horizontal">
+                                                <af:selectOneChoice id="socDiente1Editar"
+                                                                    contentStyle="Height: 23px; font-size: 15px;"
+                                                                    value="#{PacienteController.odontogramaNumeroDienteEditar1}"
+                                                                    partialTriggers="bEditarLineaDetallePresupuesto"
+                                                                    clientComponent="true" unselectedLabel="#">
+                                                    <af:selectItem label="1" id="si65" value="1"/>
+                                                    <af:selectItem label="2" id="si62" value="2"/>
+                                                    <af:selectItem label="3" id="si66" value="3"/>
+                                                    <af:selectItem label="4" id="si67" value="4"/>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice id="socDiente2Editar"
+                                                                    contentStyle="Height: 23px; font-size: 15px;"
+                                                                    value="#{PacienteController.odontogramaNumeroDienteEditar2}"
+                                                                    partialTriggers="bEditarLineaDetallePresupuesto"
+                                                                    clientComponent="true" unselectedLabel="#">
+                                                    <af:selectItem label="1" value="1" id="si58"/>
+                                                    <af:selectItem label="2" value="2" id="si59"/>
+                                                    <af:selectItem label="3" value="3" id="si50"/>
+                                                    <af:selectItem label="4" value="4" id="si52"/>
+                                                    <af:selectItem label="5" value="5" id="si53"/>
+                                                    <af:selectItem label="6" value="6" id="si54"/>
+                                                    <af:selectItem label="7" value="7" id="si55"/>
+                                                    <af:selectItem label="8" value="8" id="si56"/>
+                                                </af:selectOneChoice>
+                                            </af:panelGroupLayout>
+                                            <af:panelGroupLayout id="pgl38" layout="horizontal">
+                                                <af:selectOneChoice id="socCaraDienteEditar"
+                                                                    contentStyle="Height: 23px; font-size: 15px;"
+                                                                    label="Cara del diente"
+                                                                    partialTriggers="bEditarLineaDetallePresupuesto"
+                                                                    value="#{PacienteController.lineaDetalleEditar.caraDiente}"
+                                                                    clientComponent="true"
+                                                                    unselectedLabel="-- Seleccionar --">
+                                                    <af:selectItem label="Todo el diente" value="Todas"
+                                                                   id="si49"/>
+                                                    <af:selectItem label="1" value="1" id="si40"/>
+                                                    <af:selectItem label="2" value="2" id="si46"/>
+                                                    <af:selectItem label="3" value="3" id="si43"/>
+                                                    <af:selectItem label="4" value="4" id="si44"/>
+                                                    <af:selectItem label="5" value="5" id="si45"/>
+                                                </af:selectOneChoice>
+                                                <af:spacer width="10" height="10" id="s52"/>
+                                                <h:graphicImage id="gi142" url="images/OdontoMuestra.png" height="80"
+                                                                width="81"/>
+                                            </af:panelGroupLayout>
+                                            <af:selectBooleanRadio text="Toda la boca o dentadura"
+                                                                   id="sbrTodaDentaduraEditar" group="dienteEditar"
+                                                                   partialTriggers="bEditarLineaDetallePresupuesto"
+                                                                   clientComponent="true"/>
+                                            <af:separator id="s18"/>
+                                        </af:panelFormLayout>
+                                        <af:spacer width="10" height="10" id="s57"/>
+                                        <af:panelGroupLayout id="pgl415" layout="horizontal" halign="center">
+                                            <af:button text="Editar" id="bEditarLineaDetallePresupuesto"
+                                                       action="#{PacienteController.editarLineaDetallePresupuesto}">
+                                                <af:clientListener method="validarEditarProcedimiento" type="action"/>
+                                            </af:button>
+                                            <af:spacer width="10" height="10" id="s34"/>
+                                            <af:button text="Cancelar" id="bCancelarEditar">
+                                                <af:clientListener method="cerrarPopup" type="action"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                        <af:spacer width="10" height="10" id="s17"/>
+                                        <af:panelGroupLayout id="pgl25" layout="horizontal" halign="center">
+                                            <af:outputLabel id="olMensajeProcedimientoEditar"/>
+                                        </af:panelGroupLayout>
+                                    </af:dialog>
+                                </af:popup>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="popupNuevoPresupuesto"
+                                          contentDelivery="lazyUncached">
+                                    <af:dialog id="d4" type="none">
+                                        <f:facet name="buttonBar"/>
+                                        <af:panelGroupLayout id="pgl23" halign="center" layout="vertical">
+                                            <af:spacer width="10" height="10" id="s4"/>
+                                            <af:outputLabel value="¿Desea abandonar el actual odontograma y crear uno nuevo?" id="ol40"
+                                                            inlineStyle="font-size: 14px;"/>
+                                            <af:spacer width="10" height="10" id="s11"/>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout id="pgl24" layout="horizontal" halign="center">
+                                            <af:button text="Crear nuevo" id="bNuevoPresupuesto"
+                                                       action="#{PacienteController.crearNuevoPresupuesto}">
+                                                <af:clientListener method="validarNuevo" type="action"/>
+                                            </af:button>
+                                            <af:spacer width="10" height="10" id="s13"/>
+                                            <af:button text="Cancelar" id="b3">
+                                                <af:clientListener method="cerrarPopup" type="action"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout id="pgl30" layout="horizontal" halign="center">
+                                            <af:outputLabel id="olMensajeNuevo" clientComponent="true"/>
+                                        </af:panelGroupLayout>
+                                    </af:dialog>
+                                </af:popup>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="popupEliminarPresupuesto">
+                                    <af:dialog id="d3" title="Eliminar presupuesto" type="none">
+                                        <af:panelGroupLayout id="pgl31" layout="vertical" halign="center">
+                                            <af:spacer width="10" height="10" id="s21"/>
+                                            <af:outputLabel value="¿Esta seguro que desea eliminar este presupuesto?" id="ol35"
+                                                            inlineStyle="font-size:14px;"/>
+                                            <af:spacer width="10" height="10" id="s22"/>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout id="pgl32" layout="horizontal" halign="center">
+                                            <af:button text="Eliminar" id="bEliminar"
+                                                       action="#{PacienteController.eliminarPresupuesto}">
+                                                <af:clientListener method="validarEliminar" type="action"/>
+                                            </af:button>
+                                            <af:spacer width="10" height="10" id="s25"/>
+                                            <af:button text="Cancelar" id="b1">
+                                                <af:clientListener method="cerrarPopup" type="action"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout id="pgl33" halign="center" layout="horizontal">
+                                            <af:outputLabel id="olMensajeEliminar" clientComponent="true"/>
+                                        </af:panelGroupLayout>
+                                    </af:dialog>
+                                </af:popup>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <af:resource type="javascript">
+                            function validarAgregarProcedimiento(actionEvent){
+                                var source = actionEvent.getSource();
+                                var mensaje = source.findComponent("olMensajeProcedimientoRegistrar");
+                                
+                                var procedimiento = source.findComponent("socProcedimientoRegistrar");
+                                var estadoProcedimiento = source.findComponent("socEstadoProcedimientoRegistrar");
+                                var numeroDiente = source.findComponent("sbrNumeroDienteRegistrar");
+                                var diente1 = source.findComponent("socDiente1Registrar");
+                                var diente2 = source.findComponent("socDiente2Registrar");
+                                var caraDiente = source.findComponent("socCaraDienteRegistrar");
+                                
+                                mensaje.setValue('');
+                                
+                                if(procedimiento.getSubmittedValue()==''){
+                                  mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                  procedimiento.setChanged(true);
+                                  actionEvent.cancel();
+                                }else{
+                                  procedimiento.setChanged(false);
+                                }
+                                  
+                                if(estadoProcedimiento.getSubmittedValue()==''){
+                                  estadoProcedimiento.setChanged(true);
+                                  mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                  actionEvent.cancel();
+                                }else{
+                                  estadoProcedimiento.setChanged(false);
+                                }
+                                
+                                if(numeroDiente.getValue()==true){
+                                    if(diente1.getSubmittedValue()==''){
+                                      diente1.setChanged(true);
+                                      mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                      actionEvent.cancel();
+                                    }else{
+                                      diente1.setChanged(false);
+                                    }
+                                    
+                                    if(diente2.getSubmittedValue()==''){
+                                      diente2.setChanged(true);
+                                      mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                      actionEvent.cancel();
+                                    }else{
+                                      diente2.setChanged(false);
+                                    }
+                                    
+                                    if(caraDiente.getSubmittedValue()==''){
+                                      caraDiente.setChanged(true);
+                                      mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                      actionEvent.cancel();
+                                    }else{
+                                      caraDiente.setChanged(false);
+                                    }
+                                }
+                                
+                                if(mensaje.getValue()==''){
+                                  mensaje.setValue('Se agregó exitosamente');
+                                }
+                            }
+                            
+                            function limpiarPopupAgregar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeProcedimientoRegistrar");
+                              mensaje.setValue('');
+                            }
+                            
+                            function limpiarPopupEditar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeNuevo");
+                              mensaje.setValue('');
+                            }
+                            
+                            function validarBuscar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var presupuestos = source.findComponent("socListaPrespuestos");
+                                if(presupuestos.getSubmittedValue()==''){
+                                  actionEvent.cancel();
+                                }
+                            }
+                            
+                            function validarNuevo(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeNuevo");
+                              mensaje.setValue('Se ha creado un nuevo odontograma');
+                            }
+                            function limpiarPopupNuevo(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeNuevo");
+                              mensaje.setValue('');
+                            }
+                            
+                            function validarEliminar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeEliminar");
+                              mensaje.setValue('Se ha eliminado el presupuesto');
+                            }
+                            function limpiarPopupEliminar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeEliminar");
+                              mensaje.setValue('');
+                            }
+                            
+                            function validarEditarProcedimiento(actionEvent){
+                                var source = actionEvent.getSource();
+                                var mensaje = source.findComponent("olMensajeProcedimientoEditar");
+                                
+                                var procedimiento = source.findComponent("socProcedimientoEditar");
+                                var estadoProcedimiento = source.findComponent("socEstadoProcedimientoEditar");
+                                var numeroDiente = source.findComponent("sbrNumeroDienteEditar");
+                                var diente1 = source.findComponent("socDiente1Editar");
+                                var diente2 = source.findComponent("socDiente2Editar");
+                                var caraDiente = source.findComponent("socCaraDienteEditar");
+                                
+                                mensaje.setValue('');
+                                
+                                if(procedimiento.getSubmittedValue()==''){
+                                  mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                  procedimiento.setChanged(true);
+                                  actionEvent.cancel();
+                                }else{
+                                  procedimiento.setChanged(false);
+                                }
+                                  
+                                if(estadoProcedimiento.getSubmittedValue()==''){
+                                  estadoProcedimiento.setChanged(true);
+                                  mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                  actionEvent.cancel();
+                                }else{
+                                  estadoProcedimiento.setChanged(false);
+                                }
+                                
+                                
+                                if(numeroDiente.getValue()==true){
+                                    if(diente1.getSubmittedValue()==''){
+                                      diente1.setChanged(true);
+                                      mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                      actionEvent.cancel();
+                                    }else{
+                                      diente1.setChanged(false);
+                                    }
+                                    
+                                    if(diente2.getSubmittedValue()==''){
+                                      diente2.setChanged(true);
+                                      mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                      actionEvent.cancel();
+                                    }else{
+                                      diente2.setChanged(false);
+                                    }
+                                    
+                                    if(caraDiente.getSubmittedValue()==''){
+                                      caraDiente.setChanged(true);
+                                      mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                      actionEvent.cancel();
+                                    }else{
+                                      caraDiente.setChanged(false);
+                                    }
+                                }
+                                
+                                if(mensaje.getValue()==''){
+                                  mensaje.setValue('Se ha editado la información');
+                                }
+                            }
+                            
+                            function validarEditarPresupuesto(actionEvent){
+                              var source = actionEvent.getSource();
+                              var usuario = source.findComponent("socUsuarioPresupuesto");
+                              var mensaje = source.findComponent("olMensaje");
+                              
+                              mensaje.setValue('');
+                              
+                              if(usuario.getSubmittedValue()==''){
+                                usuario.setChanged(true);
+                                mensaje.setValue('Debe seleccionar el usuario que aplica el presupuesto');
+                                actionEvent.cancel();
+                              }else{
+                                usuario.setChanged(false);
+                              }
+                            }
+                            
+                            function validarAplicar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var usuario = source.findComponent("socUsuarioPresupuesto");
+                              var mensaje = source.findComponent("olMensaje");
+                              
+                              mensaje.setValue('');
+                              
+                              if(usuario.getSubmittedValue()==''){
+                                usuario.setChanged(true);
+                                mensaje.setValue('Debe seleccionar el usuario que aplica el presupuesto');
+                                actionEvent.cancel();
+                              }else{
+                                usuario.setChanged(false);
+                              }
+                            }
+                            
+                            function cerrarPopup(actionEvent){
+                              var source = actionEvent.getSource();
+                              var registrar = source.findComponent("popupRegistrarProcedimientoPresupuesto");
+                              var editar = source.findComponent("popupEditarProcedimientoPresupuesto");
+                              var nuevo = source.findComponent("popupNuevoPresupuesto");
+                              var eliminar = source.findComponent("popupEliminarPresupuesto");
+                              
+                                if (registrar.isPopupVisible()) {
+                                  registrar.hide();
+                                }
+                                if (editar.isPopupVisible()) {
+                                  editar.hide();
+                                }
+                                if (nuevo.isPopupVisible()) {
+                                  nuevo.hide();
+                                }
+                                if (eliminar.isPopupVisible()) {
+                                  eliminar.hide();
+                                }
+                            }
+                        </af:resource>
+                        <f:facet name="second"/>
+                    </af:panelSplitter>
+                </f:facet>
+            </af:panelSplitter>
+        </f:facet>
+    </af:panelSplitter>
+</ui:composition>

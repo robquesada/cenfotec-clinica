@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelSplitter orientation="vertical" splitterPosition="50" id="ps3">
+        <f:facet name="first"/>
+        <f:facet name="second">
+            <af:panelSplitter orientation="horizontal" splitterPosition="100" id="ps1">
+                <f:facet name="first"/>
+                <f:facet name="second">
+                    <af:panelSplitter orientation="horizontal" splitterPosition="100" positionedFromEnd="true" id="ps2">
+                        <f:facet name="first">
+                            <af:panelGroupLayout id="pgl1">
+                                <af:panelGridLayout id="pgl2">
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr1">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc1" halign="center">
+                                            <af:toolbox id="t1">
+                                                <af:toolbar id="t2">
+                                                    <af:group id="g1">
+                                                        <af:button text="Buscar usuarios" id="bUsuarios"
+                                                                   action="verusuarios"
+                                                                   rendered="#{LoginController.permisoUsuarios}"
+                                                                   inlineStyle="background-color:rgb(240,244,250); background-image:none; border-color:rgb(142,68,173); color:rgb(142,68,173);"/>
+                                                    </af:group>
+                                                    <af:group id="g2">
+                                                        <af:button text="Agregar nuevo usuario" id="b1"
+                                                                   action="agregarusuarios"
+                                                                   rendered="#{LoginController.permisoUsuarios}"/>
+                                                    </af:group>
+                                                    <af:group id="g3">
+                                                        <af:button text="Roles y permisos" id="pt_bRolesPermisos"
+                                                                   action="rolpermiso"/>
+                                                    </af:group>
+                                                    <af:group id="g4">
+                                                        <af:button text="Procedimientos" id="pt_bProcedimientos"
+                                                                   action="procedimientos"
+                                                                   rendered="#{LoginController.permisoProcedimientos}"/>
+                                                    </af:group>
+                                                </af:toolbar>
+                                            </af:toolbox>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl3">
+                                    <af:gridRow marginTop="5px" height="auto" id="pt_gr2">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc2"/>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr3">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc3" halign="center"/>
+                                    </af:gridRow>
+                                    <af:gridRow id="gr13">
+                                        <af:gridCell id="gc25" halign="center">
+                                            <af:spacer width="10" height="20" id="s1"/>
+                                            <af:panelGroupLayout id="pgl7" layout="vertical" halign="center"
+                                                                 rendered="#{!LoginController.permisoUsuarios}">
+                                                <af:outputLabel value="Su usuario no tiene permiso para administrar información de otros usuarios."
+                                                                id="ol4"/>
+                                                <af:outputLabel value="Puede seleccionar alguna de las otras opciones de este módulo de configuración." id="ol5"/>
+                                            </af:panelGroupLayout>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl4">
+                                    <af:gridRow marginTop="5px" height="auto" id="gr3">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc3"
+                                                     halign="center">
+                                            <af:panelBox id="pb2"
+                                                         inlineStyle="width:700px; Height: 47px;" showHeader="never"
+                                                         rendered="#{LoginController.permisoUsuarios}">
+                                                <f:facet name="toolbar"/>
+                                                <af:panelGridLayout id="pgl8">
+                                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px"
+                                                                id="gr8">
+                                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px"
+                                                                     id="gc10">
+                                                            <af:panelGroupLayout id="pgl9" layout="horizontal">
+                                                                <af:inputText id="itBuscarUsuarios"
+                                                                              value="#{UsuarioController.usuarioFiltro.nombre}"
+                                                                              columns="42"
+                                                                              contentStyle="height:22px; font-size:14px;"
+                                                                              placeholder="Ingrese el nombre o apellido del usuario"/>
+                                                                <af:button id="bBuscarUsuarios"
+                                                                           action="#{UsuarioController.buscarUsuarios}"
+                                                                           icon="images/Buscar.png"/>
+                                                            </af:panelGroupLayout>
+                                                        </af:gridCell>
+                                                    </af:gridRow>
+                                                </af:panelGridLayout>
+                                            </af:panelBox>
+                                            <af:panelBox text="Usuarios" id="pb1" disclosed="true"
+                                                         showDisclosure="false"
+                                                         inlineStyle="width:700px; Height: 340px;"
+                                                         rendered="#{LoginController.permisoUsuarios}" type="stretch">
+                                                <f:facet name="toolbar"/>
+                                                <af:listView id="lvBuscarUsuarios" value="#{UsuarioController.listaUsuarios}" var="item"
+                                                             partialTriggers="::bBuscarUsuarios"
+                                                             emptyText="No hay usuarios con ese nombre o apellido. Intente con uno diferente."
+                                                             selection="single"
+                                                             selectionListener="#{UsuarioController.seleccionarUsuario}">
+                                                    <f:facet name="groupHeaderStamp"/>
+                                                    <af:listItem id="li1" inlineStyle="column-width:auto;">
+                                                        <af:panelGridLayout id="pgl5">
+                                                            <af:gridRow marginTop="5px" height="auto" marginBottom="5px"
+                                                                        id="gr7">
+                                                                <af:gridCell marginStart="5px" width="15%" id="gc7"
+                                                                             halign="center">
+                                                                    <af:image id="i1"
+                                                                              source="images/UsuarioImg.png"
+                                                                              inlineStyle="width:48px; height:45px;"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell marginStart="5px" width="70%" id="gc8"
+                                                                             valign="middle">
+                                                                    <af:panelGroupLayout id="pgl6" layout="vertical">
+                                                                        <af:outputLabel id="ol1"
+                                                                                        value="#{item.nombre} #{item.primerApellido} #{item.segundoApellido}"
+                                                                                        inlineStyle="font-size:medium; font-weight:bold;"/>
+                                                                        <af:outputLabel value="Nombre de usuario: #{item.nombreUsuario} | Rol: #{item.rol1.nombreRol}" id="ol2"/>
+                                                                        <af:outputLabel value="Especialidad: #{item.especialidad}" id="ol3"/>
+                                                                    </af:panelGroupLayout>
+                                                                </af:gridCell>
+                                                                <af:gridCell marginStart="5px" width="15%"
+                                                                             marginEnd="5px" id="gc9" halign="center"
+                                                                             valign="middle">
+                                                                    <af:button id="b2"
+                                                                               action="#{UsuarioController.verUsuario}"
+                                                                               icon="images/Ver.png"/>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                        </af:panelGridLayout>
+                                                    </af:listItem>
+                                                </af:listView>
+                                            </af:panelBox>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" id="gr4">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc4"/>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="second"/>
+                    </af:panelSplitter>
+                </f:facet>
+            </af:panelSplitter>
+        </f:facet>
+    </af:panelSplitter>
+</ui:composition>

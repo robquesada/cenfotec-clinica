@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Clínica Odontológica" id="d1" inlineStyle="background-color:#1466b2;">
+        <af:form id="f1">
+            <af:panelSplitter orientation="vertical" splitterPosition="50" id="ps2">
+                <f:facet name="second">
+                    <af:panelSplitter orientation="vertical" splitterPosition="100" id="ps1">
+                        <f:facet name="second">
+                            <af:panelSplitter orientation="vertical" splitterPosition="100" positionedFromEnd="true"
+                                              id="ps3">
+                                <f:facet name="first">
+                                    <af:panelGridLayout id="pgl1">
+                                        <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+                                            <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc1"
+                                                         halign="center" valign="middle">
+                                                <af:spacer width="10" height="150" id="s4"/>
+                                                <af:decorativeBox id="db1" topHeight="50px">
+                                                    <f:facet name="center">
+                                                        <af:panelGroupLayout id="pgl4" layout="vertical"
+                                                                             halign="center">
+                                                            <af:panelGroupLayout id="pgl6" layout="vertical"
+                                                                                 halign="center">
+                                                                <af:spacer width="10" height="5" id="s11"/>
+                                                                <af:outputLabel value="Bienvenido(a)."
+                                                                                id="ol1"
+                                                                                inlineStyle="font-size:large; font-weight:bold;"/>
+                                                                <af:spacer width="10" height="10" id="s5"/>
+                                                            </af:panelGroupLayout>
+                                                            <af:separator id="s6"/>
+                                                            <af:panelGroupLayout id="pgl2" valign="top" halign="center"
+                                                                                 layout="horizontal">
+                                                                <af:image source="images/LogoClinica.png" id="i1"/>
+                                                                <af:panelGroupLayout id="pgl3" layout="vertical"
+                                                                                     halign="center">
+                                                                    <af:spacer width="10" height="5" id="s7"/>
+                                                                    <af:inputText id="itNombreUsuario"
+                                                                                  placeholder="Nombre de usuario"
+                                                                                  clientComponent="true"
+                                                                                  contentStyle="height:30px; width:250px; font-size:large;"
+                                                                                  inlineStyle="font-size:medium;"
+                                                                                  value="#{LoginController.nombreUsuarioLog}"
+                                                                                  partialTriggers="::bIngresar"/>
+                                                                    <af:spacer width="10" height="10" id="s2"/>
+                                                                    <af:inputText id="itContrasenna"
+                                                                                  placeholder="Contraseña" secret="true"
+                                                                                  clientComponent="true"
+                                                                                  contentStyle="height:30px; width:250px; font-size:large;"
+                                                                                  value="#{LoginController.contrasennaLog}"
+                                                                                  partialTriggers="::bIngresar"/>
+                                                                    <af:spacer width="10" height="10" id="s1"/>
+                                                                    <af:panelGroupLayout id="pgl7">
+                                                                        <af:spacer width="5" height="5" id="s3"/>
+                                                                        <af:button text="Ingresar" id="bIngresar"
+                                                                                   action="#{LoginController.ingresar}"
+                                                                                   inlineStyle="height:30px; width:255px; font-size:medium;">
+                                                                            <af:clientListener method="validar"
+                                                                                               type="action"/>
+                                                                        </af:button>
+                                                                    </af:panelGroupLayout>
+                                                                </af:panelGroupLayout>
+                                                                <af:spacer width="10" height="10" id="s10"/>
+                                                            </af:panelGroupLayout>
+                                                            <af:panelGroupLayout id="pgl8" layout="horizontal"
+                                                                                 halign="center" valign="top">
+                                                                <af:spacer width="10" height="10" id="s8"/>
+                                                                <af:outputLabel id="olMensaje" clientComponent="true"
+                                                                                inlineStyle="color:Red;"/>
+                                                                <af:outputLabel value="#{LoginController.mensajeLog}" id="ol2"
+                                                                                partialTriggers="::bIngresar"/>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                </af:decorativeBox>
+                                            </af:gridCell>
+                                        </af:gridRow>
+                                        <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+                                            <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc2"
+                                                         halign="center" valign="middle"/>
+                                        </af:gridRow>
+                                    </af:panelGridLayout>
+                                </f:facet>
+                                <f:facet name="second"/>
+                            </af:panelSplitter>
+                        </f:facet>
+                    </af:panelSplitter>
+                </f:facet>
+            </af:panelSplitter>
+        </af:form>
+        <f:facet name="metaContainer">
+        <af:resource type="javascript">
+            function validar(actionEvent){
+              var source = actionEvent.getSource();
+              var nombreUsuario  = source.findComponent("itNombreUsuario");
+              var contrasenna = source.findComponent("itContrasenna");
+              var mensaje = source.findComponent("olMensaje");
+              
+              mensaje.setValue('');
+              
+              if(nombreUsuario.getSubmittedValue() == '' || contrasenna.getSubmittedValue() == ''){
+                mensaje.setValue('Debe ingresar el nombre de usuario y la contraseña');
+                actionEvent.cancel();
+              }
+            }
+        </af:resource>
+      </f:facet>
+    </af:document>
+</f:view>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.2.66.68" id="MenuPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="pactaskflowdefinition1"
+              taskFlowId="/WEB-INF/paciente-task-flow-definition.xml#pac-task-flow-definition"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="agendataskflowdefinition1"
+              taskFlowId="/WEB-INF/agenda-task-flow-definition.xml#agenda-task-flow-definition" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="configuraciontaskflowdefinition1"
+              taskFlowId="/WEB-INF/configuracion-task-flow-definition.xml#configuracion-task-flow-definition"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings/>
+</pageDefinition>

@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelSplitter orientation="vertical" splitterPosition="50" id="ps2">
+    <f:facet name="first"/>
+    <f:facet name="second">
+      <af:panelSplitter orientation="horizontal" splitterPosition="100" id="ps1">
+        <f:facet name="first"/>
+        <f:facet name="second">
+          <af:panelSplitter orientation="horizontal" splitterPosition="100" positionedFromEnd="true" id="ps3">
+            <f:facet name="first">
+              <af:panelGroupLayout id="pt_pgl2">
+                        <af:panelGridLayout id="pt_pgl1">
+                            <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr1">
+                                <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc1" halign="center">
+                      <af:toolbox id="t1">
+                        <af:toolbar id="t2">
+                          <af:group id="g1">
+                            <af:button text="Buscar usuarios" id="bUsuarios" action="listarusuarios"
+                                       rendered="#{LoginController.permisoUsuarios}"/>
+                          </af:group>
+                          <af:group id="g2">
+                            <af:button text="Agregar nuevo usuario" id="b1"
+                                       rendered="#{LoginController.permisoUsuarios}"
+                                       inlineStyle="background-color:rgb(240,244,250); background-image:none; border-color:rgb(142,68,173); color:rgb(142,68,173);"/>
+                          </af:group>
+                          <af:group id="g3">
+                            <af:button text="Roles y permisos" id="pt_bRolesPermisos" action="rolpermiso"
+                                       rendered="#{LoginController.permisoPermisos}"/>
+                          </af:group>
+                          <af:group id="g4">
+                            <af:button text="Procedimientos" id="pt_bProcedimientos" action="procedimientos"
+                                       rendered="#{LoginController.permisoProcedimientos}"/>
+                          </af:group>
+                        </af:toolbar>
+                      </af:toolbox>
+                    </af:gridCell>
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                        <af:panelGridLayout id="pt_pgl3">
+                            <af:gridRow marginTop="5px" height="auto" id="pt_gr2">
+                                <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc2"/>
+                            </af:gridRow>
+                            <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr3">
+                                <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc3" halign="center"/>
+                            </af:gridRow>
+                            <af:gridRow id="gr13">
+                                <af:gridCell id="gc25">
+                                    <af:spacer width="10" height="20" id="s1"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                        <af:panelGridLayout id="pgl1">
+                            <af:gridRow marginTop="5px" height="auto" id="gr1">
+                                <af:gridCell marginStart="5px" width="100%" id="gc1" halign="end"/>
+                            </af:gridRow>
+                            <af:gridRow marginTop="5px" height="auto" id="gr2">
+                                <af:gridCell marginStart="5px" width="100%" id="gc3" halign="center">
+                                    <af:panelFormLayout id="pfl1">
+                                        <af:inputText label="Nombre" id="itNombreUsuario" clientComponent="true"
+                                                      contentStyle="Height: 23px; font-size: 13px; "
+                                                      value="#{UsuarioController.usuarioRegistrar.nombre}"
+                                                      partialTriggers="::bRegistrarUsuario"/>
+                                        <af:inputText label="Primer apellido" id="itPrimerApellidoUsuario"
+                                                      clientComponent="true"
+                                                      contentStyle="Height: 23px; font-size: 13px; "
+                                                      value="#{UsuarioController.usuarioRegistrar.primerApellido}"
+                                                      partialTriggers="::bRegistrarUsuario"/>
+                                        <af:inputText label="Segundo apellido" id="itSegundoApellidoUsuario"
+                                                      clientComponent="true"
+                                                      contentStyle="Height: 23px; font-size: 13px; "
+                                                      value="#{UsuarioController.usuarioRegistrar.segundoApellido}"
+                                                      partialTriggers="::bRegistrarUsuario"/>
+                                        <af:inputText label="Especialidad" id="itEspecialidadUsuario" clientComponent="true"
+                                                      contentStyle="Height: 23px; font-size: 13px; " value="#{UsuarioController.usuarioRegistrar.especialidad}"
+                                                      partialTriggers="::bRegistrarUsuario"/>
+                        <af:inputText label="Dirección e-mail" id="itEmailUsuario"
+                                      shortDesc="Ejemplo: nombre@dominio.com" clientComponent="true"
+                                      contentStyle="Height: 23px; font-size: 13px; "
+                                      partialTriggers="::bRegistrarUsuario"
+                                      value="#{UsuarioController.usuarioRegistrar.correoElectronico}"/>
+                        <af:inputText label="Nombre de usuario" id="itNombreDeUsuario" clientComponent="true"
+                                      contentStyle="Height: 23px; font-size: 13px; "
+                                      value="#{UsuarioController.usuarioRegistrar.nombreUsuario}"
+                                      partialTriggers="::bRegistrarUsuario"/>
+                        <af:inputText label="Contraseña" id="itContrasennaUsuario" shortDesc="Debe contener mínimo 6 dígitos"
+                                      clientComponent="true" secret="true"
+                                      contentStyle="Height: 23px; font-size: 13px; "
+                                      value="#{UsuarioController.usuarioRegistrar.contrasenna}"
+                                      partialTriggers="::bRegistrarUsuario"/>
+                        <af:inputText label="Confirmar contraseña" id="itConfirmarContrasennaUsuario" clientComponent="true"
+                                      secret="true" contentStyle="Height: 23px; font-size: 13px; "
+                                      partialTriggers="::bRegistrarUsuario"
+                                      value="#{UsuarioController.confirmarContrasennaRegistrar}"/>
+                        <af:selectOneChoice label="Nombre del rol" id="socRolUsuario" clientComponent="true"
+                                            contentStyle="Height: 23px; font-size: 13px; "
+                                            value="#{UsuarioController.usuarioRegistrar.rol1}"
+                                            partialTriggers="::bRegistrarUsuario" unselectedLabel="-- Seleccionar --">
+                          <af:forEach items="#{UsuarioController.listaRoles}" var="var">
+                            <af:selectItem label="#{var.nombreRol}" id="si2" value="#{var}"/>
+                          </af:forEach>
+                        </af:selectOneChoice>
+                      </af:panelFormLayout>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow marginTop="5px" height="auto" id="gr3">
+                                <af:gridCell marginStart="5px" width="100%" id="gc5" halign="end"/>
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                <af:panelGridLayout id="pgl2">
+                  <af:gridRow marginTop="5px" height="auto" id="gr4">
+                    <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc7" halign="center">
+                      <af:spacer width="10" height="15" id="s9"/>
+                    </af:gridCell>
+                  </af:gridRow>
+                  <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr7">
+                    <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc10" halign="center">
+                      <af:button text="Registrar" id="bRegistrarUsuario"
+                                 action="#{UsuarioController.registrarUsuario}" clientComponent="true">
+                        <af:clientListener method="validar" type="action"/>
+                      </af:button>
+                    </af:gridCell>
+                  </af:gridRow>
+                  <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr5">
+                    <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc2" halign="center">
+                      <af:panelGroupLayout id="pgl3" layout="horizontal">
+                        <af:outputLabel id="olMensaje" inlineStyle="color:Red;"/>
+                        <af:outputLabel value="#{UsuarioController.mensajeRegistrar}" id="ol1" partialTriggers="bRegistrarUsuario"/>
+                      </af:panelGroupLayout>
+                    </af:gridCell>
+                  </af:gridRow>
+                </af:panelGridLayout>
+              </af:panelGroupLayout>
+            </f:facet>
+            <af:resource type="javascript">
+                function validar(actionEvent){
+                  var source = actionEvent.getSource();
+                  var mensaje = source.findComponent("olMensaje");
+                  
+                  var nombre = source.findComponent("itNombreUsuario");
+                  var primerApellido = source.findComponent("itPrimerApellidoUsuario");
+                  var segundoApellido = source.findComponent("itSegundoApellidoUsuario");
+                  var especialidad = source.findComponent("itEspecialidadUsuario");
+                  var email = source.findComponent("itEmailUsuario");
+                  var nombreUsuario = source.findComponent("itNombreDeUsuario");
+                  var contrasenna = source.findComponent("itContrasennaUsuario");
+                  var confirmarContrasenna = source.findComponent("itConfirmarContrasennaUsuario");
+                  var rol = source.findComponent("socRolUsuario");
+                  
+                  var patronEmail = /[\w-\.]{3,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+                  var patronLetras = /^[a-zA-Z\u00C0-\u00ff]+$/;
+                  
+                  mensaje.setValue('');
+                  
+                  if(nombre.getSubmittedValue() == '' || !patronLetras.test(nombre.getSubmittedValue())){
+                    nombre.setChanged(true);
+                    mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                    actionEvent.cancel();
+                  }else{
+                    nombre.setChanged(false);
+                  }
+                  
+                  if(primerApellido.getSubmittedValue() == '' || !patronLetras.test(nombre.getSubmittedValue())){
+                    primerApellido.setChanged(true);
+                    mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                    actionEvent.cancel();
+                  }else{
+                    primerApellido.setChanged(false);
+                  }
+                  
+                  if(segundoApellido.getSubmittedValue() != '' &amp;&amp; !patronLetras.test(segundoApellido.getSubmittedValue())){
+                    segundoApellido.setChanged(true);
+                    mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                    actionEvent.cancel();
+                  }else{
+                    segundoApellido.setChanged(false);
+                  }
+                  
+                  if(especialidad.getSubmittedValue() == ''){
+                    especialidad.setChanged(true);
+                    mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                    actionEvent.cancel();
+                  }else{
+                    especialidad.setChanged(false);
+                  }
+                  
+                  if(email.getSubmittedValue() == '' || !patronEmail.test(email.getSubmittedValue())){
+                    email.setChanged(true);
+                    mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                    actionEvent.cancel();
+                  }else{
+                    email.setChanged(false);
+                  }
+                  
+                  if(nombreUsuario.getSubmittedValue() == ''){
+                    nombreUsuario.setChanged(true);
+                    mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                    actionEvent.cancel();
+                  }else{
+                    nombreUsuario.setChanged(false);
+                  }
+                  
+                  if(contrasenna.getSubmittedValue() == ''){
+                    contrasenna.setChanged(true);
+                    mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                    actionEvent.cancel();
+                  }else{
+                    contrasenna.setChanged(false);
+                  }
+                  
+                  if(confirmarContrasenna.getSubmittedValue() == ''){
+                    confirmarContrasenna.setChanged(true);
+                    mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                    actionEvent.cancel();
+                  }else if(contrasenna.getSubmittedValue() !== confirmarContrasenna.getSubmittedValue()){
+                    confirmarContrasenna.setChanged(true);
+                    mensaje.setValue('Las contraseñas ingresadas no coinciden');
+                    actionEvent.cancel();
+                  }else{
+                    confirmarContrasenna.setChanged(false);
+                  }
+                  
+                  if(rol.getSubmittedValue() == ''){
+                    rol.setChanged(true);
+                    mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                    actionEvent.cancel();
+                  }else{
+                    rol.setChanged(false);
+                  }
+                }
+            </af:resource>
+            <f:facet name="second"/>
+          </af:panelSplitter>
+        </f:facet>
+      </af:panelSplitter>
+    </f:facet>
+  </af:panelSplitter>
+</ui:composition>

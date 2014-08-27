@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="configuracion-task-flow-definition">
+    <default-activity>UsuarioListar</default-activity>
+    <view id="ConfiguracionProcedimientos">
+      <page>/ConfiguracionProcedimientos.jsff</page>
+    </view>
+    <view id="ConfiguracionRolesPermisos">
+      <page>/ConfiguracionRolesPermisos.jsff</page>
+    </view>
+    <view id="UsuarioVer">
+      <page>/UsuarioVer.jsff</page>
+    </view>
+    <view id="UsuarioListar">
+      <page>/UsuarioListar.jsff</page>
+    </view>
+    <view id="UsuarioAgregar">
+      <page>/UsuarioAgregar.jsff</page>
+    </view>
+    <control-flow-rule id="__1">
+      <from-activity-id>ConfiguracionRolesPermisos</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>procedimiento</from-outcome>
+        <to-activity-id>ConfiguracionProcedimientos</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__10">
+        <from-outcome>listarusuarios</from-outcome>
+        <to-activity-id>UsuarioListar</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__11">
+        <from-outcome>agregarusuarios</from-outcome>
+        <to-activity-id>UsuarioAgregar</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>ConfiguracionProcedimientos</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>rolpermiso</from-outcome>
+        <to-activity-id>ConfiguracionRolesPermisos</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome>listarusuarios</from-outcome>
+        <to-activity-id>UsuarioListar</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__9">
+        <from-outcome>agregarusuarios</from-outcome>
+        <to-activity-id>UsuarioAgregar</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>UsuarioListar</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>verusuarios</from-outcome>
+        <to-activity-id>UsuarioVer</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__5">
+        <from-outcome>agregarusuarios</from-outcome>
+        <to-activity-id>UsuarioAgregar</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__12">
+        <from-outcome>procedimientos</from-outcome>
+        <to-activity-id>ConfiguracionProcedimientos</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__13">
+        <from-outcome>rolpermiso</from-outcome>
+        <to-activity-id>ConfiguracionRolesPermisos</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__14">
+      <from-activity-id>UsuarioAgregar</from-activity-id>
+      <control-flow-case id="__15">
+        <from-outcome>procedimientos</from-outcome>
+        <to-activity-id>ConfiguracionProcedimientos</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__16">
+        <from-outcome>rolpermiso</from-outcome>
+        <to-activity-id>ConfiguracionRolesPermisos</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__17">
+        <from-outcome>listarusuarios</from-outcome>
+        <to-activity-id>UsuarioListar</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__18">
+      <from-activity-id>UsuarioVer</from-activity-id>
+      <control-flow-case id="__19">
+        <from-outcome>listarusuarios</from-outcome>
+        <to-activity-id>UsuarioListar</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__20">
+        <from-outcome>procedimientos</from-outcome>
+        <to-activity-id>ConfiguracionProcedimientos</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__21">
+        <from-outcome>rolpermiso</from-outcome>
+        <to-activity-id>ConfiguracionRolesPermisos</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__22">
+        <from-outcome>agregarusuarios</from-outcome>
+        <to-activity-id>UsuarioAgregar</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

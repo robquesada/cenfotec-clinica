@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<faces-config version="2.1" xmlns="http://java.sun.com/xml/ns/javaee">
+  <application>
+    <default-render-kit-id>oracle.adf.rich</default-render-kit-id>
+    <locale-config>
+      <default-locale>en</default-locale>
+    </locale-config>
+  </application>
+  <managed-bean>
+    <managed-bean-name>PacienteController</managed-bean-name>
+    <managed-bean-class>view.PacienteController</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>UsuarioController</managed-bean-name>
+    <managed-bean-class>view.UsuarioController</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>ReporteController</managed-bean-name>
+    <managed-bean-class>view.ReporteController</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>ProcedimientoController</managed-bean-name>
+    <managed-bean-class>view.ProcedimientoController</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>RolController</managed-bean-name>
+    <managed-bean-class>view.RolController</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>LoginController</managed-bean-name>
+    <managed-bean-class>view.LoginController</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>AgendaController</managed-bean-name>
+    <managed-bean-class>view.AgendaController</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+</faces-config>

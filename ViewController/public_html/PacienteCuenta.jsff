@@ -1,0 +1,377 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:facelets="http://xmlns.oracle.com/jdev/webapp/facelets"
+                xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:panelSplitter orientation="vertical" splitterPosition="50" id="ps3">
+        <f:facet name="first"/>
+        <f:facet name="second">
+            <af:panelSplitter orientation="horizontal" splitterPosition="100" id="ps2">
+                <f:facet name="first"/>
+                <f:facet name="second">
+                    <af:panelSplitter orientation="horizontal" splitterPosition="100" positionedFromEnd="true" id="ps1">
+                        <f:facet name="first">
+                            <af:panelGroupLayout id="pgl1" halign="center">
+                                <af:panelGridLayout id="pgl2">
+                                        <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr1">
+                                            <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc1" halign="center">
+                                            <af:toolbox id="t2">
+                                                <af:toolbar id="t3">
+                                                    <af:group id="g1">
+                                                        <af:button text="Buscar pacientes" id="pt_bListarPacientes"
+                                                                   action="listar"/>
+                                                    </af:group>
+                                                    <af:group id="g2">
+                                                        <af:button text="Agregar nuevo paciente"
+                                                                   id="pt_bAgregarPaciente" action="agregar"/>
+                                                    </af:group>
+                                                </af:toolbar>
+                                            </af:toolbox>
+                                        </af:gridCell>
+                                        </af:gridRow>
+                                    </af:panelGridLayout>
+                                    <af:panelGridLayout id="pgl3">
+                                        <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr3">
+                                            <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc3" halign="center">
+                                            <af:link text="#{PacienteController.pacienteEditar.nombrePaciente} #{PacienteController.pacienteEditar.primerApellido} #{PacienteController.pacienteEditar.segundoApellido}"
+                                                     id="l1" inlineStyle="font-size:large;" action="ver"/>
+                                            <af:spacer width="10" height="10" id="s6"/>
+                                            <af:outputLabel value="> Cuenta financiera" id="pt_ol1"
+                                                            inlineStyle="font-size:large; font-family:sans-serif;"/>
+                                        </af:gridCell>
+                                        </af:gridRow>
+                                        <af:gridRow id="gr13">
+                                            <af:gridCell id="gc25">
+                                                <af:spacer width="10" height="20" id="s1"/>
+                                            </af:gridCell>
+                                        </af:gridRow>
+                                    </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl4">
+                                    <af:gridRow marginTop="5px" height="auto" id="gr4">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc4"
+                                                     halign="center">
+                                            <af:panelBox id="pb2" inlineStyle="Width: 580px; " showDisclosure="false"
+                                                         showHeader="never">
+                                                <f:facet name="toolbar"/>
+                                                <af:panelGridLayout id="pgl10">
+                                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px"
+                                                                id="gr1">
+                                                        <af:gridCell marginStart="5px" width="50%" id="gc1"
+                                                                     halign="start" valign="middle">
+                                                            <af:outputLabel value="Movimientos" id="ol2"
+                                                                            inlineStyle="font-size:14px; font-weight:bold;"/>
+                                                        </af:gridCell>
+                                                        <af:gridCell marginStart="5px" width="50%" marginEnd="5px"
+                                                                     id="gc2" halign="end" valign="middle">
+                                                            <af:button id="b2" icon="images/Agregar.png">
+                                                                <af:showPopupBehavior popupId="popupRegistrarMovimiento"/>
+                                                                <af:clientListener method="limpiarRegistrar"
+                                                                                   type="action"/>
+                                                            </af:button>
+                                                        </af:gridCell>
+                                                    </af:gridRow>
+                                                </af:panelGridLayout>
+                                            </af:panelBox>
+                                            <af:panelBox id="pb1" showDisclosure="false"
+                                                         type="stretch" inlineStyle="Width: 580px; Height:270px;" showHeader="never">
+                                                <f:facet name="toolbar"/>
+                                                <af:panelGroupLayout id="pgl6" layout="scroll" halign="center">
+                                                    <af:table value="#{PacienteController.listaMovimientos}" var="row"
+                                                              rowBandingInterval="0" id="tMovimientosPaciente"
+                                                              inlineStyle="font-size: 15px;"
+                                                              rowSelection="multiple" columnSelection="multiple"
+                                                              disableColumnReordering="true"
+                                                              columnStretching="none"
+                                                              emptyText="Este paciente no tiene movimientos registrados"
+                                                              partialTriggers="::bEditarMovimiento ::bRegistrarMovimiento ::bEliminarMovimiento"
+                                                              selectionListener="#{PacienteController.seleccionarMovimiento}">
+                                                        <af:column sortable="true" headerText="Fecha" align="center"
+                                                                   id="c2" inlineStyle="font-size: 15px; height: 40px;"
+                                                                   width="120">
+                                                            <af:outputText value="#{row.fechaMovimiento}" id="ot2"/>
+                                                        </af:column>
+                                                        <af:column sortable="true" headerText="Movimiento"
+                                                                   align="center" id="c3"
+                                                                   inlineStyle="font-size: 15px;" width="150">
+                                                            <af:outputText value="#{row.nombreMovimiento}" id="ot3"/>
+                                                        </af:column>
+                                                        <af:column sortable="true" headerText="Monto en colones"
+                                                                   align="center" id="c4"
+                                                                   inlineStyle="font-size: 15px;" width="130">
+                                                            <af:outputText value="#{row.monto}" id="ot4"/>
+                                                        </af:column>
+                                                        <af:column sortable="true" headerText="Opciones"
+                                                                   align="center" id="c1" inlineStyle="font-size: 15px;"
+                                                                   width="130">
+                                                            <af:panelGroupLayout id="pgl8" layout="horizontal"
+                                                                                 halign="center" valign="middle">
+                                                                <af:button id="bEditar" icon="images/Editar.png">
+                                                                    <af:showPopupBehavior popupId="::popupEditarMovimiento"/>
+                                                                    <af:clientListener method="limpiarEditar"
+                                                                                       type="action"/>
+                                                                </af:button>
+                                                                <af:spacer width="10" height="10" id="s7"/>
+                                                                <af:button id="b4" icon="images/Borrar.png">
+                                                                    <af:showPopupBehavior popupId="::popupEliminarMovimiento"/>
+                                                                    <af:clientListener method="limpiarEliminar"
+                                                                                       type="action"/>
+                                                                </af:button>
+                                                            </af:panelGroupLayout>
+                                                        </af:column>
+                                                    </af:table>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                            <af:panelBox id="pb3" inlineStyle="Width: 580px; " showHeader="never"
+                                                         showDisclosure="false">
+                                                <f:facet name="toolbar"/>
+                                                <af:panelGroupLayout id="pgl9" halign="end" layout="vertical">
+                                                    <af:outputLabel value="Saldo actual: #{PacienteController.pacienteEditar.cuentapaciente.saldo}" id="ol1"
+                                                                    inlineStyle="font-size:15px; font-weight:bold;"
+                                                                    partialTriggers="bEliminarMovimiento bEditarMovimiento bRegistrarMovimiento"/>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" id="gr3">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc3"
+                                                     halign="center">
+                                            <af:spacer width="10" height="20" id="s8"/>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="popupRegistrarMovimiento"
+                                          clientComponent="true" contentDelivery="lazyUncached">
+                                    <af:dialog id="d1" type="none" title="Registrar nuevo movimiento"
+                                               inlineStyle="background-color:White;">
+                                        <f:facet name="buttonBar"/>
+                                        <af:panelFormLayout id="pfl1">
+                                            <af:spacer width="10" height="10" id="s2"/>
+                                            <af:inputDate id="idFechaMovimientoRegistrar"
+                                                          value="#{PacienteController.movimientoRegistrar.fechaMovimiento}"
+                                                          label="Fecha" contentStyle="Height: 23px; font-size: 15px;"
+                                                          partialTriggers="bRegistrarMovimiento"
+                                                          clientComponent="true"/>
+                                            <af:selectOneChoice label="Tipo" id="socTipoMovimientoRegistrar"
+                                                                value="#{PacienteController.movimientoRegistrar.nombreMovimiento}"
+                                                                contentStyle="Height: 23px; font-size: 15px;"
+                                                                partialTriggers="bRegistrarMovimiento"
+                                                                unselectedLabel="-- Seleccionar --"
+                                                                clientComponent="true">
+                                                <af:selectItem label="Pago" value="Pago" id="si1"/>
+                                                <af:selectItem label="Abono" value="Abono" id="si2"/>
+                                                <af:selectItem label="Depósito" value="Depósito" id="si3"/>
+                                                <af:selectItem label="Cobro" value="Cobro" id="si4"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText label="Monto" id="itMontoRegistrar"
+                                                          shortDesc="Ingrese solo números"
+                                                          value="#{PacienteController.movimientoRegistrar.monto}"
+                                                          contentStyle="Height: 23px; font-size: 15px;"
+                                                          partialTriggers="bRegistrarMovimiento"
+                                                          clientComponent="true"/>
+                                            <af:spacer width="10" height="10" id="s3"/>
+                                        </af:panelFormLayout>
+                                        <af:panelGroupLayout id="pgl5" layout="horizontal" halign="center">
+                                            <af:button text="Registrar" id="bRegistrarMovimiento"
+                                                       action="#{PacienteController.registrarMovimientoPaciente}">
+                                                <af:clientListener method="validarRegistrar" type="action"/>
+                                            </af:button>
+                                            <af:spacer width="10" height="10" id="s4"/>
+                                            <af:button text="Cancelar" id="b1">
+                                                <af:clientListener method="cerrarPopup" type="action"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout id="pgl7" layout="horizontal" halign="center">
+                                            <af:outputLabel id="olMensajeRegistrar" clientComponent="true"/>
+                                        </af:panelGroupLayout>
+                                    </af:dialog>
+                                </af:popup>
+                                <af:popup autoCancel="disabled" id="popupEditarMovimiento"
+                                          contentDelivery="lazyUncached"
+                                          childCreation="deferred">
+                                    <af:dialog id="d2" type="none" title="Editar movimiento"
+                                               inlineStyle="background-color:White;">
+                                        <f:facet name="buttonBar"/>
+                                        <af:panelFormLayout id="pfl2">
+                                            <af:spacer width="10" height="10" id="s33"/>
+                                            <af:inputDate id="idFechaMovimientoEditar"
+                                                          value="#{PacienteController.movimientoEditar.fechaMovimiento}"
+                                                          label="Fecha" contentStyle="Height: 23px; font-size: 15px;"
+                                                          clientComponent="true"/>
+                                            <af:selectOneChoice label="Tipo" id="socTipoMovimientoEditar"
+                                                                value="#{PacienteController.movimientoEditar.nombreMovimiento}"
+                                                                contentStyle="Height: 23px; font-size: 15px;"
+                                                                unselectedLabel="-- Seleccionar --"
+                                                                clientComponent="true">
+                                                <af:selectItem label="Pago" value="Pago" id="si11"/>
+                                                <af:selectItem label="Abono" value="Abono" id="si22"/>
+                                                <af:selectItem label="Depósito" value="Depósito" id="si33"/>
+                                                <af:selectItem label="Cobro" value="Cobro" id="si44"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText label="Monto" id="itMontoMovimentoEditar"
+                                                          shortDesc="Ingrese solo números"
+                                                          value="#{PacienteController.movimientoEditar.monto}"
+                                                          contentStyle="Height: 23px; font-size: 15px;"
+                                                          clientComponent="true"/>
+                                            <af:spacer width="10" height="10" id="s5"/>
+                                        </af:panelFormLayout>
+                                        <af:panelGroupLayout id="pgl16" layout="horizontal" halign="center">
+                                            <af:button text="Editar" id="bEditarMovimiento"
+                                                       action="#{PacienteController.editarMovimientoPaciente}">
+                                                <af:clientListener method="validarEditar" type="action"/>
+                                            </af:button>
+                                            <af:spacer width="10" height="10" id="s44"/>
+                                            <af:button text="Cancelar" id="bCancelarEditar">
+                                                <af:clientListener method="cerrarPopup" type="action"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout id="pgl12" layout="horizontal" halign="center">
+                                            <af:outputLabel id="olMensajeEditar" clientComponent="true"/>
+                                        </af:panelGroupLayout>
+                                    </af:dialog>
+                                </af:popup>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="popupEliminarMovimiento"
+                                          clientComponent="true" contentDelivery="lazyUncached">
+                                    <af:dialog id="d3"
+                                               title="Eliminar procedimiento" type="none"
+                                               inlineStyle="background-color:White;">
+                                        <f:facet name="buttonBar">
+                                            <af:panelGroupLayout id="pgl17" layout="horizontal"
+                                                                 halign="center">
+                                                <af:outputLabel id="olMensajeEliminar"
+                                                                inlineStyle="color:Red;"
+                                                                clientComponent="true"/>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
+                                        <af:panelGroupLayout id="pgl11" layout="vertical" halign="center">
+                                            <af:spacer width="10" height="10" id="s67"/>
+                                            <af:outputLabel value="¿Está seguro que desea eliminar este movimiento de la cuenta?"
+                                                            id="olPreguntaEliminar" inlineStyle="font-size: 14px;"/>
+                                            <af:spacer width="10" height="10" id="s10"/>
+                                            <af:panelGroupLayout id="pgl168" layout="horizontal">
+                                                <af:button text="Eliminar" id="bEliminarMovimiento"
+                                                           clientComponent="true"
+                                                           action="#{PacienteController.eliminarMovimientoPaciente}">
+                                                    <af:clientListener method="validarEliminar" type="action"/>
+                                                </af:button>
+                                                <af:spacer width="10" height="10" id="s14"/>
+                                                <af:button text="Cancelar" id="bCancelarEliminar"
+                                                           clientComponent="true">
+                                                    <af:clientListener method="cerrarPopup" type="action"/>
+                                                </af:button>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                    </af:dialog>
+                                </af:popup>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <af:resource type="javascript">
+                            function validarRegistrar(actionEvent){
+                                var source = actionEvent.getSource();
+                                var mensaje = source.findComponent("olMensajeRegistrar");
+                                
+                                var fecha = source.findComponent("idFechaMovimientoRegistrar");
+                                var tipo = source.findComponent("socTipoMovimientoRegistrar");
+                                var monto = source.findComponent("itMontoMovimentoRegistrar");
+                                
+                                mensaje.setValue('');
+                                var patronDecimal = /^(\d+\.?\d*|\.\d+)$/;
+                                
+                                if(fecha.getSubmittedValue()==''){
+                                  mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                  fecha.setChanged(true);
+                                  actionEvent.cancel();
+                                }else{
+                                  fecha.setChanged(false);
+                                }
+                                  
+                                if(tipo.getSubmittedValue()==''){
+                                  tipo.setChanged(true);
+                                  mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                  actionEvent.cancel();
+                                }else{
+                                  tipo.setChanged(false);
+                                }
+                                
+                                if(mensaje.getValue()==''){
+                                  mensaje.setValue('Se registró exitosamente');
+                                }
+                            }
+                            
+                            function limpiarRegistrar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeRegistrar");
+                              mensaje.setValue('');
+                            }
+                            
+                            function validarEditar(actionEvent){
+                                var source = actionEvent.getSource();
+                                var mensaje = source.findComponent("olMensajeEditar");
+                                
+                                var fecha = source.findComponent("idFechaMovimientoEditar");
+                                var tipo = source.findComponent("socTipoMovimientoEditar");
+                                var monto = source.findComponent("itMontoMovimentoEditar");
+                                
+                                mensaje.setValue('');
+                                var patronDecimal = /^(\d+\.?\d*|\.\d+)$/;
+                                
+                                if(fecha.getSubmittedValue()==''){
+                                  mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                  fecha.setChanged(true);
+                                  actionEvent.cancel();
+                                }else{
+                                  fecha.setChanged(false);
+                                }
+                                  
+                                if(tipo.getSubmittedValue()==''){
+                                  tipo.setChanged(true);
+                                  mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                  actionEvent.cancel();
+                                }else{
+                                  tipo.setChanged(false);
+                                }
+                                
+                                if(mensaje.getValue()==''){
+                                  mensaje.setValue('Se registró exitosamente');
+                                }
+                            }
+                        
+                            function limpiarEditar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeEditar");
+                              mensaje.setValue('');
+                            }
+                        
+                            function validarEliminar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeEliminar");
+                              mensaje.setValue('El movimiento ha sido eliminado');
+                            }
+                        
+                            function limpiarEliminar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeEliminar");
+                              mensaje.setValue('');
+                            }
+                        
+                            function cerrarPopup(actionEvent){
+                              var source = actionEvent.getSource();
+                              var registrar = source.findComponent("popupRegistrarMovimiento");
+                              var editar = source.findComponent("popupEditarMovimiento");
+                              var eliminar = source.findComponent("popupEliminarMovimiento");
+                                if (registrar.isPopupVisible()) {
+                                  registrar.hide();
+                                }
+                                if (editar.isPopupVisible()) {
+                                  editar.hide();
+                                }
+                                if (eliminar.isPopupVisible()) {
+                                  eliminar.hide();
+                                }
+                            }
+                        </af:resource>
+                        <f:facet name="second"/>
+                    </af:panelSplitter>
+                </f:facet>
+            </af:panelSplitter>
+        </f:facet>
+    </af:panelSplitter>
+</ui:composition>

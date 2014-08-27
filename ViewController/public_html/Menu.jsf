@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:h="http://java.sun.com/jsf/html">
+    <af:document title="Clínica Odontológica" id="d1">
+        <af:form id="f1">
+            <af:panelSplitter orientation="vertical" splitterPosition="35" id="ps3" disabled="true">
+                <f:facet name="first"/>
+                <f:facet name="second">
+                    <af:panelSplitter orientation="horizontal" splitterPosition="100" id="ps1">
+                        <f:facet name="first"/>
+                        <f:facet name="second">
+                            <af:panelSplitter orientation="horizontal" splitterPosition="100" positionedFromEnd="true"
+                                              id="ps2">
+                                <f:facet name="first">
+                                    <af:panelStretchLayout id="psl1" startWidth="50px" endWidth="50px"
+                                                           topHeight="35px" bottomHeight="50px">
+                                        <f:facet name="center">
+                                            <af:decorativeBox id="db1" theme="dark" topHeight="30"
+                                                              inlineStyle="border-image-width:1;" styleClass="brandtop">
+                                                <f:facet name="center">
+                                                    <af:panelSpringboard id="panelSpringboardId" displayMode="grid"
+                                                                         childCreation="lazy"
+                                                                         inlineStyle="widows:1;">
+                                                        <af:showDetailItem text="Pacientes" id="sdiPacientes"
+                                                                           stretchChildren="first"
+                                                                           icon="images/Paciente.png"
+                                                                           inflexibleHeight="100"
+                                                                           depressedIcon="images/PacienteHover.png"
+                                                                           hoverIcon="images/PacienteHover.png"
+                                                                           rendered="#{LoginController.pacienteMenu}">
+                                                            <af:region value="#{bindings.pactaskflowdefinition1.regionModel}"
+                                                                       id="r1"/>
+                                                        </af:showDetailItem>
+                                                        <af:showDetailItem text="Agenda" id="sdiAgenda"
+                                                                           stretchChildren="first"
+                                                                           icon="images/Agenda.png"
+                                                                           depressedIcon="images/AgendaHover.png"
+                                                                           hoverIcon="images/AgendaHover.png"
+                                                                           rendered="#{LoginController.permisoAgendaMenu}">
+                                                            <af:region value="#{bindings.agendataskflowdefinition1.regionModel}"
+                                                                       id="r3"/>
+                                                        </af:showDetailItem>
+                                                        <af:showDetailItem text="Configuración" id="sdi1"
+                                                                           icon="images/Configuracion.png"
+                                                                           hoverIcon="images/ConfiguracionHover.png"
+                                                                           depressedIcon="images/ConfiguracionHover.png"
+                                                                           rendered="#{LoginController.permisoConfiguracionMenu}">
+                                                            <af:region value="#{bindings.configuraciontaskflowdefinition1.regionModel}"
+                                                                       id="r5"/>
+                                                        </af:showDetailItem>
+                                                    </af:panelSpringboard>
+                                                </f:facet>
+                                                <f:facet name="top">
+                                                    <af:panelGroupLayout id="pgl1" halign="end" layout="horizontal"
+                                                                         valign="bottom">
+                                                        <af:popup childCreation="deferred" autoCancel="disabled"
+                                                                  id="popupMenu" contentDelivery="lazyUncached">
+                                                            <af:menu text="Opciones" id="m1">
+                                                                <af:commandMenuItem text="Ver perfil" id="cmiPerfil"
+                                                                                    action="guide"
+                                                                                    inlineStyle="Height: 25px; font-size: 13px; "/>
+                                                                <af:commandMenuItem text="Cerrar sesión" id="cmiCerrar"
+                                                                                    action="#{LoginController.cerrarSesion}"
+                                                                                    inlineStyle="Height: 25px; font-size: 13px; "/>
+                                                            </af:menu>
+                                                        </af:popup>
+                                                        <af:link id="logo" text="Clínica Odontológica"
+                                                                 inlineStyle="color:White;">
+                                                            <af:clientListener type="click" method="backToGrid"/>
+                                                        </af:link>
+                                                        <af:spacer width="7" height="10" id="s1"/>
+                                                        <af:outputLabel value=" |" id="ol1"/>
+                                                        <af:link text="#{LoginController.nombreCompletoLog}"
+                                                                 id="linkUsr" inlineStyle="color:White;">
+                                                            <af:showPopupBehavior popupId="popupMenu" align="beforeEnd"
+                                                                                  alignId="linkUsr"/>
+                                                        </af:link>
+                                                        <af:spacer width="7" height="10" id="s3"/>
+                                                        <af:outputLabel value="|" id="ol2"/>
+                                                        <af:link text="Cerrar sesión" id="l1"
+                                                                 action="#{LoginController.cerrarSesion}"/>
+                                                        <af:spacer width="15" height="20" id="s2"/>
+                                                    </af:panelGroupLayout>
+                                                </f:facet>
+                                            </af:decorativeBox>
+                                        </f:facet>
+                                    </af:panelStretchLayout>
+                                </f:facet>
+                                <f:facet name="second"/>
+                            </af:panelSplitter>
+                        </f:facet>
+                    </af:panelSplitter>
+                </f:facet>
+            </af:panelSplitter>
+        </af:form>
+        <f:facet name="metaContainer">
+        <af:resource type="javascript">
+            function backToGrid(actionEvent)
+            {
+              actionEvent.cancel();
+              var eventSource = actionEvent.getSource();
+              var object_navigator = eventSource.findComponent("panelSpringboardId");
+              object_navigator.setProperty(AdfRichPanelSpringboard.DISPLAY_MODE, "grid", true);
+            }
+        </af:resource>
+      </f:facet>
+    </af:document>
+</f:view>

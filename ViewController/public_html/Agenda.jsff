@@ -1,0 +1,419 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelSplitter orientation="vertical" splitterPosition="50" id="ps2">
+        <f:facet name="first"/>
+        <f:facet name="second">
+            <af:panelSplitter orientation="horizontal" splitterPosition="100" id="ps1">
+                <f:facet name="first"/>
+                <f:facet name="second">
+                    <af:panelSplitter orientation="horizontal" splitterPosition="100" positionedFromEnd="true" id="ps3">
+                        <f:facet name="first">
+                            <af:panelGroupLayout id="pgl1" layout="scroll">
+                                <af:panelGridLayout id="pgl2">
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr1">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc1" halign="center"/>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl4">
+                                    <af:gridRow marginTop="5px" height="auto" id="gr1">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc1"/>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" id="gr2">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc2"
+                                                     halign="center">
+                                            <af:panelGroupLayout id="pgl5" layout="horizontal" halign="center"
+                                                                 valign="top">
+                                                <af:panelGroupLayout id="pgl14" layout="vertical">
+                                                    <af:spacer width="10" height="25" id="s16"/>
+                                                    <af:decorativeBox id="db1">
+                                                        <f:facet name="center">
+                                                            <af:panelGroupLayout id="pgl15" layout="horizontal">
+                                                                <af:panelGroupLayout id="pgl9" layout="vertical"
+                                                                                     halign="start"
+                                                                                     inlineStyle="height: 410px;">
+                                                                    <af:spacer width="10" height="20" id="s12"/>
+                                                                    <af:panelGroupLayout id="pgl11" layout="vertical"
+                                                                                         rendered="#{LoginController.permisoAgendaPersonal}"
+                                                                                         halign="center">
+                                                                        <af:outputLabel value="Agenda de" id="ol3"/>
+                                                                        <af:outputLabel value="#{LoginController.nombreCompletoLog}"
+                                                                                        id="ol4"
+                                                                                        inlineStyle="font-weight:bold;"/>
+                                                                    </af:panelGroupLayout>
+                                                                    <af:spacer width="10" height="20" id="s13"/>
+                                                                    <af:panelGroupLayout id="pgl13" layout="vertical"
+                                                                                         rendered="#{LoginController.permisoAgendaClinica}">
+                                                                        <af:panelGroupLayout id="pgl12"
+                                                                                             layout="horizontal">
+                                                                            <af:spacer width="7" height="10" id="s15"/>
+                                                                            <af:outputLabel value="Ver citas del usuario"
+                                                                                            id="ol2"/>
+                                                                        </af:panelGroupLayout>
+                                                                        <af:panelGroupLayout id="pgl10"
+                                                                                             layout="horizontal">
+                                                                            <af:selectOneChoice id="socUsuarioAgenda"
+                                                                                                unselectedLabel="-- Todos los usuarios --"
+                                                                                                contentStyle="Height: 23px; font-size: 13px;"
+                                                                                                value="#{AgendaController.usuarioAgenda}"
+                                                                                                autoSubmit="true">
+                                                                                <af:forEach var="var"
+                                                                                            items="#{AgendaController.listaUsuarios}">
+                                                                                    <af:selectItem label="#{var.nombre} #{var.primerApellido} #{var.segundoApellido}"
+                                                                                                   id="si3"
+                                                                                                   value="#{var}"/>
+                                                                                </af:forEach>
+                                                                            </af:selectOneChoice>
+                                                                            <af:button id="bBuscarCitas"
+                                                                                       icon="images/Buscar.png"
+                                                                                       action="#{AgendaController.generarActividades}"/>
+                                                                        </af:panelGroupLayout>
+                                                                    </af:panelGroupLayout>
+                                                                    <af:spacer width="10" height="20" id="s14"/>
+                                                                </af:panelGroupLayout>
+                                                                <af:spacer width="8" height="10" id="s17"/>
+                                                            </af:panelGroupLayout>
+                                                        </f:facet>
+                                                    </af:decorativeBox>
+                                                </af:panelGroupLayout>
+                                                <af:spacer width="10" height="10" id="s11"/>
+                                                <af:calendar id="cal" value="#{AgendaController.model}"
+                                                             calendarActivityListener="#{AgendaController.activityListener}"
+                                                             partialTriggers="bAgregarCita bEditarCita bEliminarCita ::bBuscarCitas"
+                                                             calendarListener="#{AgendaController.calendarListener}"
+                                                             availableViews="month list day" listType="day">
+                                                    <f:facet name="create">
+                                                        <af:popup childCreation="deferred" autoCancel="disabled"
+                                                                  id="popupAgregarCita" contentDelivery="lazyUncached">
+                                                            <af:dialog id="d1" title="Agregar cita" type="none">
+                                                                <f:facet name="buttonBar"/>
+                                                                <af:panelFormLayout id="pfl1">
+                                                                    <af:spacer width="10" height="10" id="s1"/>
+                                                                    <af:selectOneChoice label="Usuario"
+                                                                                        id="socUsuarioRegistrar"
+                                                                                        contentStyle="Height: 23px; font-size: 13px;"
+                                                                                        value="#{AgendaController.actividadRegistrar.usuario}"
+                                                                                        unselectedLabel="-- Seleccionar --"
+                                                                                        clientComponent="true">
+                                                                        <af:forEach items="#{AgendaController.listaUsuarios}"
+                                                                                    var="var">
+                                                                            <af:selectItem label="#{var.nombre} #{var.primerApellido} #{var.segundoApellido}"
+                                                                                           id="si2" value="#{var}"/>
+                                                                        </af:forEach>
+                                                                    </af:selectOneChoice>
+                                                                    <af:inputText label="Descripción"
+                                                                                  id="itDescripcionRegistrar"
+                                                                                  contentStyle="Height: 23px; font-size: 13px;"
+                                                                                  value="#{AgendaController.actividadRegistrar.title}"
+                                                                                  clientComponent="true"/>
+                                                                    <af:selectOneChoice label="Paciente"
+                                                                                        id="socPacienteRegistrar"
+                                                                                        contentStyle="Height: 23px; font-size: 13px;"
+                                                                                        value="#{AgendaController.actividadRegistrar.paciente}"
+                                                                                        unselectedLabel="-- Seleccionar --"
+                                                                                        clientComponent="true">
+                                                                        <af:forEach items="#{AgendaController.listaPacientes}"
+                                                                                    var="var">
+                                                                            <af:selectItem label="#{var.nombrePaciente} #{var.primerApellido} #{var.segundoApellido}"
+                                                                                           id="si1"
+                                                                                           value="#{var}"/>
+                                                                        </af:forEach>
+                                                                    </af:selectOneChoice>
+                                                                    <af:selectBooleanCheckbox text="Todo el día"
+                                                                                              id="sbcTodoElDiaRegistrar"
+                                                                                              value="#{AgendaController.todoElDia}"
+                                                                                              autoSubmit="true"
+                                                                                              clientComponent="true"/>
+                                                                    <af:inputDate label="Inicio"
+                                                                                  id="idFechaInicioRegistrar"
+                                                                                  contentStyle="Height: 23px; font-size: 13px;"
+                                                                                  value="#{AgendaController.inicioRegistrar}"
+                                                                                  partialTriggers="sbcTodoElDiaRegistrar"
+                                                                                  clientComponent="true">
+                                                                        <af:convertDateTime type="#{AgendaController.todoElDia == true ? 'date' : 'both'}"/>
+                                                                    </af:inputDate>
+                                                                    <af:inputDate label="Fin" id="idFechaFinRegistrar"
+                                                                                  contentStyle="Height: 23px; font-size: 13px;"
+                                                                                  value="#{AgendaController.finRegistrar}"
+                                                                                  partialTriggers="sbcTodoElDiaRegistrar"
+                                                                                  clientComponent="true">
+                                                                        <af:convertDateTime type="#{AgendaController.todoElDia == true ? 'date' : 'both'}"/>
+                                                                    </af:inputDate>
+                                                                    <af:spacer width="10" height="10" id="s2"/>
+                                                                </af:panelFormLayout>
+                                                                <af:panelGroupLayout id="pgl3" layout="horizontal"
+                                                                                     halign="center">
+                                                                    <af:button text="Agregar" id="bAgregarCita"
+                                                                               action="#{AgendaController.agregarCita}">
+                                                                        <af:clientListener method="validarRegistrar"
+                                                                                           type="action"/>
+                                                                    </af:button>
+                                                                    <af:spacer width="10" height="10" id="s3"/>
+                                                                    <af:button text="Cancelar" id="b2">
+                                                                        <af:clientListener method="cerrarPopup"
+                                                                                           type="action"/>
+                                                                    </af:button>
+                                                                </af:panelGroupLayout>
+                                                                <af:panelGroupLayout id="pgl16" layout="horizontal"
+                                                                                     halign="center">
+                                                                    <af:outputLabel
+                                                                                    id="olMensajeRegistrar"
+                                                                                    clientComponent="true"
+                                                                                    partialTriggers="bAgregarCita"/>
+                                                                    <af:outputLabel value="#{AgendaController.mensajeRegistrar}" id="ol5"/>
+                                                                </af:panelGroupLayout>
+                                                            </af:dialog>
+                                                        </af:popup>
+                                                    </f:facet>
+                                                    <f:facet name="activityDetail">
+                                                        <af:popup childCreation="deferred" autoCancel="disabled"
+                                                                  id="popupEditarCita" contentDelivery="lazyUncached">
+                                                            <af:dialog id="d2" title="Editar cita" type="none"
+                                                                       rendered="#{AgendaController.actividadEditar != null}">
+                                                                <af:panelFormLayout id="pfl2">
+                                                                    <af:spacer width="10" height="10" id="s4"/>
+                                                                    <af:inputText label="Descripción"
+                                                                                  id="itDescripcionEditar"
+                                                                                  contentStyle="Height: 23px; font-size: 13px;"
+                                                                                  value="#{AgendaController.actividadEditar.title}"
+                                                                                  clientComponent="true"/>
+                                                                    <af:selectOneChoice label="Paciente"
+                                                                                        id="socPacienteEditar"
+                                                                                        contentStyle="Height: 23px; font-size: 13px;"
+                                                                                        value="#{AgendaController.actividadEditar.paciente}"
+                                                                                        clientComponent="true">
+                                                                        <af:forEach items="#{AgendaController.listaPacientes}"
+                                                                                    var="var">
+                                                                            <af:selectItem label="#{var.nombrePaciente} #{var.primerApellido} #{var.segundoApellido}"
+                                                                                           id="si5" value="#{var}"/>
+                                                                        </af:forEach>
+                                                                    </af:selectOneChoice>
+                                                                    <af:selectOneChoice label="Usuario"
+                                                                                        id="socUsuarioEditar"
+                                                                                        contentStyle="Height: 23px; font-size: 13px;"
+                                                                                        value="#{AgendaController.actividadEditar.usuario}"
+                                                                                        clientComponent="true">
+                                                                        <af:forEach items="#{AgendaController.listaUsuarios}"
+                                                                                    var="var">
+                                                                            <af:selectItem label="#{var.nombre} #{var.primerApellido} #{var.segundoApellido}"
+                                                                                           id="si4" value="#{var}"/>
+                                                                        </af:forEach>
+                                                                    </af:selectOneChoice>
+                                                                    <af:selectBooleanCheckbox text="Todo el día"
+                                                                                              id="sbc1"
+                                                                                              value="#{AgendaController.todoElDiaEditar}"/>
+                                                                    <af:inputDate label="Inicio" id="id1"
+                                                                                  contentStyle="Height: 23px; font-size: 13px;"
+                                                                                  value="#{AgendaController.inicioEditar}">
+                                                                        <af:convertDateTime type="#{AgendaController.todoElDia == true ? 'date' : 'both'}"/>
+                                                                    </af:inputDate>
+                                                                    <af:inputDate label="Fin" id="id2"
+                                                                                  contentStyle="Height: 23px; font-size: 13px;"
+                                                                                  value="#{AgendaController.finEditar}">
+                                                                        <af:convertDateTime type="#{AgendaController.todoElDia == true ? 'date' : 'both'}"/>
+                                                                    </af:inputDate>
+                                                                    <af:spacer width="10" height="10" id="s5"/>
+                                                                </af:panelFormLayout>
+                                                                <af:panelGroupLayout id="pgl6" layout="horizontal"
+                                                                                     halign="center">
+                                                                    <af:button text="Editar" id="bEditarCita"
+                                                                               action="#{AgendaController.editarCita}">
+                                                                        <af:clientListener method="validarEditar"
+                                                                                           type="action"/>
+                                                                    </af:button>
+                                                                    <af:spacer width="10" height="10" id="s6"/>
+                                                                    <af:button text="Cancelar" id="b3">
+                                                                        <af:clientListener method="cerrarPopup"
+                                                                                           type="action"/>
+                                                                    </af:button>
+                                                                </af:panelGroupLayout>
+                                                                <af:panelGroupLayout id="pgl17" layout="horizontal"
+                                                                                     halign="center">
+                                                                    <af:outputLabel id="olMensajeEditar"
+                                                                                    clientComponent="true"/>
+                                                                </af:panelGroupLayout>
+                                                            </af:dialog>
+                                                        </af:popup>
+                                                    </f:facet>
+                                                    <f:facet name="activityHover">
+                                                        <af:popup childCreation="deferred" autoCancel="disabled"
+                                                                  id="p1" contentDelivery="lazyUncached">
+                                                            <af:noteWindow id="nw1"
+                                                                           rendered="#{AgendaController.actividadEditar != null}">
+                                                                <af:panelFormLayout id="pfl3">
+                                                                    <af:inputText label="Usuario" id="it3"
+                                                                                  value="#{AgendaController.actividadEditar.usuario.nombre} #{AgendaController.actividadEditar.usuario.primerApellido} #{AgendaController.actividadEditar.usuario.segundoApellido}"
+                                                                                  readOnly="true"
+                                                                                  contentStyle="Height: 23px; font-size: 13px;"/>
+                                                                    <af:inputText label="Paciente" id="it5"
+                                                                                  value="#{AgendaController.actividadEditar.paciente.nombrePaciente} #{AgendaController.actividadEditar.paciente.primerApellido} #{AgendaController.actividadEditar.paciente.segundoApellido}"
+                                                                                  contentStyle="Height: 23px; font-size: 13px;"/>
+                                                                    <af:separator id="s7"/>
+                                                                    <af:inputText label="Descripción" id="it6"
+                                                                                  value="#{AgendaController.actividadEditar.title}"
+                                                                                  readOnly="true"
+                                                                                  contentStyle="Height: 23px; font-size: 13px;"/>
+                                                                    <af:inputDate label="Inicio" id="id3"
+                                                                                  value="#{AgendaController.inicioEditar}"
+                                                                                  contentStyle="Height: 23px; font-size: 13px;"
+                                                                                  readOnly="true">
+                                                                        <af:convertDateTime type="#{AgendaController.todoElDia == true ? 'date' : 'both'}"/>
+                                                                    </af:inputDate>
+                                                                    <af:inputDate label="Fin" id="id4"
+                                                                                  value="#{AgendaController.finEditar}"
+                                                                                  contentStyle="Height: 23px; font-size: 13px;"
+                                                                                  readOnly="true">
+                                                                        <af:convertDateTime type="#{AgendaController.todoElDia == true ? 'date' : 'both'}"/>
+                                                                    </af:inputDate>
+                                                                </af:panelFormLayout>
+                                                            </af:noteWindow>
+                                                        </af:popup>
+                                                    </f:facet>
+                                                    <f:facet name="activityDelete">
+                                                        <af:popup childCreation="deferred" autoCancel="disabled"
+                                                                  id="popupEliminarCita" contentDelivery="lazyUncached">
+                                                            <af:dialog id="d3" title="Eliminar cita" type="none"
+                                                                       rendered="#{AgendaController.actividadEditar != null}">
+                                                                <af:panelGroupLayout id="pgl7" layout="vertical"
+                                                                                     halign="center">
+                                                                    <af:spacer width="10" height="10" id="s9"/>
+                                                                    <af:outputLabel value="¿Está seguro que desea eliminar esta cita?"
+                                                                                    id="ol1"
+                                                                                    inlineStyle="font-size: 14px;"/>
+                                                                    <af:spacer width="10" height="10" id="s8"/>
+                                                                </af:panelGroupLayout>
+                                                                <af:panelGroupLayout id="pgl8" layout="horizontal"
+                                                                                     halign="center">
+                                                                    <af:button text="Eliminar" id="bEliminarCita"
+                                                                               action="#{AgendaController.eliminarCita}">
+                                                                    </af:button>
+                                                                    <af:spacer width="10" height="10" id="s10"/>
+                                                                    <af:button text="Cancelar" id="b5">
+                                                                        <af:clientListener method="cerrarPopup"
+                                                                                           type="action"/>
+                                                                    </af:button>
+                                                                </af:panelGroupLayout>
+                                                            </af:dialog>
+                                                        </af:popup>
+                                                    </f:facet>
+                                                    <af:calendarDropTarget dropListener="#{AgendaController.handleDrop}"
+                                                                           actions="MOVE"/>
+                                                    <f:facet name="activityContextMenu">
+                                                        <af:popup childCreation="deferred" autoCancel="disabled"
+                                                                  id="popupMenuCita">
+                                                            <af:menu text="menu 1" id="menuCita">
+                                                                <af:commandMenuItem text="Editar" id="cmi1"
+                                                                                    inlineStyle="Height: 23px; font-size: 13px; ">
+                                                                    <af:showPopupBehavior popupId="popupEditarCita"
+                                                                                          triggerType="action"/>
+                                                                </af:commandMenuItem>
+                                                                <af:commandMenuItem text="Eliminar" id="cmi2"
+                                                                                    inlineStyle="Height: 23px; font-size: 13px; ">
+                                                                    <af:showPopupBehavior popupId="popupEliminarCita"
+                                                                                          triggerType="action"/>
+                                                                </af:commandMenuItem>
+                                                            </af:menu>
+                                                        </af:popup>
+                                                    </f:facet>
+                                                </af:calendar>
+                                            </af:panelGroupLayout>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr3">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc3"/>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <af:resource type="javascript">
+                            function validarRegistrar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeRegistrar");
+                              
+                              var usuario = source.findComponent("socUsuarioRegistrar");
+                              var descripcion = source.findComponent("itDescripcionRegistrar");
+                              var paciente = source.findComponent("socPacienteRegistrar");
+                              
+                              mensaje.setValue('');
+                              
+                              if(usuario.getSubmittedValue() == ''){
+                                usuario.setChanged(true);
+                                mensaje.setValue('Todos los campos son requeridos');
+                                actionEvent.cancel();
+                              }else{
+                                usuario.setChanged(false);
+                              }
+                              
+                              if(descripcion.getSubmittedValue() == ''){
+                                descripcion.setChanged(true);
+                                mensaje.setValue('Todos los campos son requeridos');
+                                actionEvent.cancel();
+                              }else{
+                                descripcion.setChanged(false);
+                              }
+                              
+                              if(paciente.getSubmittedValue() == ''){
+                                paciente.setChanged(true);
+                                mensaje.setValue('Todos los campos son requeridos');
+                                actionEvent.cancel();
+                              }else{
+                                paciente.setChanged(false);
+                              }
+                            }
+                            
+                            function validarEditar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensajeeditar = source.findComponent("olMensajeEditar");
+                              
+                              var usuario = source.findComponent("socUsuarioEditar");
+                              var descripcion = source.findComponent("itDescripcionEditar");
+                              var paciente = source.findComponent("socPacienteEditar");
+                                  
+                                  if(usuario.getSubmittedValue() == ''){
+                                    usuario.setChanged(true);
+                                    mensajeeditar.setValue('Todos los campos son requeridos');
+                                    actionEvent.cancel();
+                                  }else{
+                                    usuario.setChanged(false);
+                                  }
+                                  
+                                  if(descripcion.getSubmittedValue() == ''){
+                                    descripcion.setChanged(true);
+                                    mensajeeditar.setValue('Todos los campos son requeridos');
+                                    actionEvent.cancel();
+                                  }else{
+                                    descripcion.setChanged(false);
+                                  }
+                                  
+                                  if(paciente.getSubmittedValue() == ''){
+                                    paciente.setChanged(true);
+                                    mensajeeditar.setValue('Todos los campos son requeridos');
+                                    actionEvent.cancel();
+                                  }else{
+                                    paciente.setChanged(false);
+                                  }
+                            }
+                            
+                            function cerrarPopup(actionEvent){
+                              var source = actionEvent.getSource();
+                              var agregarCita = source.findComponent("popupAgregarCita");
+                              var editarCita = source.findComponent("popupEditarCita");
+                              var eliminarCita = source.findComponent("popupEliminarCita");
+                                if (agregarCita.isPopupVisible()) {
+                                  agregarCita.hide();
+                                }
+                                if (editarCita.isPopupVisible()) {
+                                  editarCita.hide();
+                                }
+                                if (eliminarCita.isPopupVisible()) {
+                                  eliminarCita.hide();
+                                }
+                            }
+                        </af:resource>
+                        <f:facet name="second"/>
+                    </af:panelSplitter>
+                </f:facet>
+            </af:panelSplitter>
+        </f:facet>
+    </af:panelSplitter>
+</ui:composition>

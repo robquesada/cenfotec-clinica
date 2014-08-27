@@ -1,0 +1,347 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelSplitter orientation="vertical" splitterPosition="50" id="ps2">
+        <f:facet name="first"/>
+        <f:facet name="second">
+            <af:panelSplitter orientation="horizontal" splitterPosition="100" id="ps3">
+                <f:facet name="first"/>
+                <f:facet name="second">
+                    <af:panelSplitter orientation="horizontal" splitterPosition="100" positionedFromEnd="true" id="ps1">
+                        <f:facet name="first">
+                            <af:panelGroupLayout id="pgl1">
+                                <af:panelGridLayout id="pgl2">
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr1">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc1" halign="center">
+                                            <af:toolbox id="t2">
+                                                <af:toolbar id="t3">
+                                                    <af:group id="g1">
+                                                        <af:button text="Buscar  usuarios" id="bUsuarios"
+                                                                   action="listarusuarios"
+                                                                   rendered="#{LoginController.permisoUsuarios}"/>
+                                                    </af:group>
+                                                    <af:group id="g2">
+                                                        <af:button text="Agregar nuevo usuario" id="b1"
+                                                                   action="agregarusuarios"
+                                                                   rendered="#{LoginController.permisoUsuarios}"/>
+                                                    </af:group>
+                                                    <af:group id="g3">
+                                                        <af:button text="Roles y permisos" id="pt_bRolesPermisos"
+                                                                   action="rolpermiso"/>
+                                                    </af:group>
+                                                    <af:group id="g4">
+                                                        <af:button text="Procedimientos" id="pt_bProcedimientos"
+                                                                   action="procedimientos"
+                                                                   inlineStyle="background-color:rgb(240,244,250); background-image:none; border-color:rgb(142,68,173); color:rgb(142,68,173);"/>
+                                                    </af:group>
+                                                </af:toolbar>
+                                            </af:toolbox>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl3">
+                                    <af:gridRow marginTop="5px" height="auto" id="pt_gr2">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc2"/>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr3">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc3" halign="center"/>
+                                    </af:gridRow>
+                                    <af:gridRow id="gr13">
+                                        <af:gridCell id="gc25">
+                                            <af:spacer width="10" height="20" id="s1"/>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl4">
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc2"
+                                                     halign="center">
+                                            <af:popup childCreation="deferred" autoCancel="disabled"
+                                                      id="popupCrearProcedimiento"
+                                                      contentDelivery="lazyUncached" clientComponent="true">
+                                                <af:dialog id="d1"
+                                                           title="Registrar nuevo procedimiento" type="none"
+                                                           inlineStyle="background-color:White;">
+                                                    <af:spacer width="10" height="10" id="s9"/>
+                                                    <af:panelGroupLayout id="pgl8" layout="vertical" halign="center">
+                                                        <af:panelFormLayout id="pfl1">
+                                                            <af:inputText id="itNombreRegistrar"
+                                                                          contentStyle="Height: 23px; font-size: 13px; "
+                                                                          label="Nombre" clientComponent="true"
+                                                                          value="#{ProcedimientoController.procedimientoRegistrar.nombreProcedimiento}"
+                                                                          partialTriggers="bRegistrarProcedimiento"/>
+                                                            <af:inputText id="itPrecioRegistrar"
+                                                                          contentStyle="Height: 23px; font-size: 13px; "
+                                                                          shortDesc="Ingrese solo números"
+                                                                          label="Precio" clientComponent="true"
+                                                                          value="#{ProcedimientoController.procedimientoRegistrar.precio}"
+                                                                          partialTriggers="bRegistrarProcedimiento"/>
+                                                        </af:panelFormLayout>
+                                                        <af:spacer width="10" height="10" id="s3"/>
+                                                        <af:panelGroupLayout id="pgl6" layout="horizontal">
+                                                            <af:button text="Registrar" id="bRegistrarProcedimiento" clientComponent="true"
+                                                                       action="#{ProcedimientoController.registrarProcedimiento}">
+                                                                <af:clientListener method="validarRegistrar" type="action"/>
+                                                            </af:button>
+                                                            <af:spacer width="10" height="10" id="s4"/>
+                                                            <af:button text="Cancelar" id="b6" clientComponent="true">
+                                                                <af:clientListener method="cerrarPopup" type="action"/>
+                                                            </af:button>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelGroupLayout>
+                                                    <f:facet name="buttonBar">
+                                                        <af:panelGroupLayout id="pgl7" layout="horizontal"
+                                                                             halign="center">
+                                                            <af:outputLabel id="olMensajeRegistrar"
+                                                                            partialTriggers="bRegistrarProcedimiento"
+                                                                            value="#{ProcedimientoController.mensajeRegistrar}"/>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:popup childCreation="deferred" autoCancel="disabled"
+                                                      id="popupEditarProcedimiento"
+                                                      contentDelivery="lazyUncached" clientComponent="true">
+                                                <af:dialog id="d2"
+                                                           title="Editar procedimiento" type="none"
+                                                           inlineStyle="background-color:White;">
+                                                    <af:spacer width="10" height="10" id="s8"/>
+                                                    <af:panelGroupLayout id="pgl10" layout="vertical" halign="center">
+                                                        <af:panelFormLayout id="pfl2">
+                                                            <af:inputText id="itNombreEditar"
+                                                                          contentStyle="Height: 23px; font-size: 13px; "
+                                                                          label="Nombre" clientComponent="true"
+                                                                          value="#{ProcedimientoController.procedimientoEditar.nombreProcedimiento}"
+                                                                          partialTriggers="bEditarProcedimiento"/>
+                                                            <af:inputText id="itPrecioEditar"
+                                                                          contentStyle="Height: 23px; font-size: 13px; "
+                                                                          shortDesc="Ingrese solo números"
+                                                                          label="Precio" clientComponent="true"
+                                                                          value="#{ProcedimientoController.procedimientoEditar.precio}"
+                                                                          partialTriggers="bEditarProcedimiento"/>
+                                                        </af:panelFormLayout>
+                                                        <af:spacer width="10" height="10" id="s5"/>
+                                                        <af:panelGroupLayout id="pgl18" layout="horizontal">
+                                                            <af:button text="Editar" id="bEditarProcedimiento" clientComponent="true"
+                                                                       action="#{ProcedimientoController.editarProcedimiento}">
+                                                                <af:clientListener method="validarEditar"
+                                                                                   type="action"/>
+                                                            </af:button>
+                                                            <af:spacer width="10" height="10" id="s6"/>
+                                                            <af:button text="Cancelar" id="bCancelarEditar" clientComponent="true">
+                                                                <af:clientListener method="cerrarPopup" type="action"/>
+                                                            </af:button>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelGroupLayout>
+                                                    <f:facet name="buttonBar">
+                                                        <af:panelGroupLayout id="pgl19" layout="horizontal"
+                                                                             halign="center">
+                                                            <af:outputLabel id="olMensajeEditar"
+                                                                            clientComponent="true"/>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:popup childCreation="deferred" autoCancel="disabled"
+                                                      id="popupEliminarProcedimiento"
+                                                      contentDelivery="lazyUncached" clientComponent="true">
+                                                <af:dialog id="d3"
+                                                           title="Eliminar procedimiento" type="none"
+                                                           inlineStyle="background-color:White;">
+                                                    <af:panelGroupLayout id="pgl11" layout="vertical" halign="center">
+                                                        <af:spacer width="10" height="10" id="s7"/>
+                                                        <af:outputLabel value="¿Está seguro que desea eliminar este procedimiento?"
+                                                                        id="ol1" inlineStyle="font-size: 14px;"/>
+                                                        <af:spacer width="10" height="10" id="s10"/>
+                                                        <af:panelGroupLayout id="pgl16" layout="horizontal">
+                                                            <af:button text="Eliminar" id="bEliminarPopup"
+                                                                       clientComponent="true"
+                                                                       action="#{ProcedimientoController.eliminarProcedimiento}"/>
+                                                            <af:spacer width="10" height="10" id="s14"/>
+                                                            <af:button text="Cancelar" id="bCancelarEliminar"
+                                                                       clientComponent="true">
+                                                                <af:clientListener method="cerrarPopup" type="action"/>
+                                                            </af:button>
+                                                        </af:panelGroupLayout>
+                                                        <af:panelGroupLayout id="pgl12" layout="horizontal"
+                                                                             halign="center">
+                                                            <af:outputLabel id="olMensajeEliminar"
+                                                                            clientComponent="true"/>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelGroupLayout>
+                                                </af:dialog>
+                                            </af:popup>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr3">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc3"
+                                                     halign="center">
+                                            <af:panelBox id="pb2" showHeader="never" type="stretch"
+                                                         inlineStyle="width:550px; Height: 47px;">
+                                                <f:facet name="toolbar"/>
+                                                <af:panelGridLayout id="pgl21">
+                                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px"
+                                                                id="gr1">
+                                                        <af:gridCell marginStart="5px" width="50%" id="gc1"
+                                                                     valign="middle">
+                                                            <af:panelGroupLayout id="pgl9" layout="horizontal">
+                                                                <af:inputText id="itBuscarProcedimientos"
+                                                                              value="#{ProcedimientoController.filtro.nombreProcedimiento}"
+                                                                              columns="35"
+                                                                              contentStyle="height:22px; font-size:14px;"
+                                                                              placeholder="Ingrese el nombre del procedimiento"/>
+                                                                <af:button id="bBuscarProcedimientos"
+                                                                           action="#{ProcedimientoController.buscarProcedimientos}"
+                                                                           icon="images/Buscar.png"/>
+                                                            </af:panelGroupLayout>
+                                                        </af:gridCell>
+                                                        <af:gridCell marginStart="5px" width="50%" marginEnd="5px"
+                                                                     id="gc4" halign="end">
+                                                            <af:button id="bAgregar" icon="images/Agregar.png"
+                                                                       shortDesc="Registrar procedimiento">
+                                                                <af:showPopupBehavior popupId="::popupCrearProcedimiento"/>
+                                                                <af:clientListener method="limpiar"
+                                                                                   type="action"/>
+                                                            </af:button>
+                                                        </af:gridCell>
+                                                    </af:gridRow>
+                                                </af:panelGridLayout>
+                                            </af:panelBox>
+                                            <af:panelBox id="pb1" showDisclosure="false"
+                                                         inlineStyle="width:550px; height:330px;" disclosed="true" type="stretch" showHeader="never">
+                                                <af:table value="#{ProcedimientoController.listaProcedimientos}" var="row"
+                                                          rowBandingInterval="-1" id="t1" scrollPolicy="scroll"
+                                                          disableColumnReordering="true" rowSelection="single"
+                                                          columnSelection="single"
+                                                          partialTriggers="::bRegistrarProcedimiento ::bEditarProcedimiento ::bEliminarPopup ::bBuscarProcedimientos"
+                                                          selectionListener="#{ProcedimientoController.seleccionarProcedimiento}">
+                                                    <af:column sortable="true" headerText="Nombre" align="center"
+                                                               id="c2" inlineStyle="font-size: 15px; Height: 40px;"
+                                                               width="255">
+                                                        <af:outputText value="#{row.nombreProcedimiento}" id="ot2"/>
+                                                    </af:column>
+                                                    <af:column sortable="true" headerText="Precio" align="center"
+                                                               id="c5" inlineStyle="font-size: 15px;" width="120">
+                                                        <af:outputText value="#{row.precio}" id="ot5"/>
+                                                    </af:column>
+                                                    <af:column id="c1" headerText="Opciones" align="center" width="135">
+                                                        <af:panelGroupLayout id="pgl5" halign="center"
+                                                                             layout="horizontal">
+                                                            <af:button id="b2" icon="images/Editar.png"
+                                                                       shortDesc="Editar">
+                                                                <af:clientListener method="limpiar"
+                                                                                   type="action"/>
+                                                                <af:showPopupBehavior popupId="::popupEditarProcedimiento"/>
+                                                            </af:button>
+                                                            <af:spacer width="10" height="10" id="s2"/>
+                                                            <af:button id="b4" icon="images/Borrar.png"
+                                                                       shortDesc="Eliminar">
+                                                                <af:showPopupBehavior popupId="::popupEliminarProcedimiento"/>
+                                                                <af:clientListener method="limpiar"
+                                                                                   type="action"/>
+                                                            </af:button>
+                                                        </af:panelGroupLayout>
+                                                    </af:column>
+                                                </af:table>
+                                            </af:panelBox>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <af:resource type="javascript">
+                            function validarRegistrar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensajeEdit = source.findComponent("olMensajeEditar");
+                              var mensajeElim = source.findComponent("olMensajeEliminar");
+                              
+                              var nombre = source.findComponent("itNombreRegistrar");
+                              var precio = source.findComponent("itPrecioRegistrar");
+                              
+                              var patronEntero = /^(?:\+|-)?\d+$/;
+                              mensajeEdit.setValue('');
+                              mensajeElim.setValue('');
+                              
+                              if(nombre.getSubmittedValue() == ''){
+                                nombre.setChanged(true);
+                                actionEvent.cancel();
+                              }else{
+                                nombre.setChanged(false);
+                              }
+                              
+                              if(precio.getSubmittedValue() == '' || !patronEntero.test(precio.getSubmittedValue())){
+                                precio.setChanged(true);
+                                actionEvent.cancel();
+                              }else{
+                                precio.setChanged(false);
+                              }
+                            }
+                            
+                            function validarEditar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeEditar");
+                              
+                              var nombre = source.findComponent("itNombreEditar");
+                              var precio = source.findComponent("itPrecioEditar");
+                              
+                              var patronEntero = /^(?:\+|-)?\d+$/;
+                              mensaje.setValue('');
+                              
+                              if(nombre.getSubmittedValue() == ''){
+                                nombre.setChanged(true);
+                                mensaje.setValue('Ingrese y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                nombre.setChanged(false);
+                              }
+                              
+                              if(precio.getSubmittedValue() == '' || !patronEntero.test(precio.getSubmittedValue())){
+                                precio.setChanged(true);
+                                mensaje.setValue('Ingrese y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                precio.setChanged(false);
+                              }
+                              
+                              if(mensaje.getValue() == ''){
+                                mensaje.setValue('Se ha editado la información');
+                              }
+                            }
+                            
+                            function limpiar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensajeEliminar = source.findComponent("olMensajeEliminar");
+                              var mensajeEditar = source.findComponent("olMensajeEditar");
+                              mensajeEliminar.setValue('');
+                              mensajeEditar.setValue('');
+                            }
+                            
+                            function validarEliminar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeEliminar");
+                              mensaje.setValue('Se ha eliminado el procedimiento');
+                            }
+                            
+                            function cerrarPopup(actionEvent){
+                              var source = actionEvent.getSource();
+                              var registrar = source.findComponent("popupCrearProcedimiento");
+                              var editar = source.findComponent("popupEditarProcedimiento");
+                              var eliminar = source.findComponent("popupEliminarProcedimiento");
+                                if (registrar.isPopupVisible()) {
+                                  registrar.hide();
+                                }
+                                if (editar.isPopupVisible()) {
+                                  editar.hide();
+                                }
+                                if (eliminar.isPopupVisible()) {
+                                  eliminar.hide();
+                                }
+                            }
+                        </af:resource>
+                        <f:facet name="second"/>
+                    </af:panelSplitter>
+                </f:facet>
+            </af:panelSplitter>
+        </f:facet>
+    </af:panelSplitter>
+</ui:composition>

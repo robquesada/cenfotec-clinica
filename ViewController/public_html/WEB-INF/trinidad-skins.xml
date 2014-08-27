@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!-- To use mobile skin families in your app, please update trinidad-config.xml with below tags -->
+<!-- <skin-family>#{requestContext.agent.type == 'desktop'?'richmobile': 'mobile'}</skin-family> -->
+  <skins xmlns="http://myfaces.apache.org/trinidad/skin">
+    <skin>
+      <id>richmobile</id>
+      <family>richmobile</family>
+      <render-kit-id>org.apache.myfaces.trinidad.desktop</render-kit-id>
+      <style-sheet-name>styles/richmobile.css</style-sheet-name>
+      <extends>trinidad-simple.desktop</extends>
+    </skin>
+    <skin>
+      <id>mobile</id>
+      <family>mobile</family>
+      <render-kit-id>org.apache.myfaces.trinidad.pda</render-kit-id>
+      <style-sheet-name>styles/mobile.css</style-sheet-name>
+      <extends>trinidad-simple.pda</extends>
+    </skin>
+  <skin>
+    <id>Estilo.desktop</id>
+    <family>Estilo</family>
+    <extends>skyros-v1.desktop</extends>
+    <render-kit-id>org.apache.myfaces.trinidad.desktop</render-kit-id>
+    <style-sheet-name>skins/Estilo/Estilo.css</style-sheet-name>
+    <bundle-name>view.skinBundle</bundle-name>
+  </skin>
+</skins>

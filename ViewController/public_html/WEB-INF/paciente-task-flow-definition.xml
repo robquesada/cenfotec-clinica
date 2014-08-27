@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="pac-task-flow-definition">
+    <default-activity>PacienteListar</default-activity>
+    <view id="PacienteAgregar">
+      <page>/PacienteAgregar.jsff</page>
+    </view>
+    <view id="PacienteVer">
+      <page>/PacienteVer.jsff</page>
+    </view>
+    <view id="PacienteListar">
+      <page>/PacienteListar.jsff</page>
+    </view>
+    <view id="PacienteCuenta">
+      <page>/PacienteCuenta.jsff</page>
+    </view>
+    <view id="PacienteBitacora">
+      <page>/PacienteBitacora.jsff</page>
+    </view>
+    <view id="PacienteOdontograma">
+      <page>/PacienteOdontograma.jsff</page>
+    </view>
+    <view id="PacientePresupuesto">
+      <page>/PacientePresupuesto.jsff</page>
+    </view>
+    <control-flow-rule id="__5">
+      <from-activity-id>PacienteAgregar</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>ver</from-outcome>
+        <to-activity-id>PacienteVer</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2">
+        <from-outcome>listar</from-outcome>
+        <to-activity-id>PacienteListar</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>PacienteVer</from-activity-id>
+      <control-flow-case id="__8">
+        <from-outcome>cuenta</from-outcome>
+        <to-activity-id>PacienteCuenta</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__9">
+        <from-outcome>bitacora</from-outcome>
+        <to-activity-id>PacienteBitacora</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__10">
+        <from-outcome>odonto</from-outcome>
+        <to-activity-id>PacienteOdontograma</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__21">
+        <from-outcome>agregar</from-outcome>
+        <to-activity-id>PacienteAgregar</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__22">
+        <from-outcome>listar</from-outcome>
+        <to-activity-id>PacienteListar</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__11">
+        <from-outcome>presupuesto</from-outcome>
+        <to-activity-id>PacientePresupuesto</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__12">
+      <from-activity-id>PacienteBitacora</from-activity-id>
+      <control-flow-case id="__13">
+        <from-outcome>agregar</from-outcome>
+        <to-activity-id>PacienteAgregar</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__18">
+        <from-outcome>listar</from-outcome>
+        <to-activity-id>PacienteListar</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__28">
+        <from-outcome>ver</from-outcome>
+        <to-activity-id>PacienteVer</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__14">
+      <from-activity-id>PacienteCuenta</from-activity-id>
+      <control-flow-case id="__15">
+        <from-outcome>agregar</from-outcome>
+        <to-activity-id>PacienteAgregar</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__19">
+        <from-outcome>listar</from-outcome>
+        <to-activity-id>PacienteListar</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__27">
+        <from-outcome>ver</from-outcome>
+        <to-activity-id>PacienteVer</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__16">
+      <from-activity-id>PacienteOdontograma</from-activity-id>
+      <control-flow-case id="__17">
+        <from-outcome>agregar</from-outcome>
+        <to-activity-id>PacienteAgregar</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__20">
+        <from-outcome>listar</from-outcome>
+        <to-activity-id>PacienteListar</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__29">
+        <from-outcome>ver</from-outcome>
+        <to-activity-id>PacienteVer</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__1">
+      <from-activity-id>PacienteListar</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>agregar</from-outcome>
+        <to-activity-id>PacienteAgregar</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__4">
+        <from-outcome>ver</from-outcome>
+        <to-activity-id>PacienteVer</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__23">
+      <from-activity-id>PacientePresupuesto</from-activity-id>
+      <control-flow-case id="__24">
+        <from-outcome>ver</from-outcome>
+        <to-activity-id>PacienteVer</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__25">
+        <from-outcome>agregar</from-outcome>
+        <to-activity-id>PacienteAgregar</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__26">
+        <from-outcome>listar</from-outcome>
+        <to-activity-id>PacienteListar</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__30">
+        <from-outcome>odonto</from-outcome>
+        <to-activity-id>PacienteOdontograma</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

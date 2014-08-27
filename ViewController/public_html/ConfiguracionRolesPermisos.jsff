@@ -1,0 +1,371 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelSplitter orientation="vertical" splitterPosition="50" id="ps2">
+        <f:facet name="first"/>
+        <f:facet name="second">
+            <af:panelSplitter orientation="horizontal" splitterPosition="100" id="ps1">
+                <f:facet name="first"/>
+                <f:facet name="second">
+                    <af:panelSplitter orientation="horizontal" splitterPosition="100" positionedFromEnd="true" id="ps3">
+                        <f:facet name="first">
+                            <af:panelGroupLayout id="pgl1">
+                                <af:panelGridLayout id="pgl2">
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr1">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc1" halign="center">
+                                            <af:toolbox id="t1">
+                                                <af:toolbar id="t2">
+                                                    <af:group id="g1">
+                                                        <af:button text="Buscar usuarios" id="bUsuarios"
+                                                                   action="listarusuarios"
+                                                                   rendered="#{LoginController.permisoUsuarios}"/>
+                                                    </af:group>
+                                                    <af:group id="g3">
+                                                        <af:button text="Agregar nuevo usuario" id="b1"
+                                                                   action="agregarusuarios"
+                                                                   rendered="#{LoginController.permisoUsuarios}"/>
+                                                    </af:group>
+                                                    <af:group id="g2">
+                                                        <af:button text="Roles y permisos" id="pt_bRolesPermisos"
+                                                                   action="rolpermiso"
+                                                                   inlineStyle="background-color:rgb(240,244,250); background-image:none; border-color:rgb(142,68,173); color:rgb(142,68,173);"/>
+                                                    </af:group>
+                                                    <af:group id="g4">
+                                                        <af:button text="Procedimientos" id="pt_bProcedimientos"
+                                                                   action="procedimiento"/>
+                                                    </af:group>
+                                                </af:toolbar>
+                                            </af:toolbox>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl3">
+                                    <af:gridRow marginTop="5px" height="auto" id="pt_gr2">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc2">
+                                            <af:spacer width="10" height="10" id="s2"/>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr3">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc3" halign="center"/>
+                                    </af:gridRow>
+                                    <af:gridRow id="gr13">
+                                        <af:gridCell id="gc25"/>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl4">
+                                    <af:gridRow marginTop="5px" height="auto" id="gr1">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc1"
+                                                     halign="center">
+                                            <af:panelBox text="Crear nuevo rol" id="pb1" showDisclosure="false">
+                                                <f:facet name="toolbar"/>
+                                                <af:spacer width="10" height="10" id="s16"/>
+                                                <af:panelGroupLayout id="pgl16" layout="horizontal" halign="center">
+                                                    <af:panelFormLayout id="pfl3">
+                                                        <af:panelGroupLayout id="pgl5" halign="center"
+                                                                             layout="horizontal" valign="top">
+                                                            <af:inputText id="itNombreRol" columns="30"
+                                                                          clientComponent="true"
+                                                                          contentStyle="Height: 23px; font-size: 13px;"
+                                                                          placeholder="Ingrese el nombre del rol"
+                                                                          value="#{RolController.rolRegistrar.nombreRol}"
+                                                                          partialTriggers="::bRegistrarRol"/>
+                                                            <af:spacer width="40" height="10" id="s5"/>
+                                                            <af:panelGroupLayout id="pgl13" layout="vertical">
+                                                                <af:panelGroupLayout id="pgl14" layout="horizontal"
+                                                                                     valign="top">
+                                                                    <af:selectManyListbox size="5" id="smlPermisos1"
+                                                                                          clientComponent="true"
+                                                                                          inlineStyle="border-width:0px;"
+                                                                                          value="#{RolController.listaIdPermisosGeneral}"
+                                                                                          partialTriggers="::bRegistrarRol">
+                                                                        <af:selectItem label="Administrar usuarios"
+                                                                                       id="si2" value="AUsuarios"/>
+                                                                        <af:selectItem label="Agenda de la clínica"
+                                                                                       id="si26" value="CAgenda"/>
+                                                                        <af:selectItem label="Agenda personal" id="si3"
+                                                                                       value="AAgenda"/>
+                                                                    </af:selectManyListbox>
+                                                                    <af:spacer width="10" height="10" id="s1"/>
+                                                                    <af:selectManyListbox size="5" id="smlPermisos2"
+                                                                                          clientComponent="true"
+                                                                                          value="#{RolController.listaIdPermisosPacientesOpciones}"
+                                                                                          partialTriggers="::bRegistrarRol">
+                                                                        <af:selectItem label="Cuentas y bitácoras pacientes"
+                                                                                       id="si10" value="PCuentas"/>
+                                                                        <af:selectItem label="Odontogramas y presupuestos"
+                                                                                       id="si11" value="POdontogramas"/>
+                                                                    </af:selectManyListbox>
+                                                                    <af:spacer width="10" height="10" id="s3"/>
+                                                                    <af:selectManyListbox size="5" id="smlPermisos3"
+                                                                                          clientComponent="true"
+                                                                                          value="#{RolController.listaIdPermisosConfiguracion}"
+                                                                                          partialTriggers="::bRegistrarRol">
+                                                                        <af:selectItem label="Administrar roles y permisos"
+                                                                                       id="si7" value="CPermisos"/>
+                                                                        <af:selectItem label="Administrar procedimientos"
+                                                                                       id="si8"
+                                                                                       value="CProcedimientos"/>
+                                                                    </af:selectManyListbox>
+                                                                </af:panelGroupLayout>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                        <af:spacer width="10" height="10" id="s6"/>
+                                                        <af:panelGroupLayout id="pgl6" halign="center"
+                                                                             layout="vertical">
+                                                            <af:button text="Registrar" id="bRegistrarRol"
+                                                                       action="#{RolController.registrarRol}">
+                                                                <af:clientListener method="validarRegistrar" type="action"/>
+                                                            </af:button>
+                                                            <af:spacer width="10" height="10" id="s13"/>
+                                                            <af:panelGroupLayout id="pgl17" layout="horizontal">
+                                                                <af:outputLabel id="olMensaje"
+                                                                                inlineStyle="color:Green;"
+                                                                                clientComponent="true"/>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelFormLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" id="gr2">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc2"
+                                                     halign="center">
+                                            <af:separator id="s14"/>
+                                            <af:popup childCreation="deferred" autoCancel="disabled"
+                                                      id="popupEditarRol" contentDelivery="lazyUncached">
+                                                <af:dialog id="d1" type="none" title="Editar rol"
+                                                           inlineStyle="background-color:White;">
+                                                    <af:spacer width="10" height="10" id="s9"/>
+                                                    <af:panelGroupLayout id="pgl9" layout="vertical" halign="center">
+                                                        <af:inputText label="Nombre del rol" id="itNombreRolEditar"
+                                                                      contentStyle="Height: 23px; font-size: 13px; "
+                                                                      value="#{RolController.rolEditar.nombreRol}"
+                                                                      editable="onAccess" clientComponent="true"/>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" height="10" id="s15"/>
+                                                    <f:facet name="buttonBar">
+                                                        <af:panelGroupLayout id="pgl20" layout="horizontal"
+                                                                             halign="center">
+                                                            <af:outputLabel id="olMensajeEditar"
+                                                                            inlineStyle="color:Red;"
+                                                                            clientComponent="true"/>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <af:panelGroupLayout id="pgl70" halign="center" layout="horizontal"
+                                                                         valign="top">
+                                                        <af:panelGroupLayout id="pgl10" layout="vertical"
+                                                                             halign="start" valign="top">
+                                                            <af:panelGroupLayout id="pgl11" layout="horizontal"
+                                                                                 halign="start" valign="top">
+                                                                <af:selectManyListbox size="3"
+                                                                                      id="smlPermisosEditar1"
+                                                                                      inlineStyle="border-image-width:0; outline-color:invert; border-image-outset:1;"
+                                                                                      clientComponent="true"
+                                                                                      value="#{RolController.listaEditarPermisosGeneral}">
+                                                                    <af:selectItem label="Adminisitrar usuarios" id="si14"
+                                                                                   value="AUsuarios"/>
+                                                                    <af:selectItem label="Agenda de la clínica"
+                                                                                   id="si15" value="CAgenda"/>
+                                                                    <af:selectItem label="Agenda personal" id="si25"
+                                                                                   value="AAgenda"/>
+                                                                </af:selectManyListbox>
+                                                                <af:spacer width="10" height="10" id="s8"/>
+                                                                <af:selectManyListbox size="5" id="smlPermisosEditar2"
+                                                                                      clientComponent="true"
+                                                                                      value="#{RolController.listaEditarPermisosOpciones}">
+                                                                    <af:selectItem label="Cuentas y bitácoras pacientes" id="si16"
+                                                                                   value="PCuentas"/>
+                                                                    <af:selectItem label="Odontogramas y presupuestos"
+                                                                                   id="si17" value="POdontogramas"/>
+                                                                </af:selectManyListbox>
+                                                                <af:spacer width="10" height="10" id="s7"/>
+                                                                <af:selectManyListbox size="5" id="smlPermisosEditar3"
+                                                                                      clientComponent="true"
+                                                                                      value="#{RolController.listaEditarPermisosConfiguracion}">
+                                                                    <af:selectItem label="Administrra roles y permisos"
+                                                                                   id="si22" value="CPermisos"/>
+                                                                    <af:selectItem label="Administrar procedimientos"
+                                                                                   id="si23" value="CProcedimientos"/>
+                                                                </af:selectManyListbox>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelGroupLayout>
+                                                    <af:panelGroupLayout id="pgl8" layout="vertical" halign="center">
+                                                        <af:spacer width="10" height="10" id="s18"/>
+                                                        <af:panelGroupLayout id="pgl7" layout="horizontal">
+                                                            <af:button text="Guardar cambios" id="bEditarRol"
+                                                                       clientComponent="true"
+                                                                       action="#{RolController.editarRol}">
+                                                                <af:clientListener method="validarEditar"
+                                                                                   type="action"/>
+                                                            </af:button>
+                                                            <af:spacer width="10" height="10" id="s4"/>
+                                                            <af:button text="Cancelar" id="bCancelar"
+                                                                       clientComponent="true">
+                                                                <af:clientListener method="cerrarPopup" type="action"/>
+                                                            </af:button>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelGroupLayout>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:popup childCreation="deferred" autoCancel="disabled"
+                                                      id="popupEliminarRol" contentDelivery="lazyUncached">
+                                                <af:dialog id="d2" type="none" title="Eliminar rol">
+                                                    <f:facet name="buttonBar"/>
+                                                    <af:panelGroupLayout id="pgl12" layout="horizontal"
+                                                                         halign="center">
+                                                        <af:outputLabel value="¿Está seguro que desea eliminar este rol?" id="ol1"
+                                                                        inlineStyle="font-size:14px;"/>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="10" height="10" id="s12"/>
+                                                    <af:panelGroupLayout id="pgl15" layout="horizontal"
+                                                                         halign="center">
+                                                        <af:button text="Eliminar" id="bEliminar"
+                                                                   action="#{RolController.eliminarRol}">
+                                                            <af:clientListener method="validarEliminar" type="action"/>
+                                                        </af:button>
+                                                        <af:spacer width="10" height="10" id="s10"/>
+                                                        <af:button text="Cancelar" id="b3">
+                                                            <af:clientListener method="cerrarPopup" type="action"/>
+                                                        </af:button>
+                                                    </af:panelGroupLayout>
+                                                    <af:panelGroupLayout id="pgl19" layout="horizontal"
+                                                                         halign="center">
+                                                        <af:outputLabel id="olMensajeEliminar" clientComponent="true"/>
+                                                    </af:panelGroupLayout>
+                                                </af:dialog>
+                                            </af:popup>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr3">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc3"
+                                                     halign="center">
+                                            <af:panelBox text="Modificar rol" id="pb2" showDisclosure="false">
+                                                <f:facet name="toolbar"/>
+                                                <af:panelGroupLayout id="pgl18" layout="horizontal" halign="center">
+                                                    <af:selectOneChoice label="Seleccionar rol" id="socRolUsuarioEditar"
+                                                                        clientComponent="true"
+                                                                        contentStyle="Height: 23px; font-size: 13px;"
+                                                                        partialTriggers="bRegistrarRol bEliminar"
+                                                                        value="#{RolController.rolEditar}"
+                                                                        unselectedLabel="-- Seleccionar --"
+                                                                        valueChangeListener="#{RolController.seleccionarRol}"
+                                                                        autoSubmit="true">
+                                                        <af:forEach items="#{RolController.listaRoles}" var="var">
+                                                            <af:selectItem id="si12"
+                                                                           value="#{var}" label="#{var.nombreRol}"/>
+                                                        </af:forEach>
+                                                    </af:selectOneChoice>
+                                                    <af:spacer width="10" height="10" id="s11"/>
+                                                    <af:button id="bEditar" shortDesc="Editar rol"
+                                                               icon="images/Editar.png">
+                                                        <af:showPopupBehavior popupId="popupEditarRol"
+                                                                              triggerType="action"/>
+                                                        <af:clientListener method="validarOpcion" type="action"/>
+                                                    </af:button>
+                                                    <af:spacer width="10" height="10" id="s20"/>
+                                                    <af:button id="bEliminarRol" shortDesc="Eliminar rol"
+                                                               icon="images/Borrar.png">
+                                                        <af:showPopupBehavior popupId="popupEliminarRol"
+                                                                              triggerType="action"/>
+                                                        <af:clientListener method="validarOpcion" type="action"/>
+                                                    </af:button>
+                                                </af:panelGroupLayout>
+                                            </af:panelBox>
+                                            <af:outputLabel id="olMensajeOpciones"/>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <af:resource type="javascript">
+                            function validarRegistrar(actionEvent) {
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensaje");
+                              var rol = source.findComponent("itNombreRol");
+                              var permisos1 = source.findComponent("smlPermisos1");
+                              var permisos2 = source.findComponent("smlPermisos2");
+                              var permisos3 = source.findComponent("smlPermisos3");
+                              
+                              mensaje.setValue('');
+                              rol.setChanged(false);
+                              
+                              if(rol.getSubmittedValue() == ''){
+                                rol.setChanged(true);
+                                mensaje.setValue('Debe ingresar un nombre al rol');
+                                actionEvent.cancel();
+                              }else if(permisos1.getSubmittedValue()=='' &amp;&amp; permisos2.getSubmittedValue()=='' &amp;&amp; permisos3.getSubmittedValue()==''){
+                                permisos1.setChanged(true);
+                                mensaje.setValue('Debe seleccionar permisos al rol');
+                                actionEvent.cancel();
+                              }else{
+                                rol.setChanged(false);
+                                permisos1.setChanged(false);
+                              }
+                              
+                              if(mensaje.getValue()==''){
+                                mensaje.setValue('Se ha registrado correctamente');
+                              }
+                              
+                            }
+
+                            function validarEditar(actionEvent) {
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeEditar");
+                              var nombreRol = source.findComponent("itNombreRolEditar");
+                              var permisos1 = source.findComponent("smlPermisosEditar1");
+                              var permisos2 = source.findComponent("smlPermisosEditar2");
+                              var permisos3 = source.findComponent("smlPermisosEditar3");
+                              
+                              mensaje.setValue('');
+                              nombreRol.setChanged(false);
+                              
+                              if(nombreRol.getSubmittedValue() == ''){
+                                nombreRol.setChanged(true);
+                                mensaje.setValue('Debe seleccionar un rol para editarlo o eliminarlo');
+                                actionEvent.cancel();
+                              }else if(permisos1.getSubmittedValue()=='' &amp;&amp; permisos2.getSubmittedValue()=='' &amp;&amp; permisos3.getSubmittedValue()=='' &amp;&amp; permisos4.getSubmittedValue()==''){
+                                permisos1.setChanged(true);
+                                mensaje.setValue('Debe seleccionar permisos al rol');
+                                actionEvent.cancel();
+                              }else{
+                                nombreRol.setChanged(false);
+                                permisos1.setChanged(false);
+                              }
+                            }
+                            
+                            function validarOpcion(actionEvent) {
+                              var source = actionEvent.getSource();
+                              var rol = source.findComponent("socRolUsuarioEditar");
+                                if (rol.getValue() == '') {
+                                  actionEvent.cancel();
+                                }
+                            }
+                            
+                            function validarEliminar(actionEvent) {
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeEliminar");
+                              
+                              mensaje.setValue('El rol ha sido eliminado');
+                            }
+                            
+                            function cerrarPopup(actionEvent) {
+                              var source = actionEvent.getSource();
+                              var editar = source.findComponent("popupEditarRol");
+                              var eliminar = source.findComponent("popupEliminarRol");
+                                if (editar.isPopupVisible()) {
+                                  editar.hide();
+                                }
+                                if (eliminar.isPopupVisible()) {
+                                  eliminar.hide();
+                                }
+                            }
+                        </af:resource>
+                        <f:facet name="second"/>
+                    </af:panelSplitter>
+                </f:facet>
+            </af:panelSplitter>
+        </f:facet>
+    </af:panelSplitter>
+</ui:composition>

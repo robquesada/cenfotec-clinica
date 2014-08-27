@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:facelets="http://xmlns.oracle.com/jdev/webapp/facelets"
+                xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:panelSplitter orientation="vertical" splitterPosition="50" id="ps2">
+        <f:facet name="first"/>
+        <f:facet name="second">
+            <af:panelSplitter orientation="horizontal" splitterPosition="100" id="ps1">
+                <f:facet name="first"/>
+                <f:facet name="second">
+                    <af:panelSplitter orientation="horizontal" splitterPosition="100" positionedFromEnd="true" id="ps3">
+                        <f:facet name="first">
+                            <af:panelGroupLayout id="pgl1">
+                                <af:panelGridLayout id="pgl2">
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr1">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc1"
+                                                     halign="center">
+                                            <af:toolbox id="t1">
+                                                <af:toolbar id="t2">
+                                                    <af:group id="g1">
+                                                        <af:button text="Buscar pacientes" id="pt_bListarPacientes"
+                                                                   inlineStyle="background-color:rgb(240,244,250); background-image:none; border-color:rgb(142,68,173); color:rgb(142,68,173);"/>
+                                                    </af:group>
+                                                    <af:group id="g2">
+                                                        <af:button text="Agregar nuevo paciente"
+                                                                   id="pt_bAgregarPaciente" action="agregar"/>
+                                                    </af:group>
+                                                </af:toolbar>
+                                            </af:toolbox>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl3">
+                                    <af:gridRow marginTop="5px" height="auto" id="pt_gr2">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc2">
+                                            <af:spacer width="10" height="20" id="s2"/>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr3">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc3"
+                                                     halign="center"/>
+                                    </af:gridRow>
+                                    <af:gridRow id="gr13">
+                                        <af:gridCell id="gc25"/>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl4">
+                                    <af:gridRow marginTop="5px" height="auto" id="gr3">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc3"
+                                                     halign="center">
+                                            <af:panelBox id="pb2" showHeader="never" showDisclosure="false"
+                                                         inlineStyle="Width: 700px; Height: 47px;">
+                                                <f:facet name="toolbar"/>
+                                                <af:panelGridLayout id="pgl7">
+                                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px"
+                                                                id="gr9">
+                                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px"
+                                                                     id="gc10">
+                                                            <af:panelGroupLayout id="pgl8" layout="horizontal">
+                                                                <af:inputText id="itBuscarPaciente" columns="42"
+                                                                              placeholder="Ingrese el nombre o apellido del paciente"
+                                                                              contentStyle="height:22px; font-size:14px;"
+                                                                              value="#{PacienteController.pacienteFiltro.nombrePaciente}"/>
+                                                                <af:button id="bBuscarPacientes"
+                                                                           action="#{PacienteController.buscarPacientes}"
+                                                                           icon="images/Buscar.png"/>
+                                                            </af:panelGroupLayout>
+                                                        </af:gridCell>
+                                                    </af:gridRow>
+                                                </af:panelGridLayout>
+                                            </af:panelBox>
+                                            <af:panelBox text="Pacientes" id="pb1" disclosed="true" type="stretch"
+                                                         showDisclosure="false"
+                                                         inlineStyle="width:700px; Height: 340px;">
+                                                <f:facet name="toolbar"/>
+                                                <af:listView id="lv1"
+                                                             value="#{PacienteController.listaPacientes}" var="item"
+                                                             emptyText="No hay pacientes con ese nombre o apellido. Intente con otro."
+                                                             selectionListener="#{PacienteController.seleccionarPaciente}"
+                                                             selection="single" partialTriggers="::bBuscarPacientes">
+                                                    <f:facet name="groupHeaderStamp"/>
+                                                    <af:listItem id="li1">
+                                                        <af:panelGridLayout id="pgl5">
+                                                            <af:gridRow marginTop="5px" height="auto" marginBottom="5px"
+                                                                        id="gr7">
+                                                                <af:gridCell marginStart="5px" width="15%" id="gc7"
+                                                                             halign="center" valign="middle">
+                                                                    <af:image id="i1"
+                                                                              source="images/Persona#{item.sexo}.png"
+                                                                              inlineStyle="width:48px; height:45px;"/>
+                                                                </af:gridCell>
+                                                                <af:gridCell marginStart="5px" width="70%" id="gc8"
+                                                                             valign="middle">
+                                                                    <af:panelGroupLayout id="pgl6" layout="vertical">
+                                                                        <af:outputText value="#{item.nombrePaciente} #{item.primerApellido} #{item.segundoApellido}" id="ot1"
+                                                                                       inlineStyle="font-size:medium; font-weight:bold;"/>
+                                                                        <af:panelGroupLayout id="pgl9"
+                                                                                             layout="horizontal">
+                                                                            <af:outputText value="Fecha de nacimiento:"
+                                                                                           id="ot2"/>
+                                                                            <af:outputText value="#{item.fechaNacimiento}"
+                                                                                           id="ot4"/>
+                                                                            <af:spacer width="3" height="10" id="s1"/>
+                                                                            <af:outputText value=" | Fecha de ingreso: "
+                                                                                           id="ot6"/>
+                                                                            <af:outputText value="#{item.fechaIngreso}"
+                                                                                           id="ot5"/>
+                                                                        </af:panelGroupLayout>
+                                                                        <af:outputText value="Identificación: #{item.identificacionPaciente} | Lugar de residencia: #{item.lugarResidencia}" id="ot3"/>
+                                                                    </af:panelGroupLayout>
+                                                                </af:gridCell>
+                                                                <af:gridCell marginStart="5px" width="15%"
+                                                                             marginEnd="5px" id="gc9" halign="center"
+                                                                             valign="middle">
+                                                                    <af:button id="b1"
+                                                                               action="#{PacienteController.verPaciente}" icon="images/Ver.png"/>
+                                                                </af:gridCell>
+                                                            </af:gridRow>
+                                                        </af:panelGridLayout>
+                                                    </af:listItem>
+                                                </af:listView>
+                                            </af:panelBox>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" id="gr4">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc4"/>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" id="gr5">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc5"/>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr6">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc6"/>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="second"/>
+                    </af:panelSplitter>
+                </f:facet>
+            </af:panelSplitter>
+        </f:facet>
+    </af:panelSplitter>
+</ui:composition>

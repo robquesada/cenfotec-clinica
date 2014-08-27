@@ -1,0 +1,612 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+    <af:panelSplitter orientation="vertical" splitterPosition="50" id="ps2">
+        <f:facet name="first"/>
+        <f:facet name="second">
+            <af:panelSplitter orientation="horizontal" splitterPosition="100" id="ps1">
+                <f:facet name="first"/>
+                <f:facet name="second">
+                    <af:panelSplitter orientation="horizontal" splitterPosition="100" positionedFromEnd="true" id="ps3">
+                        <f:facet name="first">
+                            <af:panelGroupLayout id="pgl1">
+                                <af:panelGridLayout id="pgl2">
+                                        <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr1">
+                                            <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc1" halign="center">
+                                            <af:toolbox id="t2">
+                                                <af:toolbar id="t3">
+                                                    <af:group id="g1">
+                                                        <af:button text="Buscar pacientes" id="pt_bListarPacientes"
+                                                                   action="listar"/>
+                                                    </af:group>
+                                                    <af:group id="g2">
+                                                        <af:button text="Agregar nuevo paciente"
+                                                                   id="pt_bAgregarPaciente" action="agregar"/>
+                                                    </af:group>
+                                                </af:toolbar>
+                                            </af:toolbox>
+                                        </af:gridCell>
+                                        </af:gridRow>
+                                    </af:panelGridLayout>
+                                    <af:panelGridLayout id="pgl3">
+                                        <af:gridRow marginTop="5px" height="auto" id="pt_gr2">
+                                            <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc2"/>
+                                        </af:gridRow>
+                                        <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr3">
+                                            <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc3" halign="center">
+                                            <af:link text="#{PacienteController.pacienteEditar.nombrePaciente} #{PacienteController.pacienteEditar.primerApellido} #{PacienteController.pacienteEditar.segundoApellido}" id="l1" inlineStyle="font-size:large;"
+                                                     action="ver"/>
+                                            <af:spacer width="10" height="10" id="s9"/>
+                                            <af:outputLabel value="> Bitácora de procedimientos" id="pt_ol1"
+                                                            inlineStyle="font-size:large; font-family:sans-serif;"/>
+                                        </af:gridCell>
+                                        </af:gridRow>
+                                        <af:gridRow id="gr13">
+                                            <af:gridCell id="gc25">
+                                                <af:spacer width="10" height="20" id="s1"/>
+                                            </af:gridCell>
+                                        </af:gridRow>
+                                    </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl4">
+                                    <af:gridRow marginTop="5px" height="auto" id="gr1">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc1"/>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" id="gr2">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc2"
+                                                     halign="center">
+                                            <af:panelBox id="pb2" inlineStyle="Width:910px;  Height: 47px" showHeader="never" showDisclosure="false"
+                                                         type="stretch">
+                                                <f:facet name="toolbar"/>
+                                                <af:panelGridLayout id="pgl7">
+                                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px"
+                                                                id="gr3">
+                                                        <af:gridCell marginStart="5px" width="50%" id="gc3"
+                                                                     halign="start" valign="middle">
+                                                            <af:outputLabel value="Historial de procedimientos" id="ol1"
+                                                                            inlineStyle="font-weight:bold;"/>
+                                                        </af:gridCell>
+                                                        <af:gridCell marginStart="5px" width="50%" marginEnd="5px"
+                                                                     id="gc4" halign="end" valign="middle">
+                                                            <af:button id="bAgregarBitacora" icon="images/Agregar.png">
+                                                                <af:showPopupBehavior popupId="popupRegistrarBitacora"/>
+                                                                <af:clientListener method="limpiarRegistrar"
+                                                                                   type="action"/>
+                                                            </af:button>
+                                                        </af:gridCell>
+                                                    </af:gridRow>
+                                                </af:panelGridLayout>
+                                            </af:panelBox>
+                                            <af:panelBox id="pb1" showDisclosure="false"
+                                                         inlineStyle="height:310px; Width: 910px;" showHeader="never" type="stretch">
+                                                <f:facet name="toolbar"/>
+                                                <af:table value="#{PacienteController.listaBitacoraProcedimientos}" var="row"
+                                                          rowBandingInterval="0" id="tBitacoraProcedimientos" scrollPolicy="scroll" disableColumnReordering="true"
+                                                          rowSelection="multiple" columnSelection="multiple"
+                                                          partialTriggers="::bEliminarBitacoraProcedimiento ::bEditarBitacoraProcedimiento ::bRegistrarBitacoraProcedimiento"
+                                                          selectionListener="#{PacienteController.seleccionarBitacoraProcedimiento}"
+                                                          emptyText="Este paciente no tiene procedimientos registrados">
+                                                    <af:column sortable="true" headerText="Fecha" align="center"
+                                                               id="c1" inlineStyle="font-size: 15px; Height: 40px;">
+                                                        <af:outputText value="#{row.fecha}" id="ot1"/>
+                                                    </af:column>
+                                                    <af:column sortable="true" headerText="Nombre" align="center"
+                                                               id="c2" inlineStyle="font-size: 15px; Height: 40px;"
+                                                               width="177">
+                                                        <af:outputText value="#{row.bitacoraprocedimiento.nombreProcedimiento}" id="ot2"
+                                                                       truncateAt="0"/>
+                                                    </af:column>
+                                                    <af:column sortable="true" headerText="Diente" align="center"
+                                                               id="c3" inlineStyle="font-size: 15px;">
+                                                        <af:outputText value="#{row.numeroDiente}" id="ot3"/>
+                                                    </af:column>
+                                                    <af:column id="c5" headerText="Cara de diente" align="center"
+                                                               sortable="true" inlineStyle="font-size: 15px;">
+                                                        <af:outputText value="#{row.caraDiente}" id="ot5"/>
+                                                    </af:column>
+                                                    <af:column sortable="true" headerText="Estado" align="center"
+                                                               id="c4" inlineStyle="font-size: 15px;">
+                                                        <af:outputText value="#{row.estado}" id="ot4"/>
+                                                    </af:column>
+                                                    <af:column sortable="true" headerText="Usuario que lo aplicó" align="center"
+                                                               id="c7"
+                                                               inlineStyle="font-size: 15px; Height: 40px;" width="177">
+                                                        <af:outputText value="#{row.usuario2.nombre} #{row.usuario2.primerApellido} #{row.usuario2.segundoApellido}" id="ot6"/>
+                                                    </af:column>
+                                                    <af:column id="c6" headerText="Opciones" align="center"
+                                                               sortable="true">
+                                                        <af:panelGroupLayout id="pgl5" layout="horizontal">
+                                                            <af:button id="bEditar" icon="images/Editar.png">
+                                                                <af:clientListener method="limpiarEditar"
+                                                                                   type="action"/>
+                                                                <af:showPopupBehavior popupId="::popupEditarBitacora"/>
+                                                            </af:button>
+                                                            <af:spacer width="10" height="10" id="s3"/>
+                                                            <af:button id="bEliminar" icon="images/Borrar.png">
+                                                                <af:showPopupBehavior popupId="::popupEliminarBitacora"/>
+                                                            </af:button>
+                                                        </af:panelGroupLayout>
+                                                    </af:column>
+                                                </af:table>
+                                            </af:panelBox>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="popupRegistrarBitacora"
+                                          clientComponent="true" contentDelivery="lazyUncached">
+                                    <af:dialog id="d1" type="none" title="Agregar nuevo registro"
+                                               inlineStyle="background-color:White;">
+                                        <f:facet name="buttonBar"/>
+                                        <af:panelGroupLayout id="pgl9" layout="horizontal" halign="center">
+                                            <af:panelFormLayout id="pfl1">
+                                                <af:spacer width="10" height="10" id="s23"/>
+                                                <af:inputDate id="idFechaProcedimientoRegistrar" columns="10"
+                                                              value="#{PacienteController.bitacoraProcedimientoRegistrar.fecha}"
+                                                              label="Fecha"
+                                                              contentStyle="Height: 23px; font-size: 15px;"
+                                                              partialTriggers="bRegistrarBitacoraProcedimiento"
+                                                              clientComponent="true"/>
+                                                <af:selectOneChoice label="Procedimiento" id="socProcedimientoRegistrar"
+                                                                    value="#{PacienteController.bitacoraProcedimientoRegistrar.bitacoraprocedimiento}"
+                                                                    contentStyle="Height: 23px; font-size: 15px;"
+                                                                    partialTriggers="bRegistrarBitacoraProcedimiento"
+                                                                    unselectedLabel="-- Seleccionar --"
+                                                                    clientComponent="true">
+                                                    <af:forEach var="var"
+                                                                items="#{PacienteController.listaProcedimientos}">
+                                                        <af:selectItem label="#{var.nombreProcedimiento}" value="#{var}"
+                                                                       id="si1"/>
+                                                    </af:forEach>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice label="Estado del procedimiento"
+                                                                    id="socEstadoProcedimientoRegistrar"
+                                                                    contentStyle="Height: 23px; font-size: 15px;"
+                                                                    value="#{PacienteController.bitacoraProcedimientoRegistrar.estado}"
+                                                                    partialTriggers="bRegistrarBitacoraProcedimiento"
+                                                                    unselectedLabel="-- Seleccionar --"
+                                                                    clientComponent="true">
+                                                    <af:selectItem label="Pendiente" value="Pendiente" id="si3"/>
+                                                    <af:selectItem label="En proceso" value="En proceso" id="si17"/>
+                                                    <af:selectItem label="Aplicado" value="Aplicado" id="si18"/>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice label="Usuario que lo aplicó"
+                                                                    id="socUsuarioRegistrar"
+                                                                    contentStyle="Height: 23px; font-size: 15px;"
+                                                                    value="#{PacienteController.bitacoraProcedimientoRegistrar.usuario2}"
+                                                                    partialTriggers="bRegistrarBitacoraProcedimiento"
+                                                                    unselectedLabel="-- Seleccionar --">
+                                                    <af:forEach var="var" items="#{PacienteController.listaUsuarios}">
+                                                        <af:selectItem id="si4"
+                                                                       label="#{var.nombre} #{var.primerApellido} #{var.segundoApellido}"
+                                                                       value="#{var}"/>
+                                                    </af:forEach>
+                                                </af:selectOneChoice>
+                                                <af:separator id="s6"/>
+                                                <af:selectBooleanRadio label="Diente" id="sbrNumeroDienteRegistrar"
+                                                                       text="Número de diente" group="diente"
+                                                                       selected="true"
+                                                                       partialTriggers="bRegistrarBitacoraProcedimiento"
+                                                                       value="#{PacienteController.dienteSeleccionadoRegistrar}"
+                                                                       clientComponent="true"/>
+                                                <af:panelGroupLayout id="pgl6" layout="horizontal">
+                                                    <af:selectOneChoice id="socDiente1Registrar"
+                                                                        contentStyle="Height: 23px; font-size: 15px;"
+                                                                        value="#{PacienteController.numeroDiente1}"
+                                                                        partialTriggers="bRegistrarBitacoraProcedimiento"
+                                                                        unselectedLabel="#" clientComponent="true">
+                                                        <af:selectItem label="1" id="si5" value="1"/>
+                                                        <af:selectItem label="2" id="si2" value="2"/>
+                                                        <af:selectItem label="3" id="si6" value="3"/>
+                                                        <af:selectItem label="4" id="si7" value="4"/>
+                                                    </af:selectOneChoice>
+                                                    <af:selectOneChoice id="socDiente2Registrar"
+                                                                        contentStyle="Height: 23px; font-size: 15px;"
+                                                                        value="#{PacienteController.numeroDiente2}"
+                                                                        partialTriggers="bRegistrarBitacoraProcedimiento"
+                                                                        unselectedLabel="#" clientComponent="true">
+                                                        <af:selectItem label="1" value="1" id="si8"/>
+                                                        <af:selectItem label="2" value="2" id="si9"/>
+                                                        <af:selectItem label="3" value="3" id="si10"/>
+                                                        <af:selectItem label="4" value="4" id="si12"/>
+                                                        <af:selectItem label="5" value="5" id="si13"/>
+                                                        <af:selectItem label="6" value="6" id="si14"/>
+                                                        <af:selectItem label="7" value="7" id="si15"/>
+                                                        <af:selectItem label="8" value="8" id="si16"/>
+                                                    </af:selectOneChoice>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout id="pgl8" layout="horizontal">
+                                                    <af:selectOneChoice id="socCaraDienteRegistrar"
+                                                                        contentStyle="Height: 23px; font-size: 15px;"
+                                                                        label="Cara del diente"
+                                                                        partialTriggers="bRegistrarBitacoraProcedimiento"
+                                                                        value="#{PacienteController.bitacoraProcedimientoRegistrar.caraDiente}"
+                                                                        unselectedLabel="-- Seleccionar --"
+                                                                        clientComponent="true">
+                                                        <af:selectItem label="Todo el diente" value="Todas" id="si19"/>
+                                                        <af:selectItem label="1" value="1" id="si20"/>
+                                                        <af:selectItem label="2" value="2" id="si21"/>
+                                                        <af:selectItem label="3" value="3" id="si23"/>
+                                                        <af:selectItem label="4" value="4" id="si24"/>
+                                                        <af:selectItem label="5" value="5" id="si25"/>
+                                                    </af:selectOneChoice>
+                                                    <af:spacer width="10" height="10" id="s2"/>
+                                                    <h:graphicImage id="gi2" url="images/OdontoMuestra.png" height="80"
+                                                                    width="81"/>
+                                                </af:panelGroupLayout>
+                                                <af:selectBooleanRadio text="Toda la boca y/o dentadura"
+                                                                       id="sbrTodaDentadura" group="diente"
+                                                                       partialTriggers="bRegistrarBitacoraProcedimiento"
+                                                                       clientComponent="true"/>
+                                                <af:separator id="s8"/>
+                                            </af:panelFormLayout>
+                                            <af:spacer width="10" height="10" id="s5"/>
+                                        </af:panelGroupLayout>
+                                        <af:spacer width="10" height="10" id="s7"/>
+                                        <af:panelGroupLayout id="pgl15" layout="horizontal" halign="center">
+                                            <af:button text="Registrar" id="bRegistrarBitacoraProcedimiento"
+                                                       action="#{PacienteController.registrarBitacoraProcedimiento}">
+                                                <af:clientListener method="validarRegistrar" type="action"/>
+                                            </af:button>
+                                            <af:spacer width="10" height="10" id="s4"/>
+                                            <af:button text="Cancelar" id="b1">
+                                                <af:clientListener method="cerrarPopup" type="action"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout id="pgl10" halign="center" layout="horizontal">
+                                            <af:outputLabel value="#{PacienteController.mensajeBitacoraRegistrar}"
+                                                            id="olMensajeRegistrar"
+                                                            partialTriggers="bRegistrarBitacoraProcedimiento bAgregarBitacora"
+                                                            clientComponent="true"/>
+                                        </af:panelGroupLayout>
+                                    </af:dialog>
+                                </af:popup>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="popupEditarBitacora"
+                                          clientComponent="true" contentDelivery="lazyUncached">
+                                    <af:dialog id="d2" type="none" title="Editar procedimiento de bitácora"
+                                               inlineStyle="background-color:White;">
+                                        <af:panelGroupLayout id="pgl13" layout="horizontal" halign="center">
+                                            <af:panelFormLayout id="pfl11">
+                                                <af:spacer width="10" height="10" id="s33"/>
+                                                <af:inputDate id="idFechaProcedimientoEditar" columns="10"
+                                                              value="#{PacienteController.bitacoraProcedimientoEditar.fecha}"
+                                                              label="Fecha"
+                                                              contentStyle="Height: 23px; font-size: 15px;"
+                                                              partialTriggers="bEditarBitacoraProcedimiento"/>
+                                                <af:selectOneChoice label="Procedimiento" id="socProcedimientoEditar"
+                                                                    value="#{PacienteController.bitacoraProcedimientoEditar.bitacoraprocedimiento}"
+                                                                    contentStyle="Height: 23px; font-size: 15px;"
+                                                                    partialTriggers="bEditarBitacoraProcedimiento">
+                                                    <af:forEach var="var"
+                                                                items="#{PacienteController.listaProcedimientos}">
+                                                        <af:selectItem label="#{var.nombreProcedimiento}" value="#{var}"
+                                                                       id="si41"/>
+                                                    </af:forEach>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice label="Estado del procedimiento"
+                                                                    id="socEstadoProcedimientoEditar"
+                                                                    contentStyle="Height: 23px; font-size: 15px;"
+                                                                    value="#{PacienteController.bitacoraProcedimientoEditar.estado}"
+                                                                    partialTriggers="bEditarBitacoraProcedimiento">
+                                                    <af:selectItem label="Pendiente" value="Pendiente" id="si11"/>
+                                                    <af:selectItem label="En proceso" value="En proceso" id="si112"/>
+                                                    <af:selectItem label="Aplicado" value="Aplicado" id="si113"/>
+                                                </af:selectOneChoice>
+                                                <af:selectOneChoice label="Usuario que lo aplicó" id="socUsuarioEditar"
+                                                                    contentStyle="Height: 23px; font-size: 15px;"
+                                                                    value="#{PacienteController.bitacoraProcedimientoEditar.usuario2}"
+                                                                    partialTriggers="bEditarBitacoraProcedimiento">
+                                                    <af:forEach var="var" items="#{PacienteController.listaUsuarios}">
+                                                        <af:selectItem id="si244"
+                                                                       label="#{var.nombre} #{var.primerApellido} #{var.segundoApellido}"
+                                                                       value="#{var}"/>
+                                                    </af:forEach>
+                                                </af:selectOneChoice>
+                                                <af:separator id="s66"/>
+                                                <af:selectBooleanRadio label="Diente" id="sbrNumeroDienteEditar"
+                                                                       text="Número de diente" group="diente"
+                                                                       selected="true"
+                                                                       partialTriggers="bEditarBitacoraProcedimiento"
+                                                                       value="#{PacienteController.dienteSeleccionadoEditar}"/>
+                                                <af:panelGroupLayout id="pgl26" layout="horizontal">
+                                                    <af:selectOneChoice id="socDiente1Editar"
+                                                                        contentStyle="Height: 23px; font-size: 15px;"
+                                                                        value="#{PacienteController.numeroDienteEditar1}"
+                                                                        partialTriggers="bEditarBitacoraProcedimiento">
+                                                        <af:selectItem label="1" id="si35" value="1"/>
+                                                        <af:selectItem label="2" id="si32" value="2"/>
+                                                        <af:selectItem label="3" id="si36" value="3"/>
+                                                        <af:selectItem label="4" id="si37" value="4"/>
+                                                    </af:selectOneChoice>
+                                                    <af:selectOneChoice id="socDiente2Editar"
+                                                                        contentStyle="Height: 23px; font-size: 15px;"
+                                                                        value="#{PacienteController.numeroDienteEditar2}"
+                                                                        partialTriggers="bEditarBitacoraProcedimiento">
+                                                        <af:selectItem label="1" value="1" id="si88"/>
+                                                        <af:selectItem label="2" value="2" id="si89"/>
+                                                        <af:selectItem label="3" value="3" id="si810"/>
+                                                        <af:selectItem label="4" value="4" id="si812"/>
+                                                        <af:selectItem label="5" value="5" id="si813"/>
+                                                        <af:selectItem label="6" value="6" id="si814"/>
+                                                        <af:selectItem label="7" value="7" id="si815"/>
+                                                        <af:selectItem label="8" value="8" id="si816"/>
+                                                    </af:selectOneChoice>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout id="pgl28" layout="horizontal">
+                                                    <af:selectOneChoice id="socCaraDienteEditar"
+                                                                        contentStyle="Height: 23px; font-size: 15px;"
+                                                                        label="Cara del diente"
+                                                                        partialTriggers="bEditarBitacoraProcedimiento"
+                                                                        value="#{PacienteController.bitacoraProcedimientoEditar.caraDiente}">
+                                                        <af:selectItem label="Todo el diente" value="Todas" id="si129"/>
+                                                        <af:selectItem label="1" value="1" id="si220"/>
+                                                        <af:selectItem label="2" value="2" id="si221"/>
+                                                        <af:selectItem label="3" value="3" id="si223"/>
+                                                        <af:selectItem label="4" value="4" id="si224"/>
+                                                        <af:selectItem label="5" value="5" id="si225"/>
+                                                    </af:selectOneChoice>
+                                                    <af:spacer width="10" height="10" id="s42"/>
+                                                    <h:graphicImage id="gi22" url="images/OdontoMuestra.png" height="80"
+                                                                    width="81"/>
+                                                </af:panelGroupLayout>
+                                                <af:selectBooleanRadio text="Toda la boca y/o dentadura"
+                                                                       id="sbrTodaDentaduraEditar" group="diente"
+                                                                       partialTriggers="bEditarBitacoraProcedimiento"/>
+                                                <af:separator id="s28"/>
+                                            </af:panelFormLayout>
+                                            <af:spacer width="10" height="10" id="s11"/>
+                                        </af:panelGroupLayout>
+                                        <af:spacer width="10" height="10" id="s27"/>
+                                        <af:panelGroupLayout id="pgl25" layout="horizontal" halign="center">
+                                            <af:button text="Editar" id="bEditarBitacoraProcedimiento"
+                                                       action="#{PacienteController.editarBitacoraProcedimiento}">
+                                                <af:clientListener type="action" method="validarEditar"/>
+                                            </af:button>
+                                            <af:spacer width="10" height="10" id="s24"/>
+                                            <af:button text="Cancelar" id="bCancelarEditar">
+                                                <af:clientListener method="cerrarPopup" type="action"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout id="pgl12" halign="center" layout="horizontal">
+                                            <af:outputLabel id="olMensajeEditar"
+                                                            clientComponent="true"/>
+                                        </af:panelGroupLayout>
+                                    </af:dialog>
+                                </af:popup>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="popupEliminarBitacora"
+                                          clientComponent="true" contentDelivery="lazyUncached">
+                                    <af:dialog id="d3"
+                                               title="Eliminar registro de bitacora" type="none"
+                                               inlineStyle="background-color:White;">
+                                        <f:facet name="buttonBar">
+                                            <af:panelGroupLayout id="pgl17" layout="horizontal"
+                                                                 halign="center">
+                                                <af:outputLabel id="olMensajeEliminar"
+                                                                inlineStyle="color:Red;"
+                                                                clientComponent="true"/>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
+                                        <af:panelGroupLayout id="pgl11" layout="vertical" halign="center">
+                                            <af:spacer width="10" height="10" id="s67"/>
+                                            <af:outputLabel value="¿Está seguro que desea eliminar este registro de la bitácora de procedimientos?"
+                                                            id="olPreguntaEliminar" inlineStyle="font-size: 14px;"/>
+                                            <af:spacer width="10" height="10" id="s10"/>
+                                            <af:panelGroupLayout id="pgl168" layout="horizontal">
+                                                <af:button text="Eliminar" id="bEliminarBitacoraProcedimiento"
+                                                           clientComponent="true"
+                                                           action="#{PacienteController.eliminarBitacoraProcedimiento}">
+                                                    <af:clientListener method="validarEliminar" type="action"/>
+                                                </af:button>
+                                                <af:spacer width="10" height="10" id="s14"/>
+                                                <af:button text="Cancelar" id="bCancelarEliminar"
+                                                           clientComponent="true">
+                                                    <af:clientListener method="cerrarPopup" type="action"/>
+                                                </af:button>
+                                            </af:panelGroupLayout>
+                                        </af:panelGroupLayout>
+                                    </af:dialog>
+                                </af:popup>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                         <af:resource type="javascript">
+                            function validarRegistrar(actionEvent){
+                                var source = actionEvent.getSource();
+                                var mensaje = source.findComponent("olMensajeRegistrar");
+                                
+                                var fecha = source.findComponent("idFechaProcedimientoRegistrar");
+                                var procedimiento = source.findComponent("socProcedimientoRegistrar");
+                                var estadoProcedimiento = source.findComponent("socEstadoProcedimientoRegistrar");
+                                var usuario = source.findComponent("socUsuarioRegistrar");
+                                var numeroDiente = source.findComponent("sbrNumeroDienteRegistrar");
+                                var diente1 = source.findComponent("socDiente1Registrar");
+                                var diente2 = source.findComponent("socDiente2Registrar");
+                                var caraDiente = source.findComponent("socCaraDienteRegistrar");
+                                
+                                mensaje.setValue('');
+                                
+                                if(fecha.getSubmittedValue()==''){
+                                  mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                  fecha.setChanged(true);
+                                  actionEvent.cancel();
+                                }else{
+                                  fecha.setChanged(false);
+                                }
+                                
+                                if(procedimiento.getSubmittedValue()==''){
+                                  mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                  procedimiento.setChanged(true);
+                                  actionEvent.cancel();
+                                }else{
+                                  procedimiento.setChanged(false);
+                                }
+                                  
+                                if(estadoProcedimiento.getSubmittedValue()==''){
+                                  estadoProcedimiento.setChanged(true);
+                                  mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                  actionEvent.cancel();
+                                }else{
+                                  estadoProcedimiento.setChanged(false);
+                                }
+                                
+                                if(usuario.getSubmittedValue()==''){
+                                  usuario.setChanged(true);
+                                  mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                  actionEvent.cancel();
+                                }else{
+                                  usuario.setChanged(false);
+                                }
+                                
+                                if(numeroDiente.getValue()==true){
+                                    if(diente1.getSubmittedValue()==''){
+                                      diente1.setChanged(true);
+                                      mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                      actionEvent.cancel();
+                                    }else{
+                                      diente1.setChanged(false);
+                                    }
+                                    
+                                    if(diente2.getSubmittedValue()==''){
+                                      diente2.setChanged(true);
+                                      mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                      actionEvent.cancel();
+                                    }else{
+                                      diente2.setChanged(false);
+                                    }
+                                    
+                                    if(caraDiente.getSubmittedValue()==''){
+                                      caraDiente.setChanged(true);
+                                      mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                      actionEvent.cancel();
+                                    }else{
+                                      caraDiente.setChanged(false);
+                                    }
+                                }
+                                
+                                if(mensaje.getValue()==''){
+                                  mensaje.setValue('Se agregó exitosamente');
+                                }
+                            }
+                         
+                            function limpiarRegistrar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeRegistrar");
+                                mensaje.setValue('');
+                            }
+                         
+                            function validarEditar(actionEvent){
+                                var source = actionEvent.getSource();
+                                var mensaje = source.findComponent("olMensajeEditar");
+                                
+                                var fecha = source.findComponent("idFechaProcedimientoEditar");
+                                var procedimiento = source.findComponent("socProcedimientoEditar");
+                                var estadoProcedimiento = source.findComponent("socEstadoProcedimientoEditar");
+                                var usuario = source.findComponent("socUsuarioEditar");
+                                var numeroDiente = source.findComponent("sbrNumeroDienteEditar");
+                                var diente1 = source.findComponent("socDiente1Editar");
+                                var diente2 = source.findComponent("socDiente2Editar");
+                                var caraDiente = source.findComponent("socCaraDienteEditar");
+                                
+                                mensaje.setValue('');
+                                
+                                if(fecha.getSubmittedValue()==''){
+                                  mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                  fecha.setChanged(true);
+                                  actionEvent.cancel();
+                                }else{
+                                  fecha.setChanged(false);
+                                }
+                                
+                                if(procedimiento.getSubmittedValue()==''){
+                                  mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                  procedimiento.setChanged(true);
+                                  actionEvent.cancel();
+                                }else{
+                                  procedimiento.setChanged(false);
+                                }
+                                  
+                                if(estadoProcedimiento.getSubmittedValue()==''){
+                                  estadoProcedimiento.setChanged(true);
+                                  mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                  actionEvent.cancel();
+                                }else{
+                                  estadoProcedimiento.setChanged(false);
+                                }
+                                
+                                if(usuario.getSubmittedValue()==''){
+                                  usuario.setChanged(true);
+                                  mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                  actionEvent.cancel();
+                                }else{
+                                  usuario.setChanged(false);
+                                }
+                                
+                                if(numeroDiente.getValue()==true){
+                                    if(diente1.getSubmittedValue()==''){
+                                      diente1.setChanged(true);
+                                      mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                      actionEvent.cancel();
+                                    }else{
+                                      diente1.setChanged(false);
+                                    }
+                                    
+                                    if(diente2.getSubmittedValue()==''){
+                                      diente2.setChanged(true);
+                                      mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                      actionEvent.cancel();
+                                    }else{
+                                      diente2.setChanged(false);
+                                    }
+                                    
+                                    if(caraDiente.getSubmittedValue()==''){
+                                      caraDiente.setChanged(true);
+                                      mensaje.setValue('Debe seleccionar datos en los campos señalados');
+                                      actionEvent.cancel();
+                                    }else{
+                                      caraDiente.setChanged(false);
+                                    }
+                                }
+                                
+                                if(mensaje.getValue()==''){
+                                  mensaje.setValue('Se ha editado la información');
+                                }
+                            }
+                         
+                            function limpiarEditar(actionEvent){
+                                var source = actionEvent.getSource();
+                                var mensaje = source.findComponent("olMensajeEditar");
+                                mensaje.setValue('');
+                            }
+                         
+                            function validarEliminar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeEliminar");
+                                mensaje.setValue('Se ha eliminado el registro de la bitácora');
+                            }
+                         
+                            function limpiarEliminar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeEliminar");
+                                mensaje.setValue('');
+                            }
+                         
+                            function cerrarPopup(actionEvent){
+                              var source = actionEvent.getSource();
+                              var registrar = source.findComponent("popupRegistrarBitacora");
+                              var editar = source.findComponent("popupEditarBitacora");
+                              var eliminar = source.findComponent("popupEliminarBitacora");
+                                if (registrar.isPopupVisible()) {
+                                  registrar.hide();
+                                }
+                                if (editar.isPopupVisible()) {
+                                  editar.hide();
+                                }
+                                if (eliminar.isPopupVisible()) {
+                                  eliminar.hide();
+                                }
+                            }
+                        </af:resource>
+                        <f:facet name="second"/>
+                    </af:panelSplitter>
+                </f:facet>
+            </af:panelSplitter>
+        </f:facet>
+    </af:panelSplitter>
+</ui:composition>

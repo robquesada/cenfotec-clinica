@@ -1,0 +1,521 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:facelets="http://xmlns.oracle.com/jdev/webapp/facelets"
+                xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:h="http://java.sun.com/jsf/html">
+    <af:panelSplitter orientation="vertical" splitterPosition="50" id="ps1">
+        <f:facet name="first"/>
+        <f:facet name="second">
+            <af:panelSplitter orientation="horizontal" splitterPosition="100" id="ps2">
+                <f:facet name="first"/>
+                <f:facet name="second">
+                    <af:panelSplitter orientation="horizontal" splitterPosition="100" positionedFromEnd="true" id="ps3">
+                        <f:facet name="first">
+                            <af:panelGroupLayout id="pgl1">
+                                <af:panelGridLayout id="pgl2">
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr1">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc1"
+                                                     halign="center">
+                                            <af:toolbox id="t1">
+                                                <af:toolbar id="t2">
+                                                    <af:group id="g1">
+                                                        <af:button text="Buscar pacientes" id="pt_bListarPacientes"
+                                                                   action="listar"/>
+                                                    </af:group>
+                                                    <af:group id="g2">
+                                                        <af:button text="Agregar nuevo paciente"
+                                                                   id="pt_bAgregarPaciente" action="agregar"/>
+                                                    </af:group>
+                                                </af:toolbar>
+                                            </af:toolbox>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl3">
+                                    <af:gridRow marginTop="5px" height="auto" id="pt_gr2">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc2"/>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr3">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc3"
+                                                     halign="center">
+                                            <af:link text="#{PacienteController.pacienteEditar.nombrePaciente} #{PacienteController.pacienteEditar.primerApellido} #{PacienteController.pacienteEditar.segundoApellido}" id="l2" inlineStyle="font-size:large;"
+                                                     partialTriggers="bEditarPaciente"/>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                    <af:gridRow id="gr13">
+                                        <af:gridCell id="gc25" halign="center">
+                                            <af:spacer width="10" height="20" id="s1"/>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl4">
+                                    <af:gridRow marginTop="5px" height="auto" id="gr3">
+                                        <af:gridCell marginStart="5px" width="40%" id="gc7" halign="end" valign="top">
+                                            <af:panelFormLayout id="pfl2">
+                                                <af:inputText label="Nombre" id="itNombrePaciente"
+                                                              value="#{PacienteController.pacienteEditar.nombrePaciente}"
+                                                              requiredMessageDetail="No puede dejar este espacio en blanco"
+                                                              editable="onAccess"
+                                                              contentStyle="Height: 23px; font-size: 13px; "
+                                                              clientComponent="true"/>
+                                                <af:inputText label="Primer apellido" id="itPrimerApellidoPaciente"
+                                                              value="#{PacienteController.pacienteEditar.primerApellido}"
+                                                              editable="onAccess"
+                                                              contentStyle="Height: 23px; font-size: 13px; "
+                                                              clientComponent="true"/>
+                                                <af:inputText label="Segundo apellido" id="itSegundoApellidoPaciente"
+                                                              value="#{PacienteController.pacienteEditar.segundoApellido}"
+                                                              editable="onAccess"
+                                                              contentStyle="Height: 23px; font-size: 13px; "
+                                                              clientComponent="true"/>
+                                                <af:inputText label="Identificación" id="itIdentificacion"
+                                                              value="#{PacienteController.pacienteEditar.identificacionPaciente}"
+                                                              editable="onAccess" shortDesc="Ingrese solo números"
+                                                              contentStyle="Height: 23px; font-size: 13px; "
+                                                              clientComponent="true"/>
+                                                <af:selectOneRadio label="Sexo" id="sorSexo" layout="horizontal"
+                                                                   contentStyle="Height: 23px; font-size: 13px; "
+                                                                   value="#{PacienteController.pacienteEditar.sexo}"
+                                                                   clientComponent="true">
+                                                    <af:selectItem label="Femenino" value="F" id="si2"/>
+                                                    <af:selectItem label="Masculino" value="M" id="si1"/>
+                                                </af:selectOneRadio>
+                                                <af:inputText label="Fecha de nacimiento" id="itFechaNacimientoPaciente"
+                                                              value="#{PacienteController.pacienteEditar.fechaNacimiento}"
+                                                              editable="onAccess"
+                                                              contentStyle="Height: 23px; font-size: 13px; "
+                                                              clientComponent="true"/>
+                                            </af:panelFormLayout>
+                                            <af:panelGroupLayout id="pgl66" layout="horizontal" valign="top"
+                                                                 halign="center">
+                                                <af:spacer width="70" height="10" id="s11"/>
+                                                <af:panelGroupLayout id="pgl44" halign="end">
+                                                    <af:panelGroupLayout id="pgl13" layout="horizontal" halign="center"
+                                                                         valign="middle">
+                                                        <af:spacer width="55" height="10" id="s4"/>
+                                                        <af:outputLabel value="Encargado(s) del paciente" id="ol2"/>
+                                                        <af:button id="bAgregar" clientComponent="true"
+                                                                   icon="images/Agregar.png">
+                                                            <af:showPopupBehavior popupId="popupEncargadoFamiliaEditar"
+                                                                                  triggerType="action"/>
+                                                            <af:clientListener method="limpiarPopup" type="action"/>
+                                                        </af:button>
+                                                    </af:panelGroupLayout>
+                                                    <af:panelGroupLayout id="pgl16" layout="horizontal">
+                                                        <af:panelBox id="pb1" showDisclosure="false" showHeader="never"
+                                                                     inlineStyle="width: 260px; height: 100px;"
+                                                                     type="stretch" styleClass="sinborde">
+                                                            <f:facet name="toolbar"/>
+                                                            <af:listView id="lv1"
+                                                                         value="#{PacienteController.listaEncargadosFamiliaEditar}"
+                                                                         var="var" selection="single"
+                                                                         selectionListener="#{PacienteController.seleccionarEncargadoFamiliaEditar}"
+                                                                         partialTriggers="::bAgregarEncargadoFamilia bQuitarEncargadoFamilia"
+                                                                         emptyText="Esta información es opcional.">
+                                                                <f:facet name="groupHeaderStamp"/>
+                                                                <af:listItem id="li1">
+                                                                    <af:panelGridLayout id="pgl12">
+                                                                        <af:gridRow height="27px" id="gr2">
+                                                                            <af:gridCell marginStart="5px" width="80%"
+                                                                                         id="gc2" valign="top">
+                                                                                <af:panelGroupLayout id="pgl15"
+                                                                                                     layout="vertical">
+                                                                                    <af:outputText value="#{var.nombreFamiliar}"
+                                                                                                   id="ot4"/>
+                                                                                    <af:outputText value="#{var.parentezco} | Teléfono: #{var.telefonoFamiliar}"
+                                                                                                   id="ot5"/>
+                                                                                </af:panelGroupLayout>
+                                                                            </af:gridCell>
+                                                                            <af:gridCell marginStart="5px" width="20%"
+                                                                                         marginEnd="5px" id="gc3"
+                                                                                         halign="center" valign="top">
+                                                                                <af:button id="bQuitarEncargadoFamilia"
+                                                                                           action="#{PacienteController.quitarEncargadoFamiliaEditar}"
+                                                                                           icon="images/Borrar.png"/>
+                                                                            </af:gridCell>
+                                                                        </af:gridRow>
+                                                                    </af:panelGridLayout>
+                                                                </af:listItem>
+                                                            </af:listView>
+                                                        </af:panelBox>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelGroupLayout>
+                                        </af:gridCell>
+                                        <af:gridCell marginStart="30px" width="30%" id="gc8" halign="center"
+                                                     valign="top">
+                                            <af:panelFormLayout id="pfl1" labelAlignment="start">
+                                                <af:inputText label="Expediente" id="itExpedientePaciente"
+                                                              value="#{PacienteController.pacienteEditar.numeroExpediente}"
+                                                              editable="onAccess"
+                                                              contentStyle="Height: 23px; font-size: 13px; "
+                                                              clientComponent="true"/>
+                                                <af:inputText label="Dirección e-mail" id="itEmailPaciente"
+                                                              value="#{PacienteController.pacienteEditar.correoElectronico}"
+                                                              editable="onAccess"
+                                                              shortDesc="Ejemplo: nombre@dominio.com"
+                                                              contentStyle="Height: 23px; font-size: 13px; "
+                                                              clientComponent="true"/>
+                                                <af:inputText label="Lugar de residencia" id="itResidenciaPaciente"
+                                                              value="#{PacienteController.pacienteEditar.lugarResidencia}"
+                                                              editable="onAccess"
+                                                              contentStyle="Height: 23px; font-size: 13px; "
+                                                              clientComponent="true"/>
+                                                <af:inputNumberSpinbox label="Descuento" id="insDescuentoPaciente"
+                                                                       value="#{PacienteController.pacienteEditar.porcentajeDescuento}"
+                                                                       editable="onAccess"
+                                                                       shortDesc="Ingrese solo números"
+                                                                       contentStyle="Height: 23px; font-size: 13px; "
+                                                                       columns="22" minimum="0" maximum="100"
+                                                                       clientComponent="true"/>
+                                                <af:inputText label="Comentario" id="itComentarioPaciente" rows="2"
+                                                              value="#{PacienteController.pacienteEditar.comentario}"
+                                                              editable="onAccess"
+                                                              contentStyle="font-size: 13px; height: 46px;"
+                                                              clientComponent="true"/>
+                                            </af:panelFormLayout>
+                                            <af:panelGroupLayout id="pgl6" layout="horizontal" valign="top"
+                                                                 halign="start">
+                                                <af:spacer width="10" height="10" id="s7"/>
+                                                <af:panelGroupLayout id="pgl14" halign="center">
+                                                    <af:panelGroupLayout id="pgl113" layout="horizontal" halign="start">
+                                                        <af:inputText label="Teléfono paciente" id="itTelefonoPaciente"
+                                                                      shortDesc="Ejemplo: 8888-1234"
+                                                                      clientComponent="true"
+                                                                      contentStyle="Height: 23px; font-size: 13px; "
+                                                                      columns="17"
+                                                                      value="#{PacienteController.telefonoPacienteEditar}"
+                                                                      partialTriggers="bAgregarEncargadoFamilia"/>
+                                                        <af:button id="bAgregarTelefonoPaciente" clientComponent="true"
+                                                                   icon="images/Agregar.png"
+                                                                   action="#{PacienteController.agregarTelefonoPacienteEditar}">
+                                                            <af:clientListener method="validarTelefono" type="action"/>
+                                                        </af:button>
+                                                    </af:panelGroupLayout>
+                                                    <af:panelGroupLayout id="pgl166" layout="horizontal">
+                                                        <af:spacer width="108" height="10" id="s44"/>
+                                                        <af:panelBox id="pb11" showDisclosure="false" showHeader="never"
+                                                                     inlineStyle="width: 195px; height: 100px;"
+                                                                     type="stretch" styleClass="sinborde">
+                                                            <f:facet name="toolbar"/>
+                                                            <af:table var="row" rowBandingInterval="0"
+                                                                      id="tListaTelefonos"
+                                                                      value="#{PacienteController.listaTelefonosEditarPaciente}"
+                                                                      partialTriggers="::bAgregarTelefonoPaciente bQuitarTelefonoPaciente"
+                                                                      rowSelection="single" columnSelection="none"
+                                                                      emptyText="Agregue al menos uno."
+                                                                      selectionListener="#{PacienteController.seleccionarTelefonoEditar}">
+                                                                <af:column sortable="false" headerText="Teléfono(s)"
+                                                                           id="c11"
+                                                                           inlineStyle="font-size: 14px; width: 30px; "
+                                                                           align="center">
+                                                                    <af:outputText value="#{row.numeroTelefono}"
+                                                                                   id="ot11"/>
+                                                                </af:column>
+                                                                <af:column id="c22" headerText="Eliminar" align="center"
+                                                                           inlineStyle="Width: 150px;" width="65">
+                                                                    <af:button id="bQuitarTelefonoPaciente"
+                                                                               action="#{PacienteController.quitarTelefonoPaciente}"
+                                                                               icon="images/Borrar.png"/>
+                                                                </af:column>
+                                                            </af:table>
+                                                        </af:panelBox>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                            </af:panelGroupLayout>
+                                        </af:gridCell>
+                                        <af:gridCell marginStart="30px" width="25%" marginEnd="5px" id="gc9"
+                                                     halign="start" valign="top">
+                                            <af:panelFormLayout id="pfl3">
+                                                <af:button text="Odontogramas" id="bVerOdontogramas"
+                                                           icon="images/Odontograma.png" iconPosition="bottom"
+                                                           action="#{PacienteController.verOdontogramasPaciente}" inlineStyle="Height: 45px;"
+                                                           rendered="#{LoginController.permisoOdontogramas}"/>
+                                                <af:spacer width="10" height="10" id="s3"/>
+                                                <af:button text="Bitácora" id="bBitacoraProcedimientos"
+                                                           iconPosition="bottom" icon="images/Bitacora.png"
+                                                           inlineStyle="Height: 45px;"
+                                                           action="#{PacienteController.verBitacoraPaciente}"
+                                                           rendered="#{LoginController.permisoCuentas}"/>
+                                                <af:spacer width="10" height="10" id="s6"/>
+                                                <af:button text="Cuenta financiera" id="bVerCuenta"
+                                                           icon="images/Cuenta.png" iconPosition="bottom"
+                                                           action="#{PacienteController.verCuentaPaciente}" inlineStyle="Height: 45px;"
+                                                           rendered="#{LoginController.permisoCuentas}"/>
+                                                <af:spacer width="10" height="10" id="s5"/>
+                                            </af:panelFormLayout>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl5">
+                                    <af:gridRow id="gr4">
+                                        <af:gridCell id="gc10" halign="center" valign="top"/>
+                                    </af:gridRow>
+                                    <af:gridRow id="gr1">
+                                        <af:gridCell id="gc1">
+                                            <af:spacer width="10" height="10" id="s10"/>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr16">
+                                        <af:gridCell marginStart="5px" width="100%" id="gc31" halign="center">
+                                            <af:panelGroupLayout id="pgl10" layout="horizontal" halign="center">
+                                                <af:button id="b4" icon="images/Borrar.png">
+                                                    <af:showPopupBehavior popupId="popupEliminarPaciente"
+                                                                          triggerType="action"/>
+                                                </af:button>
+                                                <af:spacer width="10" height="10" id="s14"/>
+                                                <af:button text="Guardar cambios" id="bEditarPaciente"
+                                                           action="#{PacienteController.editarPaciente}">
+                                                    <af:clientListener method="validar" type="action"/>
+                                                </af:button>
+                                            </af:panelGroupLayout>
+                                            <af:popup childCreation="deferred" autoCancel="disabled"
+                                                      id="popupEliminarPaciente" clientComponent="true"
+                                                      contentDelivery="lazyUncached">
+                                                <af:dialog id="d1" type="none" title="Eliminar paciente"
+                                                           inlineStyle="background-color:White;">
+                                                    <f:facet name="buttonBar"/>
+                                                    <af:panelGroupLayout id="pgl7" layout="vertical" halign="center">
+                                                        <af:spacer width="10" height="10" id="s2"/>
+                                                        <af:outputLabel value="¿Está seguro que desea eliminar este paciente?" id="ol1"
+                                                                        inlineStyle="font-size:14px;"/>
+                                                        <af:spacer width="10" height="10" id="s8"/>
+                                                    </af:panelGroupLayout>
+                                                    <af:panelGroupLayout id="pgl8" layout="horizontal" halign="center">
+                                                        <af:button text="Eliminar" id="b1"
+                                                                   action="#{PacienteController.deshabilitarPaciente}"/>
+                                                        <af:spacer width="10" height="10" id="s9"/>
+                                                        <af:button text="Cancelar" id="b2">
+                                                            <af:clientListener method="cerrarPopup" type="action"/>
+                                                        </af:button>
+                                                    </af:panelGroupLayout>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:panelGroupLayout id="pgl9" layout="horizontal">
+                                                <af:outputLabel id="olMensaje" clientComponent="true"/>
+                                                <af:outputLabel value="#{PacienteController.mensajePacienteEditar}"
+                                                                id="olMensajeEditar" partialTriggers="bEditarPaciente"/>
+                                            </af:panelGroupLayout>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:popup childCreation="deferred" autoCancel="disabled"
+                                          id="popupEncargadoFamiliaEditar" clientComponent="true"
+                                          contentDelivery="lazyUncached">
+                                    <af:dialog id="d2" type="none" title="Agregar encargado del paciente"
+                                               inlineStyle="background-color:White;">
+                                        <f:facet name="buttonBar"/>
+                                        <af:panelFormLayout id="pfl4">
+                                            <af:spacer width="10" height="10" id="s13"/>
+                                            <af:inputText label="Nombre" id="itNombreEncargado"
+                                                          contentStyle="Height: 23px; font-size: 13px; "
+                                                          value="#{PacienteController.nombreEncargadoEditar}"
+                                                          partialTriggers="bAgregarEncargadoFamilia"
+                                                          clientComponent="true"/>
+                                            <af:inputText label="Teléfono" id="itTelefonoEncargado"
+                                                          contentStyle="Height: 23px; font-size: 13px; "
+                                                          value="#{PacienteController.numeroTelefonoEncargadoEditar}"
+                                                          shortDesc="Ejemplo: 8888-1234"
+                                                          partialTriggers="bAgregarEncargadoFamilia"
+                                                          clientComponent="true"/>
+                                            <af:inputText label="Parentezco o relación" id="itRelacionEncargado"
+                                                          contentStyle="Height: 23px; font-size: 13px; "
+                                                          shortDesc="Ejemplo: Madre"
+                                                          value="#{PacienteController.parentezcoEncargadoEditar}"
+                                                          partialTriggers="bAgregarEncargadoFamilia"
+                                                          clientComponent="true"/>
+                                            <af:spacer width="10" height="10" id="s15"/>
+                                        </af:panelFormLayout>
+                                        <af:panelGroupLayout id="pgl11" layout="horizontal" halign="center">
+                                            <af:button text="Agregar" id="bAgregarEncargadoFamilia"
+                                                       action="#{PacienteController.agregarEncargadoFamiliaEditar}">
+                                                <af:clientListener method="validarEncargado" type="action"/>
+                                            </af:button>
+                                            <af:spacer width="10" height="10" id="s12"/>
+                                            <af:button text="Cancelar" id="b5">
+                                                <af:clientListener method="cerrarPopup" type="action"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout id="pgl17" layout="horizontal" halign="center">
+                                            <af:outputLabel id="olMensajeEncargado" clientComponent="true"/>
+                                        </af:panelGroupLayout>
+                                    </af:dialog>
+                                </af:popup>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <af:resource type="javascript">
+                            function validar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensaje");
+                              
+                              var nombre = source.findComponent("itNombrePaciente");
+                              var primerApellido = source.findComponent("itPrimerApellidoPaciente");
+                              var segundoApellido = source.findComponent("itSegundoApellidoPaciente");
+                              var identificacion = source.findComponent("itIdentificacion");
+                              var fechaNacimiento = source.findComponent("itFechaNacimientoPaciente");
+                              var email = source.findComponent("itEmailPaciente");
+                              var residencia = source.findComponent("itResidenciaPaciente");
+                              var descuento = source.findComponent("insDescuentoPaciente");
+                              
+                              var patronEmail = /[\w-\.]{3,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+                              var patronLetras = /^[a-zA-Z\u00C0-\u00ff]+$/;
+                              
+                              mensaje.setValue('');
+                              
+                              if(nombre.getSubmittedValue() == '' || !patronLetras.test(nombre.getSubmittedValue())){
+                                nombre.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                nombre.setChanged(false);
+                              }
+                              
+                              if(primerApellido.getSubmittedValue() == '' || !patronLetras.test(primerApellido.getSubmittedValue())){
+                                primerApellido.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                primerApellido.setChanged(false);
+                              }
+                              
+                              if(segundoApellido.getSubmittedValue() != '' &amp;&amp; !patronLetras.test(segundoApellido.getSubmittedValue())){
+                                   segundoApellido.setChanged(true);
+                                    mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                    actionEvent.cancel();
+                              }else{
+                                segundoApellido.setChanged(false);
+                              }
+                              
+                              if(identificacion.getSubmittedValue() == ''){
+                                identificacion.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                identificacion.setChanged(false);
+                              }
+                              
+                              if(fechaNacimiento.getSubmittedValue() == ''){
+                                fechaNacimiento.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                fechaNacimiento.setChanged(false);
+                              }
+                              
+                              if(email.getSubmittedValue() != '' &amp;&amp; !patronEmail.test(email.getSubmittedValue())){
+                                email.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                email.setChanged(false);
+                              }
+                              
+                              if(residencia.getSubmittedValue() == ''){
+                                residencia.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                residencia.setChanged(false);
+                              }
+                              
+                              if(descuento.getSubmittedValue() == ''){
+                                descuento.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                descuento.setChanged(false);
+                              }
+                            }
+                            
+                            function validarTelefono(actionEvent){
+                              var source = actionEvent.getSource();
+                              var telefono = source.findComponent("itTelefonoPaciente");
+                              var mensaje = source.findComponent("olMensaje");
+                              
+                              var patronTelefono = /^\d{4}-\d{4}$/;
+                              mensaje.setValue('');
+                              
+                              if(telefono.getSubmittedValue() == '' || !patronTelefono.test(telefono.getSubmittedValue())){
+                                telefono.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                telefono.setChanged(false);
+                              }
+                            }
+                            
+                            function validarEncargado(actionEvent){
+                              var source = actionEvent.getSource();
+                              var nombreEncargado = source.findComponent("itNombreEncargado");
+                              var telefonoEncargado = source.findComponent("itTelefonoEncargado");
+                              var relacionEncargado = source.findComponent("itRelacionEncargado");
+                              var mensaje = source.findComponent("olMensajeEncargado"); 
+                              
+                              var patronTelefono = /^\d{4}-\d{4}$/;
+                              var patronLetras = /^[a-zA-Z\u00C0-\u00ff]+$/;
+                              mensaje.setValue('');
+                              
+                              if(nombreEncargado.getSubmittedValue() == ''){
+                                nombreEncargado.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                nombreEncargado.setChanged(false);
+                              }
+                              
+                              if(telefonoEncargado.getSubmittedValue() == '' || !patronTelefono.test(telefonoEncargado.getSubmittedValue())){
+                                telefonoEncargado.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                telefonoEncargado.setChanged(false);
+                              }
+                              
+                              if(relacionEncargado.getSubmittedValue() == '' || !patronLetras.test(relacionEncargado.getSubmittedValue())){
+                                relacionEncargado.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                relacionEncargado.setChanged(false);
+                              }
+                              
+                              if(mensaje.getValue() == ''){
+                                mensaje.setValue('Se agregó con éxito');
+                              }
+                            }
+                            
+                            function limpiarPopup(actionEvent){
+                                var source = actionEvent.getSource();
+                                var nombreEncargado = source.findComponent("itNombreEncargado");
+                                var telefonoEncargado = source.findComponent("itTelefonoEncargado");
+                                var relacionEncargado = source.findComponent("itRelacionEncargado");
+                                var mensajeEncargado = source.findComponent("olMensajeEncargado");
+                            
+                                nombreEncargado.setValue('');
+                                nombreEncargado.setChanged(false);
+                                telefonoEncargado.setValue('');
+                                telefonoEncargado.setChanged(false);
+                                relacionEncargado.setValue('');
+                                relacionEncargado.setChanged(false);
+                                mensajeEncargado.setValue('');
+                            }
+                            
+                            function cerrarPopup(actionEvent){
+                              var source = actionEvent.getSource();
+                              var agregarEncargado = source.findComponent("popupEncargadoFamiliaEditar");
+                              var eliminar = source.findComponent("popupEliminarPaciente");
+                                if (agregarEncargado.isPopupVisible()) {
+                                  agregarEncargado.hide();
+                                }
+                                if (eliminar.isPopupVisible()) {
+                                  eliminar.hide();
+                                }
+                            }
+                        </af:resource>
+                        <f:facet name="second"/>
+                    </af:panelSplitter>
+                </f:facet>
+            </af:panelSplitter>
+        </f:facet>
+    </af:panelSplitter>
+</ui:composition>

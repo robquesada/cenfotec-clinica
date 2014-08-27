@@ -1,0 +1,357 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelSplitter orientation="vertical" splitterPosition="50" id="ps3">
+        <f:facet name="first"/>
+        <f:facet name="second">
+            <af:panelSplitter orientation="horizontal" splitterPosition="100" id="ps2">
+                <f:facet name="first"/>
+                <f:facet name="second">
+                    <af:panelSplitter orientation="horizontal" splitterPosition="100" positionedFromEnd="true" id="ps1">
+                        <f:facet name="first">
+                            <af:panelGroupLayout id="pt_pgl2">
+                                <af:panelGridLayout id="pt_pgl1">
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr1">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc1" halign="center">
+                                            <af:toolbox id="t1">
+                                                <af:toolbar id="t2">
+                                                    <af:group id="g1">
+                                                        <af:button text="Buscar usuarios" id="bUsuarios"
+                                                                   action="listarusuarios"
+                                                                   rendered="#{LoginController.permisoUsuarios}"/>
+                                                    </af:group>
+                                                    <af:group id="g2">
+                                                        <af:button text="Agregar nuevo usuario" id="b1"
+                                                                   action="agregarusuarios"
+                                                                   rendered="#{LoginController.permisoUsuarios}"/>
+                                                    </af:group>
+                                                    <af:group id="g3">
+                                                        <af:button text="Roles y permisos" id="pt_bRolesPermisos"
+                                                                   action="rolpermiso"
+                                                                   rendered="#{LoginController.permisoPermisos}"/>
+                                                    </af:group>
+                                                    <af:group id="g4">
+                                                        <af:button text="Procedimientos" id="pt_bProcedimientos"
+                                                                   action="procedimientos"
+                                                                   rendered="#{LoginController.permisoProcedimientos}"/>
+                                                    </af:group>
+                                                </af:toolbar>
+                                            </af:toolbox>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pt_pgl3">
+                                    <af:gridRow marginTop="5px" height="auto" id="pt_gr2">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc2">
+                                            <af:spacer width="10" height="20" id="s2"/>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="pt_gr3">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="pt_gc3" halign="center">
+                                            <af:link text="#{UsuarioController.usuarioEditar.nombre} #{UsuarioController.usuarioEditar.primerApellido} #{UsuarioController.usuarioEditar.segundoApellido}" id="l1"
+                                                     inlineStyle="font-size:large; font-weight:bold;" action="null"
+                                                     partialTriggers="bModificarUsuario"/>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                    <af:gridRow id="gr13">
+                                        <af:gridCell id="gc25">
+                                            <af:spacer width="10" height="20" id="s1"/>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl1">
+                                    <af:gridRow marginTop="5px" height="auto" id="gr1">
+                                        <af:gridCell marginStart="5px" width="100%" id="gc1" halign="end"/>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" id="gr2">
+                                        <af:gridCell marginStart="5px" width="100%" id="gc3" halign="center">
+                                            <af:panelGroupLayout id="pgl4" layout="horizontal" valign="top">
+                                                <af:panelFormLayout id="pfl1">
+                                                    <af:inputText label="Nombre" id="itNombreUsuario"
+                                                                  editable="onAccess" rows="1"
+                                                                  value="#{UsuarioController.usuarioEditar.nombre}"
+                                                                  clientComponent="true"
+                                                                  contentStyle="Height: 23px; font-size: 13px; "
+                                                                  partialTriggers="bModificarUsuario"/>
+                                                    <af:inputText label="Primer apellido" id="itPrimerApellidoUsuario"
+                                                                  editable="onAccess" rows="1"
+                                                                  value="#{UsuarioController.usuarioEditar.primerApellido}"
+                                                                  clientComponent="true"
+                                                                  contentStyle="Height: 23px; font-size: 13px; "
+                                                                  partialTriggers="bModificarUsuario"/>
+                                                    <af:inputText label="Segundo apellido" id="itSegundoApellidoUsuario"
+                                                                  editable="onAccess" rows="1" clientComponent="true"
+                                                                  contentStyle="Height: 23px; font-size: 13px; "
+                                                                  value="#{UsuarioController.usuarioEditar.segundoApellido}"
+                                                                  partialTriggers="bModificarUsuario"/>
+                                                    <af:inputText label="Especialidad" id="itEspecialidadUsuario"
+                                                                  editable="onAccess" rows="1"
+                                                                  value="#{UsuarioController.usuarioEditar.especialidad}"
+                                                                  clientComponent="true"
+                                                                  contentStyle="Height: 23px; font-size: 13px; "
+                                                                  partialTriggers="bModificarUsuario"/>
+                                                    <af:inputText label="Dirección e-mail" id="itEmailUsuario"
+                                                                  editable="onAccess"
+                                                                  value="#{UsuarioController.usuarioEditar.correoElectronico}"
+                                                                  clientComponent="true"
+                                                                  contentStyle="Height: 23px; font-size: 13px; "
+                                                                  partialTriggers="bModificarUsuario"
+                                                                  shortDesc="Ejemplo: nombre@mail.com"/>
+                                                    <af:inputText label="Nombre de usuario" id="itNombreDeUsuario"
+                                                                  editable="onAccess"
+                                                                  value="#{UsuarioController.usuarioEditar.nombreUsuario}"
+                                                                  clientComponent="true"
+                                                                  contentStyle="Height: 23px; font-size: 13px; "
+                                                                  partialTriggers="bModificarUsuario"
+                                                                  maximumLength="15"/>
+                                                    <af:selectOneChoice label="Nombre del rol" id="socRolUsuario"
+                                                                        clientComponent="true"
+                                                                        contentStyle="Height: 23px; font-size: 13px; "
+                                                                        value="#{UsuarioController.usuarioEditar.rol1}"
+                                                                        partialTriggers="bModificarUsuario">
+                                                        <af:forEach items="#{UsuarioController.listaRoles}" var="var">
+                                                            <af:selectItem label="#{var.nombreRol}" id="si1"
+                                                                           value="#{var}"/>
+                                                        </af:forEach>
+                                                    </af:selectOneChoice>
+                                                </af:panelFormLayout>
+                                                <af:spacer width="50" height="10" id="s4"/>
+                                                <af:panelBox text="Modificar contraseña" id="pb1"
+                                                             showDisclosure="false">
+                                                    <f:facet name="toolbar"/>
+                                                    <af:panelGroupLayout id="pgl5" layout="vertical" halign="center">
+                                                        <af:panelFormLayout id="pfl2">
+                                                            <af:inputText label="Contraseña actual"
+                                                                          id="itContrasennaEditar"
+                                                                          columns="15" secret="true"
+                                                                          clientComponent="true"
+                                                                          contentStyle="Height: 23px; font-size: 13px; "
+                                                                          partialTriggers="bCambiarContrasenna"
+                                                                          value="#{UsuarioController.contrasennaActualEditar}"/>
+                                                            <af:inputText label="Nueva contraseña"
+                                                                          id="itContrasennaNuevaEditar" columns="15"
+                                                                          secret="true" clientComponent="true"
+                                                                          contentStyle="Height: 23px; font-size: 13px; "
+                                                                          partialTriggers="bCambiarContrasenna"
+                                                                          value="#{UsuarioController.contrasennaNuevaEditar}"/>
+                                                            <af:inputText label="Confirmar nueva contraseña"
+                                                                          id="itConfirmarContrasennaEditar"
+                                                                          columns="15" secret="true"
+                                                                          clientComponent="true"
+                                                                          contentStyle="Height: 23px; font-size: 13px; "
+                                                                          partialTriggers="bCambiarContrasenna"
+                                                                          value="#{UsuarioController.confirmarContrasennaEditar}"/>
+                                                        </af:panelFormLayout>
+                                                        <af:spacer width="10" height="10" id="s7"/>
+                                                        <af:button text="Cambiar" id="bCambiarContrasenna"
+                                                                   action="#{UsuarioController.modificarContrasenna}">
+                                                            <af:clientListener method="validarContrasenna"
+                                                                               type="action"/>
+                                                        </af:button>
+                                                        <af:panelGroupLayout id="pgl6" layout="horizontal">
+                                                            <af:outputLabel value="#{UsuarioController.mensajeContrasenna}" id="olMsj"
+                                                                            partialTriggers="bModificarUsuario bCambiarContrasenna"/>
+                                                            <af:outputLabel id="olMensajeContra"
+                                                                            inlineStyle="color:Red;"/>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelGroupLayout>
+                                                </af:panelBox>
+                                            </af:panelGroupLayout>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" id="gr3">
+                                        <af:gridCell marginStart="5px" width="100%" id="gc5" halign="end"/>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                                <af:panelGridLayout id="pgl2">
+                                  <af:gridRow marginTop="5px" height="auto" id="gr4">
+                                    <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc7" halign="center">
+                                      <af:spacer width="10" height="50" id="s9"/>
+                                    </af:gridCell>
+                                  </af:gridRow>
+                                  <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr7">
+                                    <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc10" halign="center">
+                                            <af:button id="bEliminarUsuario" icon="images/Borrar.png">
+                                                <af:showPopupBehavior popupId="popupEliminarUsuario"
+                                                                      triggerType="action"/>
+                                            </af:button>
+                                            <af:spacer width="10" height="10" id="s5"/>
+                                            <af:button text="Guardar cambios" id="bModificarUsuario"
+                                                       action="#{UsuarioController.editarUsuario}">
+                                                <af:clientListener method="validar" type="action"/>
+                                            </af:button>
+                                        </af:gridCell>
+                                  </af:gridRow>
+                                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr5">
+                                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc2"
+                                                     halign="center">
+                                            <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                                <af:outputLabel value="#{UsuarioController.mensajeEditar}" id="olMensajeEditar"
+                                                                partialTriggers="bModificarUsuario bCambiarContrasenna"
+                                                                clientComponent="true"/>
+                                                <af:outputLabel id="olMensaje" inlineStyle="color:Red;"
+                                                                clientComponent="true"/>
+                                                <af:popup childCreation="deferred" autoCancel="disabled"
+                                                          id="popupEliminarUsuario" contentDelivery="lazyUncached">
+                                                    <af:dialog id="d1" type="none" title="Eliminar usuario"
+                                                               inlineStyle="background-color:White;">
+                                                        <f:facet name="buttonBar"/>
+                                                        <af:panelGroupLayout id="pgl7" layout="vertical"
+                                                                             halign="center">
+                                                            <af:spacer width="10" height="10" id="s3"/>
+                                                            <af:outputLabel value="¿Está seguro que desea eliminar este usuario?" id="ol2"
+                                                                            inlineStyle="font-size: 14px;"/>
+                                                            <af:spacer width="10" height="10" id="s6"/>
+                                                        </af:panelGroupLayout>
+                                                        <af:panelGroupLayout id="pgl8" layout="horizontal"
+                                                                             halign="center">
+                                                            <af:button text="Eliminar" id="b2"
+                                                                       action="#{UsuarioController.eliminarUsuario}"/>
+                                                            <af:spacer width="10" height="10" id="s8"/>
+                                                            <af:button text="Cancelar" id="b3">
+                                                                <af:clientListener method="cerrarPopup" type="action"/>
+                                                            </af:button>
+                                                        </af:panelGroupLayout>
+                                                    </af:dialog>
+                                                </af:popup>
+                                            </af:panelGroupLayout>
+                                        </af:gridCell>
+                                    </af:gridRow>
+                                </af:panelGridLayout>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <af:resource type="javascript">
+                            function validar(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensaje");
+                              var mensajeEditar = source.findComponent("olMensajeEditar");
+                              
+                              var nombre = source.findComponent("itNombreUsuario");
+                              var primerApellido = source.findComponent("itPrimerApellidoUsuario");
+                              var segundoApellido = source.findComponent("itSegundoApellidoUsuario");
+                              var especialidad = source.findComponent("itEspecialidadUsuario");
+                              var email = source.findComponent("itEmailUsuario");
+                              var nombreUsuario = source.findComponent("itNombreDeUsuario");
+                              var rol = source.findComponent("socRolUsuario");
+                              
+                              var patronEmail = /[\w-\.]{3,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+                              var patronLetras = /^[a-zA-Z\u00C0-\u00ff]+$/;
+                              
+                              mensaje.setValue('');
+                              mensajeEditar.setValue('');
+                              
+                              if(nombre.getSubmittedValue() == '' || !patronLetras.test(nombre.getSubmittedValue())){
+                                nombre.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                nombre.setChanged(false);
+                              }
+                              
+                              if(primerApellido.getSubmittedValue() == '' || !patronLetras.test(primerApellido.getSubmittedValue())){
+                                primerApellido.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                primerApellido.setChanged(false);
+                              }
+                              
+                              if(segundoApellido.getSubmittedValue() != '' &amp;&amp; !patronLetras.test(segundoApellido.getSubmittedValue())){
+                                   segundoApellido.setChanged(true);
+                                    mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                    actionEvent.cancel();
+                              }else{
+                                segundoApellido.setChanged(false);
+                              }
+                              
+                              if(especialidad.getSubmittedValue() == ''){
+                                especialidad.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                especialidad.setChanged(false);
+                              }
+                              
+                              if(email.getSubmittedValue() == '' || !patronEmail.test(email.getSubmittedValue())){
+                                email.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                email.setChanged(false);
+                              }
+                              
+                              if(nombreUsuario.getSubmittedValue() == ''){
+                                nombreUsuario.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                nombreUsuario.setChanged(false);
+                              }
+                              
+                              if(rol.getSubmittedValue() == ''){
+                                rol.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                rol.setChanged(false);
+                              }
+                              
+                              if(mensajeEditar.getValue() == ''){
+                                mensajeEditar.setValue('Se han guardado los cambios');
+                              }
+                            }
+                            
+                            function validarContrasenna(actionEvent){
+                              var source = actionEvent.getSource();
+                              var mensaje = source.findComponent("olMensajeContra");
+                              
+                              var contrasenna = source.findComponent("itContrasennaEditar");
+                              var nuevaContrasenna = source.findComponent("itContrasennaNuevaEditar");
+                              var confirmarContrasenna = source.findComponent("itConfirmarContrasennaEditar");
+                              
+                              mensaje.setValue('');
+                              
+                              if(contrasenna.getSubmittedValue() == ''){
+                                contrasenna.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                contrasenna.setChanged(false);
+                              }
+                              
+                              if(nuevaContrasenna.getSubmittedValue() == ''){
+                                nuevaContrasenna.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else{
+                                nuevaContrasenna.setChanged(false);
+                              }
+                              
+                              if(confirmarContrasenna.getSubmittedValue() == ''){
+                                confirmarContrasenna.setChanged(true);
+                                mensaje.setValue('Ingrese los datos requeridos y/o corrija la información señalada');
+                                actionEvent.cancel();
+                              }else if(nuevaContrasenna.getSubmittedValue() !== confirmarContrasenna.getSubmittedValue()){
+                                confirmarContrasenna.setChanged(true);
+                                mensaje.setValue('La confirmacion de la contraseña no coincide con la nueva contraseña');
+                                actionEvent.cancel();
+                              }else{
+                                confirmarContrasenna.setChanged(false);
+                              }
+                            }
+                            
+                            function cerrarPopup(actionEvent){
+                              var source = actionEvent.getSource();
+                              var eliminar = source.findComponent("popupEliminarUsuario");
+                                if (eliminar.isPopupVisible()) {
+                                  eliminar.hide();
+                                }
+                            }
+                        </af:resource>
+                        <f:facet name="second"/>
+                    </af:panelSplitter>
+                </f:facet>
+            </af:panelSplitter>
+        </f:facet>
+    </af:panelSplitter>
+</ui:composition>
